@@ -36,6 +36,7 @@ plots
 
 plots\*\.png
 *.csv
+*.xlsx
 *.pdf
 *.pptx
 *snapshot*
