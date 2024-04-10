@@ -17,7 +17,7 @@ make_obs;
 % Período inicial de filtrado
 sdate = qq(2001,4);
 % Período final de filtrado (fin de historia)
-edate = qq(2023,4);
+edate = qq(2023,3);
 
 % carga de modelo con p.filter = true (.model)
 [m,~,~] = read_QPM(true);

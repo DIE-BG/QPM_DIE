@@ -164,7 +164,7 @@ p.rho_DLA_CPI_RW = 0.7;%0.4724;%0.5666;
 p.rho_D4L_CPI_TAR = 0.8723;
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% alibrated Steady States
+% Calibrated Steady States
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Foreign trend inflation or inflation target
 p.ss_DLA_CPI_RW = 2;
@@ -183,6 +183,9 @@ p.ss_REM_GDP  = 15.0;
 %adding money growth steady state
 p.ss_D4L_MB = 10;
 
+p.ss_D4L_CPIXFE = 4;
+p.ss_D4L_VEL = -2.37;
+p.ss_D4L_GDP = 3.5;
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Standard Deviation for Shocks in QPM
