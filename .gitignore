@@ -35,7 +35,6 @@ octave-workspace
 plots
 
 plots\*\.png
-*.csv
 *.pdf
 *.pptx
 *snapshot*
