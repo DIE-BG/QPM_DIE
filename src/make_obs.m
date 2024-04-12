@@ -52,7 +52,7 @@ Nota: Debiera agregarse D4L_BM a listado de observables.
 %}
 %% Load quarterly data
 % Base de datos inicial
-d = databank.fromCSV('data/data.csv');
+d = databank.fromCSV(MODEL.data_file_name);
 % Estructura para cálculos intermedios
 dd = struct();
 %% Make log of variables

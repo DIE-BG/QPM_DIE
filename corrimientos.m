@@ -6,13 +6,17 @@ QPM
 clear all;
 addpath('src')
 
-%% Datos
+%% Carga de configuraciones generales del corrimiento base (v0)
+StartConfig;
+
+%% Preprocessing
+Preprocessing;
+disp('Preprocesamiento: ok');
+%% Observables
 % Calculo de variables a partir de base de datos inicial
 % makedata;
 make_obs;
-% Calculo de variables no observables a partir de estructura del modelo
-% kalmanfilter;
-% hist = databank.fromCSV('output\KalmanHist_long.csv');
+disp('Makeobs: ok');
 %% parámetros para filtro de kalman
 % Período inicial de filtrado
 sdate = qq(2001,4);
