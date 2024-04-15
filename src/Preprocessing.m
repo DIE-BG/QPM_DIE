@@ -10,8 +10,14 @@ Departamento de Investigaciones Económicas - 2024.
 MJGM/JGOR
 
 %}
+%%
+% Creación de folder para datos
+if ~isfolder(fullfile('data', 'corrimientos', MODEL.CORR_DATE, MODEL.CORR_VER))
+    mkdir(fullfile('data', 'corrimientos', MODEL.CORR_DATE, MODEL.CORR_VER))
+end  
 
-% VARIABLES TRIMESTRALES
+
+%% VARIABLES TRIMESTRALES
 % Producto externo y domestico (nominal y real)
 % Quarterly
 q = databank.fromCSV(fullfile('data', 'raw', MODEL.CORR_DATE, 'quarterly.csv'));
@@ -51,19 +57,46 @@ for i = 1:length(names)
     end
 end
 
-%% Estructura Preproc (monthly, quarterly, obs)
+% Estructura Preproc (monthly, quarterly, obs)
 MODEL.PreProc.monthy = m;
 MODEL.PreProc.quarterly = q;
-obs = {'GDP', 'CPI', 'CPIXFE', 'S', 'RS', 'GDP_RW', 'CPI_RW', 'RS_RW', 'REM_GDP', 'MB'};
-MODEL.PreProc.obs = q*obs;
+list_mobs = {'GDP', 'CPI', 'CPIXFE', 'S', 'RS', 'GDP_RW', 'CPI_RW', 'RS_RW', 'REM_GDP', 'MB'};
+temp = q*list_mobs;
 
-for i = 1:length(obs)
-    MODEL.PreProc.obs.(obs{i}).UserData.endhist = dat2char(MODEL.DATES.hist_end);
+%% Construcción de variables observables para QPM
+
+% Variables en logaritmo
+exceptions = {'RS','RS_RW'};
+
+list = dbnames(temp);
+
+for i = 1:length(list)
+    if isempty(strmatch(list{i},exceptions,'exact'))
+        temp.(['L_' list{i}]) = 100*log(temp.(list{i}));
+    end
 end
 
-%% Exportamos datos
-if ~isfolder(fullfile('data', 'corrimientos', MODEL.CORR_DATE, MODEL.CORR_VER))
-    mkdir(fullfile('data', 'corrimientos', MODEL.CORR_DATE, MODEL.CORR_VER))
-end  
+% Brechas HP
+% For GDP_RW the observable is L_GDP_RW_GAP 
+
+list = {'L_GDP_RW'};
+
+for i = 1:length(list)
+    [temp.([list{i} '_BAR']), temp.([list{i} '_GAP'])] = hpf(temp.(list{i}));
+end
+
+% Estructura para observables
+MODEL.PreProc.obs = struct();
+% Lista de observables (debe coincidir con .model)
+obs_list = {'L_GDP', 'L_S','L_CPI','RS','L_CPIXFE','L_CPI_RW','RS_RW', 'L_GDP_RW_GAP', 'L_GDP_RW','REM_GDP', 'L_MB'}; 
+
+for i = 1:length(obs_list)
+   MODEL.PreProc.obs.(strcat('OBS_',obs_list{i})) = temp.(obs_list{i}); 
+   MODEL.PreProc.obs.(strcat('OBS_',obs_list{i})).UserData.endhist = dat2char(MODEL.DATES.hist_end); 
+end
+
+clear temp;
+
+%% Almacenamiento de csv con datos que entran al proceso de filtrado.
 
 databank.toCSV(MODEL.PreProc.obs, MODEL.data_file_name, Inf, 'Decimals=', 5, 'UserDataFields=', 'endhist');
