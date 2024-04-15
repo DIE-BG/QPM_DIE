@@ -11,12 +11,8 @@ StartConfig;
 
 %% Preprocessing
 Preprocessing;
-disp('Preprocesamiento: ok');
-%% Observables
-% Calculo de variables a partir de base de datos inicial
-% makedata;
-make_obs;
-disp('Makeobs: ok');
+disp('Preprocesamiento de Observables: ok');
+
 %% parámetros para filtro de kalman
 % Período inicial de filtrado
 sdate = qq(2001,4);
