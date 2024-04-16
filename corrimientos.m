@@ -25,6 +25,17 @@ MODEL = SimTools.sim.read_model(MODEL);
                             'meanOnly=',true);
 fcstrng = MODEL.DATES.pred_start:MODEL.DATES.pred_end;
 MODEL.F_pred = simulate(MODEL.MF, MODEL.F, fcstrng, 'anticipate', false, 'DbOverlay=', true);
+
+%% Post-Procesamiento de variables seleccionadas.
+pp_list = {'L_MB', 'L_VEL', 'L_CPI_RW', 'L_CPI_RW_Q'};
+list_nivel = {'L_S','L_MB'};
+
+MODEL = PostProcessing(MODEL,...
+    'list',pp_list,...
+    'list_niv', list_nivel,...
+    'Esc',{MODEL.CORR_VER, MODEL.F_pred});
+disp('Postprocesamiento: ok');
+
 return
 %%
 
