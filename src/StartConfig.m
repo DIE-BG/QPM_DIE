@@ -1,21 +1,21 @@
 %% Modelo y setparam
-MODEL.mod_file_name = 'SVAR50L.mod';
+MODEL.mod_file_name = 'QPM.model';
 MODEL.param_file_name = 'setparam.m';
 
 %% Configuración del corrimiento
 
 MODEL.CORR_VER = 'v0';
 
-MODEL.CORR_DATE = '2024-02';
-MODEL.CORR_DATE_ANT = '2023-11';
+MODEL.CORR_DATE = '2024-04';
+MODEL.CORR_DATE_ANT = '2024-02';
 
-MODEL.leg_act = 'Febrero 2024';  
-MODEL.leg_ant = 'Noviembre 2023'; 
+MODEL.leg_act = 'Abril 2024';  
+MODEL.leg_ant = 'Febrero 2024'; 
 
 % Fechas de fin de historia
-MODEL.DATES.hist_end_ant = qq(2023, 3);
-MODEL.DATES.hist_end = qq(2023, 4);
-MODEL.DATES.hist_end_mm = mm(2023, 12);
+MODEL.DATES.hist_end_ant = qq(2023, 4);
+MODEL.DATES.hist_end = qq(2024, 1);
+MODEL.DATES.hist_end_mm = mm(2024, 03);
 
 %% Otros elementos y fechas
 MODEL.data_file_name = fullfile( ...
@@ -46,5 +46,5 @@ MODEL.DATES.hist_start_mm = mm(2005,1);
 tab_range_mm = MODEL.DATES.hist_end_mm-8:MODEL.DATES.hist_end_mm;
 
 %% Carga de info mes previo
-% MODEL_ANT = load(sprintf('MODEL-%s.mat',MODEL.CORR_DATE_ANT));
-% MODEL_ANT = MODEL_ANT.MODEL;
+MODEL_ANT = load(sprintf('MODEL-%s.mat',MODEL.CORR_DATE_ANT));
+MODEL_ANT = MODEL_ANT.MODEL;
