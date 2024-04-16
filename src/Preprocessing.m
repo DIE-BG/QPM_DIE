@@ -91,8 +91,8 @@ MODEL.PreProc.obs = struct();
 obs_list = {'L_GDP', 'L_S','L_CPI','RS','L_CPIXFE','L_CPI_RW','RS_RW', 'L_GDP_RW_GAP', 'L_GDP_RW','REM_GDP', 'L_MB'}; 
 
 for i = 1:length(obs_list)
-   MODEL.PreProc.obs.(strcat('OBS_',obs_list{i})) = temp.(obs_list{i}); 
-   MODEL.PreProc.obs.(strcat('OBS_',obs_list{i})).UserData.endhist = dat2char(MODEL.DATES.hist_end); 
+   MODEL.PreProc.obs.(strcat('m_',obs_list{i})) = temp.(obs_list{i}); 
+   MODEL.PreProc.obs.(strcat('m_',obs_list{i})).UserData.endhist = dat2char(MODEL.DATES.hist_end); 
 end
 
 clear temp;
