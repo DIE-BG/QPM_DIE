@@ -45,20 +45,25 @@ MODEL.PostProc.(params.Esc{1}) = struct();
 
 %% Logaritmos
 
-
 temp_db = databank.copy(params.Esc{2}, params.list); 
 
+% Se agregan los logs desestacionalizados del modelo a la estructura de
+% post-procesamiento (para facilitar graficado)
+list_gaps_mod = get(MODEL.MF, 'xlist');
+% cosa = struct;
+for i = 1:length(list_gaps_mod)
+    if startsWith(list_gaps_mod{i}, 'L_') && ~endsWith(list_gaps_mod{i}, '_BAR') && ~endsWith(list_gaps_mod{i}, '_GAP')
+       MODEL.PostProc.(params.Esc{1}).l_sa.(strcat(list_gaps_mod{i},'_SA')) = MODEL.F_pred.(list_gaps_mod{i});
+    end
+end  
+
+% Variables que es necesario desestacionalizar (porque la variable endogena
+% del modelo es la D4L)
 if isanystri('L_MB',params.list) && isanystri('L_VEL',params.list)
-    temp_db.L_MB = x12(temp_db.L_MB);
-    temp_db.L_VEL = x12(temp_db.L_VEL);
+    MODEL.PostProc.(params.Esc{1}).l_sa.L_MB_SA = x12(temp_db.L_MB);
+    MODEL.PostProc.(params.Esc{1}).l_sa.L_VEL_SA = x12(temp_db.L_VEL);
 end
-
-% Se le agrega _SA a los nombres al integrarlas a MODEL.PostProc.().l_sa
-MODEL.PostProc.(params.Esc{1}).l_sa = databank.apply(@(x) x,...
-                                                     temp_db,...
-                                                     'Append=', '_SA',...
-                                                     'RemoveSource=',true);
-
+                           
 % Tendencias HP de los logs desestacionalizados           
 MODEL.PostProc.(params.Esc{1}).l_bar = databank.apply(@(x) hpf(x),...
                                                      MODEL.PostProc.(params.Esc{1}).l_sa,...
@@ -66,12 +71,36 @@ MODEL.PostProc.(params.Esc{1}).l_bar = databank.apply(@(x) hpf(x),...
                                                     'RemoveEnd=',true,...
                                                     'Append=', '_BAR',...
                                                     'RemoveSource=',true);
+                                                
+% Se agregan las tendencias del modelo a la estructura de
+% post-procesamiento (para facilitar graficado)
+list_gaps_mod = get(MODEL.MF, 'xlist');
+% cosa = struct;
+for i = 1:length(list_gaps_mod)
+    if startsWith(list_gaps_mod{i}, 'L_') && endsWith(list_gaps_mod{i}, '_BAR')
+       MODEL.PostProc.(params.Esc{1}).l_bar.(list_gaps_mod{i}) = MODEL.F_pred.(list_gaps_mod{i});
+    end
+end  
+ 
+% Se agregan las brechas del modelo a la estructura de post-procesamiento
+% (para facilitar el graficado)
+list_gaps_mod = get(MODEL.MF, 'xlist');
+% cosa = struct;
+for i = 1:length(list_gaps_mod)
+    if endsWith(list_gaps_mod{i}, '_GAP')
+       MODEL.PostProc.(params.Esc{1}).l_gap.(list_gaps_mod{i}) = MODEL.F_pred.(list_gaps_mod{i});
+    end
+end  
+
 % brechas relacionadas
 for i = 1:length(params.list)
    MODEL.PostProc.(params.Esc{1}).l_gap.(strcat(params.list{i},'_GAP')) = ...
                         MODEL.PostProc.(params.Esc{1}).l_sa.(strcat(params.list{i},'_SA')) - ...
                         MODEL.PostProc.(params.Esc{1}).l_bar.(strcat(params.list{i},'_BAR'));   
 end
+
+
+
 %% Niveles
 temp_db = databank.copy(params.Esc{2}, params.list_niv); 
 
@@ -95,6 +124,5 @@ MODEL.PostProc.(params.Esc{1}).niv = databank.apply(@(x) exp(x/100),...
 MODEL.PostProc.(params.Esc{1}).niv_bar = databank.apply(@(x) hpf(x),...
                                                         MODEL.PostProc.(params.Esc{1}).niv,...
                                                         'Append=', '_BAR',...   
-                                                        'RemoveSource=',true);
-                    
+                                                        'RemoveSource=',true);                                                  
 end
