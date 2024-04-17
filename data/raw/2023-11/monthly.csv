@@ -1,5 +1,5 @@
 ,CPI,CPIXFE,S,RS,A,A_prom,ind_prec_expus,ind_prec_impus,RS_RW,REM,MB
-Comments ->,Indice de Precios al Consumidor,Indice de Inflación Subyacente,Tipo de Cambio Nominal,Tasa de interes de Política Monetaria,Peso de las exportaciones de EEUU en las importaciones de Guuatemala,Peso de las exportaciones de EEUU en las importaciones de Guuatemala (Promedio 12 meses),Indice de Precios de Exportaciones de EEUU,Indice de Precios de Importaciones de EEUU,Tasa de Fondos Federales,,Base Monetaria
+Comments ->,Indice de Precios al Consumidor,Indice de Inflación Subyacente,Tipo de Cambio Nominal,Tasa de interes de Política Monetaria,Peso de las exportaciones de EEUU en las importaciones de Guuatemala,Peso de las exportaciones de EEUU en las importaciones de Guuatemala (Promedio 12 meses),Indice de Precios de Exportaciones de EEUU,Indice de Precios de Importaciones de EEUU,Tasa de Fondos Federales,Remesas (Millones de dólares),Base Monetaria
 2001M01,30.23975661,101.506546,7.8,5.72,0.405616097,0.418750972,100.3,100.5,5.74,,11611.1
 2001M02,30.46050654,102.51536,7.74,6.24,0.442726965,0.420649465,100.2,99.9,5.59,,11786.1
 2001M03,30.62457743,103.2149,7.7,5.4,0.457810776,0.423804942,100,98.3,5.29,,11961.7
@@ -274,4 +274,4 @@ Comments ->,Indice de Precios al Consumidor,Indice de Inflación Subyacente,Tipo 
 2023M08,98.73236205,311.11035,7.8596623,5,0.34657445,0.341218593,149.2,140.3,5.33,1773.4,120568.2
 2023M09,99.28874613,312.30222,7.8674573,5,0.310944854,0.340333312,150,141,5.33,1699.5,117599.6
 2023M10,100.5449122,314.21646,7.8427152,5,0.341890598,0.338699943,148.6,140.1,5.33,1650.7,120456.8
-2023M11,99.88528163,314.8882,7.827379,,,,147.5,139.4,5.33,1614.6,
+2023M11,99.88528163,314.8882,7.827379,,,,,,,,
