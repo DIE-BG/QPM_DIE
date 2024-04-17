@@ -29,17 +29,48 @@ m = databank.fromCSV(fullfile('data', 'raw', MODEL.CORR_DATE, 'monthly.csv'));
 %% Construcción de CPI_RW y REM_GDP
 % CPI_RW
 m.CPI_RW = m.A_prom*m.ind_prec_expus + (1- m.A_prom)*m.ind_prec_impus;
+m.CPI_RW.Comment = 'Indice de precios de importaciones e importaciones';
 
 % REM_GDP
 q.REM = m.REM.convert('Q', 'method=', @sum);
 q.S = m.S.convert('Q', 'method=', 'last');
 q.REM_GDP = ((q.REM*q.S)/q.NGDP)*100;
+q.REM_GDP.Comment = 'Remesas como porcentaje del producto';
+
+%% Otras transformaciones
+% tasas de variacion de CPI, CPIXFE, CPINOSUBY
+% CPI Intermensual 
+m.CPI_mom = m.CPI.pct(-1);
+m.CPI_mom.Comment = 'Inflación total';
+m.CPI_mom.Caption = 'Tasa de variación Intermensual'; 
+% CPI interanual
+m.CPI_yoy = m.CPI.pct(-12);
+m.CPI_yoy.Comment = 'Inflación total';
+m.CPI_yoy.Caption = 'Tasa de variación Interanual';
+
+% CPIXFE Intermensual
+m.CPIXFE_mom = m.CPIXFE.pct(-1);
+m.CPIXFE_mom.Comment = 'Inflación subyacente';
+m.CPIXFE_mom.Caption = 'Tasa de variación Intermensual'; 
+% CPIXFE Interanual
+m.CPIXFE_yoy = m.CPIXFE.pct(-12);
+m.CPIXFE_yoy.Comment = 'Inflación subyacente';
+m.CPIXFE_yoy.Caption = 'Tasa de variación Interanual';
+
+% CPINOSUBYIntermensual
+m.CPINOSUBY_mom = m.CPI_mom - m.CPIXFE_mom;
+m.CPINOSUBY_mom.Comment = 'Inflación no subyacente';
+m.CPINOSUBY_mom.Caption = 'Tasa de variación Intermensual';
+% CPINOSUBY Interanual
+m.CPINOSUBY_yoy = m.CPI_yoy - m.CPIXFE_yoy;
+m.CPINOSUBY_yoy.Comment = 'Inflación no subyacente';
+m.CPINOSUBY_yoy.Caption = 'Tasa de variación Intermensual';
 
 %% Trimestralización
 % Se tienen variables stock y de flujo por lo que el proceso de
 % trimestralización es disinta para cada una.
 % variables stock (trimestralización última del trimestre)
-stock = {'CPI', 'CPI_RW', 'CPIXFE', 'RS', 'RS_RW'};
+stock = {'CPI', 'CPI_RW', 'CPIXFE', 'RS', 'RS_RW', 'MB'};
 
 names = dbnames(m);
 
@@ -49,16 +80,13 @@ for i = 1:length(names)
     end
 end
 
-flow = {'MB'};
-
-for i = 1:length(names)
-    if ~isempty(strmatch(names{i},flow,'exact'))
-        q.(names{i}) = m.(names{i}).convert('Q', 'method', @mean);
-    end
-end
+%% Desestacionalización
+% Se desestacionaliza GDP y REM_GDP
+q.GDP = q.GDP.x12;
+q.REM_GDP = q.REM_GDP.x12;
 
 % Estructura Preproc (monthly, quarterly, obs)
-MODEL.PreProc.monthy = m;
+MODEL.PreProc.monthly = m;
 MODEL.PreProc.quarterly = q;
 list_mobs = {'GDP', 'CPI', 'CPIXFE', 'S', 'RS', 'GDP_RW', 'CPI_RW', 'RS_RW', 'REM_GDP', 'MB'};
 temp = q*list_mobs;
