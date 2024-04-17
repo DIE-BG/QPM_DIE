@@ -175,6 +175,10 @@ for rng = params.StartDate
     
     grid off;
     
+    vline(MODEL.DATES.hist_end_ant, ...
+        'LineWidth', 1.5, ...
+        'LineStyle', '-');
+    
     % Titulo
     if strcmp(params.Esc_add{1}, 'v0')
     title('Tasa de Variación del Tipo de Cambio Real (Porcentajes)',...
