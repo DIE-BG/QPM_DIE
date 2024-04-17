@@ -50,7 +50,7 @@ if do_graphs == true
     PreProcPlots_q(MODEL,...
         'Esc_add', {'v0', MODEL_ANT},...
         'tab_range', tab_range_source_data)
-    
+    % Graficas de simulación
     simPlots(MODEL,...
         'StartDate',{MODEL.DATES.hist_start, MODEL.DATES.hist_end - 20},...
         'EndDatePlot', {MODEL.DATES.pred_end, MODEL.DATES.hist_end + 20},...
@@ -97,7 +97,7 @@ if do_graphs == true
     
     % Descomposición de choques para variables seleccionadas
     Desc_shocks
-end
+
     
     % Real exchange rate
     tc_real(MODEL,...
@@ -118,7 +118,7 @@ end
         'LegendsNames',{MODEL.leg_ant, MODEL.leg_act});
      
 end
-%%
+
 
 %% Almacenamiento de Estructura MODEL del mes corriente.
 save(fullfile('data','fulldata',MODEL.CORR_DATE, sprintf("MODEL-%s.mat", MODEL.CORR_DATE)), 'MODEL');
