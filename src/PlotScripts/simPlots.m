@@ -69,6 +69,9 @@ if ~isempty(params.Esc_add)
     full_data_add = params.Esc_add{2}; 
 end
 
+%% Estados estacionarios
+MODEL.toplot.ss = get(MODEL.MF, 'Sstatelevel');
+
 %% Bloque 1: Variables del modelo (xlist) (libre vs otro)
 list = params.PlotList;
 % Iteración para los rangos de ploteo
@@ -154,15 +157,26 @@ for rng = 1 : length(params.StartDate)
         
         zeroline();
         
-        if startsWith(list{var}, 'd4_') || startsWith(list{var}, 'dla_') ||...
-                strcmp(list{var},'i') || strcmp(list{var},'r') || strcmp(list{var},'i_star') ...
+      
+        if startsWith(list{var}, 'D4L_') || startsWith(list{var}, 'DLA_') ||...
+                strcmp(list{var},'RS') || strcmp(list{var},'RR') || strcmp(list{var},'RS_RW') ...
                 && params.PlotSSLine
             
+            
+            if real(SS.(list{var})) ~= 0
             hline(...
                 real(SS.(list{var})), ...
                 'LineWidth', 1.5, ...
                 'LineStyle', ':' ...
                 );
+            
+            else
+                
+            zeroline('LineWidth', 1.5, ...
+                'LineStyle', ':');
+            
+            end
+            
             % Anotación
             x_lims = get(gca, 'XLim');
             SimTools.scripts.anotaciones_simples(...
@@ -176,8 +190,8 @@ for rng = 1 : length(params.StartDate)
                 );
         end
         
-        if startsWith(list{var}, 'd4_') || startsWith(list{var}, 'dla_') ||...
-                strcmp(list{var},'i') || strcmp(list{var},'r') || strcmp(list{var},'i_star') ...
+        if startsWith(list{var}, 'D4L_') || startsWith(list{var}, 'DLA_') ||...
+                strcmp(list{var},'RS') || strcmp(list{var},'RR') || strcmp(list{var},'RS_RW') ...
                 && params.PlotSSLine && params.PlotAnnotations
             % Anotaciones para corrimiento actual
             SimTools.scripts.die_anotaciones( ...
@@ -341,6 +355,7 @@ for corr = 1:length(params.LegendsNames)
             'MarkerSize', 17, ...
             'LineWidth', 2 ...
             );
+         
         hold off
         % highlight(params.StartDate{rng}:MODEL.DATES.hist_end);
         zeroline;
