@@ -33,7 +33,6 @@ octave-workspace
 
 # Other Ignored files
 plots
-
 plots\*\.png
 *.pdf
 *.pptx
