@@ -54,7 +54,7 @@ full_data_add = params.Esc_add{2};
 %% Leyendas
 params.LegendsNames = {MODEL.leg_act, MODEL.leg_ant};
 
-%% Resto de variables en frecuencia mensual
+%% Variables en frecuencia trimestral
 names = dbnames(MODEL.PreProc.quarterly);
 
 for rng = params.StartDate
@@ -154,8 +154,5 @@ for rng = params.StartDate
         end
     end
 end
-
-
-
 
 end

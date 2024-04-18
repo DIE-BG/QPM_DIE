@@ -1,0 +1,5 @@
+observaciones:
+- PIB usa PreProcessing: Titulo no sale completo.
+- Todas las gráficas jorge, versión short?
+- TASA EXTERNA, COLOCAR LA MENSUAL QUE ESTÁ PENDIENTE
+- Tipo de cambio real (componentes por corrimiento), aumentar el tamaño de letra de todo 

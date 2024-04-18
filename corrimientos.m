@@ -122,6 +122,13 @@ if do_graphs == true
     
 end
 
+%%
+
+%% Presentación
+prs = false;
+if prs == true
+    presentacion;
+end
 
 %% Almacenamiento de Estructura MODEL del mes corriente.
 save(fullfile('data','fulldata',MODEL.CORR_DATE, sprintf("MODEL-%s.mat", MODEL.CORR_DATE)), 'MODEL');

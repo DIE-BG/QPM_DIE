@@ -66,6 +66,18 @@ m.CPINOSUBY_yoy = m.CPI_yoy - m.CPIXFE_yoy;
 m.CPINOSUBY_yoy.Comment = 'Inflación no subyacente';
 m.CPINOSUBY_yoy.Caption = 'Tasa de variación Intermensual';
 
+% Precios de importaciones
+m.DLA_ind_prec_impus = m.ind_prec_impus.pct(-1)*4;
+m.DLA_ind_prec_impus.Comment =  'Tasa Intermensual anualizada Precio de Importaciones de EEUU';
+m.D4L_ind_prec_impus = m.ind_prec_impus.pct(-4);
+m.D4L_ind_prec_impus.Comment = 'Tasa de variación interanual Precio de Importaciones de EEUU';
+
+% Precios de exportaciones
+m.DLA_ind_prec_expus = m.ind_prec_expus.pct(-1)*4;
+m.DLA_ind_prec_expus.Comment =  'Tasa Intermensual anualizada Precio de Exportaciones de EEUU';
+m.D4L_ind_prec_expus = m.ind_prec_expus.pct(-4);
+m.D4L_ind_prec_expus.Comment = 'Tasa de variación interanual Precio de Exportaciones de EEUU';
+
 %% Trimestralización
 % Se tienen variables stock y de flujo por lo que el proceso de
 % trimestralización es disinta para cada una.
@@ -126,5 +138,6 @@ end
 clear temp;
 
 %% Almacenamiento de csv con datos que entran al proceso de filtrado.
-
 databank.toCSV(MODEL.PreProc.obs, MODEL.data_file_name, Inf, 'Decimals=', 5, 'UserDataFields=', 'endhist');
+
+trimestrales;
