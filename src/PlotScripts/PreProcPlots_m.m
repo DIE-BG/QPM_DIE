@@ -186,6 +186,10 @@ for rng = params.StartDate
         
         hold off
         
+        if startsWith(names{i}, ["DLA_", "D4L_"]) || endsWith(names{i}, ["mom", "yoy"])
+            zeroline()
+        end
+        
         %Returns handles to the patch and line objects
         chi = get(gca, 'Children');
         %Reverse the stacking order so that the patch overlays the line

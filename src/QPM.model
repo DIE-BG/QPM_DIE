@@ -397,7 +397,7 @@ m_L_MB         = L_MB;
 
 Legend
 L_CPI          log of price level
-RS_UNC     	   nominal interest rate (unconstrained by the zero bound)
+RS_UNC     	   nominal interest rate (unconstrained by the zero bou nd)
 RR         	   real interest rate
 RSNEUTRAL_UNC  policy neutral rate (unconstrained by the zero bound)
 L_S            log of nominal exchange rate
