@@ -30,12 +30,12 @@ if isempty(params.SavePath)
     params.SavePath = fullfile('plots', MODEL.CORR_DATE, params.Esc{1}, 'PostProcessing');
 end
 
-if ~isfolder(params.SavePath)
-    mkdir(params.SavePath)
-else
-    rmdir(params.SavePath, 's')
-    mkdir(params.SavePath)
-end  
+% if ~isfolder(params.SavePath)
+%     mkdir(params.SavePath)
+% else
+%     rmdir(params.SavePath, 's')
+%     mkdir(params.SavePath)
+% end  
 
 
 %%
