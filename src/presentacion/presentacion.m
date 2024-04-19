@@ -19,7 +19,7 @@ for i = 1:length(folder_name)
 
         %% Diapositiva de título
         exportToPPTX('addslide','Master',1,'Layout','Diapositiva de título');
-        exportToPPTX('addtext',{'Modelo SVAR50-4B', sprintf('Corrimiento %s: %s',MODEL.leg_act, MODEL.esc_names{i})},...
+        exportToPPTX('addtext',{'Modelo QPM', sprintf('Corrimiento %s: %s',MODEL.leg_act, MODEL.esc_names{i})},...
                     'Position','Title','fontsize',45);
         exportToPPTX('addtext',{'DEPARTAMENTO DE INVESTIGACIONES ECONÓMICAS','BANCO DE GUATEMALA'},...
                      'Position','Subtitle','fontsize',20);
@@ -69,11 +69,6 @@ for i = 1:length(folder_name)
         Crecimiento;
         BM_Vel;
 
-        if esc_alt == false
-            EscAltPres;
-        end   
-
-
         %%
         exportToPPTX('addslide','Layout','Encabezado de sección');
         exportToPPTX('addtext','Muchas Gracias','Position','title','fontsize',48);
@@ -86,7 +81,7 @@ for i = 1:length(folder_name)
         
         exportToPPTX( ...
             'save', ...
-            fullfile(save_path, sprintf('SVAR50-4B Corrimiento %s %s - %s',...
+            fullfile(save_path, sprintf('QPM Corrimiento %s %s - %s',...
                                          MODEL.CORR_DATE,...
                                          folder_name{i},...
                                          MODEL.esc_names{i})));

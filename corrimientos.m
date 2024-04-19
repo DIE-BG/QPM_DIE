@@ -11,6 +11,7 @@ PATH.temp = genpath('temp');
 structfun(@addpath, PATH)
 
 %% Carga de configuraciones generales del corrimiento base (v0)
+tic
 StartConfig;
 
 %% Preprocessing
@@ -125,7 +126,7 @@ end
 %%
 
 %% Presentación
-prs = false;
+prs = true;
 if prs == true
     presentacion;
 end
@@ -134,4 +135,4 @@ end
 save(fullfile('data','fulldata',MODEL.CORR_DATE, sprintf("MODEL-%s.mat", MODEL.CORR_DATE)), 'MODEL');
 disp('Almacenamiento estructura MODEL: ok');
 disp('---- FIN ----');
-
+toc

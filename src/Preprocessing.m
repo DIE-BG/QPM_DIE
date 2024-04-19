@@ -67,15 +67,15 @@ m.CPINOSUBY_yoy.Comment = 'Inflación no subyacente';
 m.CPINOSUBY_yoy.Caption = 'Tasa de variación Intermensual';
 
 % Precios de importaciones
-m.DLA_ind_prec_impus = m.ind_prec_impus.pct(-1)*4;
+m.DLA_ind_prec_impus = m.ind_prec_impus.pct(-1)*12;
 m.DLA_ind_prec_impus.Comment =  'Tasa Intermensual anualizada Precio de Importaciones de EEUU';
-m.D4L_ind_prec_impus = m.ind_prec_impus.pct(-4);
+m.D4L_ind_prec_impus = m.ind_prec_impus.pct(-12);
 m.D4L_ind_prec_impus.Comment = 'Tasa de variación interanual Precio de Importaciones de EEUU';
 
 % Precios de exportaciones
-m.DLA_ind_prec_expus = m.ind_prec_expus.pct(-1)*4;
+m.DLA_ind_prec_expus = m.ind_prec_expus.pct(-1)*12;
 m.DLA_ind_prec_expus.Comment =  'Tasa Intermensual anualizada Precio de Exportaciones de EEUU';
-m.D4L_ind_prec_expus = m.ind_prec_expus.pct(-4);
+m.D4L_ind_prec_expus = m.ind_prec_expus.pct(-12);
 m.D4L_ind_prec_expus.Comment = 'Tasa de variación interanual Precio de Exportaciones de EEUU';
 
 %% Trimestralización
