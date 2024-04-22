@@ -36,7 +36,7 @@ MODEL = PostProcessing(MODEL,...
     'list_niv', list_nivel,...
     'Esc',{MODEL.CORR_VER, MODEL.F_pred});
 disp('Postprocesamiento: ok');
-return
+
 %% Gráficas
 do_graphs = true;
 
@@ -117,9 +117,6 @@ if do_graphs == true
         'Esc_add', {'v0', MODEL_ANT.PostProc},...
         'tab_range', tab_range,...
         'LegendsNames',{MODEL.leg_ant, MODEL.leg_act});
-     
-    % shock decomposition
-    Desc_shocks;
     
 end
 
