@@ -31,7 +31,7 @@ estmd = estimate(md, MODEL.PreProc.quarterly.L_GDP_RW_BAR.Data);
 
 fcstrng = length(MODEL.PreProc.quarterly.L_GDP_RW.End+1:MODEL.DATES.pred_end);
 
-[Y, YMSE] = forecast(estmd,  fcstrng,...
+[Y, ~] = forecast(estmd,  fcstrng,...
                     MODEL.PreProc.quarterly.L_GDP_RW_BAR.Data);
 
 MODEL.PreProc.quarterly.L_GDP_RW_BAR(MODEL.PreProc.quarterly.L_GDP_RW.End+1:MODEL.DATES.pred_end) = Y;
