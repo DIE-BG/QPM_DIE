@@ -39,6 +39,7 @@ plots\*\.png
 *snapshot*
 *.asv
 *.png
+!src/presentacion/star.png
 **/~$*.xlsx
 *.~f1
 *.evsettings
