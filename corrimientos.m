@@ -28,13 +28,16 @@ fcstrng = MODEL.DATES.pred_start:MODEL.DATES.pred_end;
 MODEL.F_pred = simulate(MODEL.MF, MODEL.F, fcstrng, 'anticipate', false, 'DbOverlay=', true);
 
 %% Post-Procesamiento de variables seleccionadas.
-pp_list = {'L_MB', 'L_VEL', 'L_CPI_RW', 'L_CPI_RW_Q','L_Z', 'L_GDP'};
+pp_list = {'L_MB', 'L_VEL', 'L_CPI_RW', 'L_CPI_RW_Q','L_Z', 'L_GDP', 'L_GDP_RW'};
 list_nivel = {'L_S','L_MB'};
+
+MODEL = rec_GDP_RW(MODEL);
 
 MODEL = PostProcessing(MODEL,...
     'list',pp_list,...
     'list_niv', list_nivel,...
     'Esc',{MODEL.CORR_VER, MODEL.F_pred});
+
 disp('Postprocesamiento: ok');
 
 %% Gráficas
@@ -99,12 +102,6 @@ if do_graphs == true
     % Descomposición de choques para variables seleccionadas
     Desc_shocks
 
-    
-%     % Real exchange rate
-%     tc_real(MODEL,...
-%         'Esc_add', {'v0', MODEL_ANT.F_pred},...
-%         'tab_range', tab_range);
-    
     % Real exchange rate (subplot)
     tcr_subplot(MODEL,...
         'Esc_add', {'v0', MODEL_ANT},...

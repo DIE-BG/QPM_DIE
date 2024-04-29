@@ -50,6 +50,7 @@ temp_db = databank.copy(params.Esc{2}, params.list);
 % Se agregan los logs desestacionalizados del modelo a la estructura de
 % post-procesamiento (para facilitar graficado)
 list_gaps_mod = get(MODEL.MF, 'xlist');
+list_gaps_mod = params.list + list_gaps_mod;
 % cosa = struct;
 for i = 1:length(list_gaps_mod)
     if startsWith(list_gaps_mod{i}, 'L_') && ~endsWith(list_gaps_mod{i}, '_BAR') && ~endsWith(list_gaps_mod{i}, '_GAP')

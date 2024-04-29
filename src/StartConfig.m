@@ -6,18 +6,18 @@ MODEL.param_file_name = 'setparam.m';
 
 MODEL.CORR_VER = 'v0';
 
-% MODEL.CORR_DATE = '2024-04';
-MODEL.CORR_DATE = '2024-02';
+MODEL.CORR_DATE = '2024-04';
+% MODEL.CORR_DATE = '2024-02';
 MODEL.CORR_DATE_ANT = '2024-02';
 
-% MODEL.leg_act = 'Abril 2024';  
-MODEL.leg_act = 'Febrero 2024';  
+MODEL.leg_act = 'Abril 2024';  
+% MODEL.leg_act = 'Febrero 2024';  
 MODEL.leg_ant = 'Febrero 2024'; 
 
 % Fechas de fin de historia
 MODEL.DATES.hist_end_ant = qq(2023, 4);
-MODEL.DATES.hist_end = qq(2023, 4);%qq(2023,4);%
-MODEL.DATES.hist_end_mm = mm(2024, 02);
+MODEL.DATES.hist_end = qq(2024, 1);%qq(2023,4);%
+MODEL.DATES.hist_end_mm = mm(2024, 03);
 
 %% Otros elementos y fechas
 MODEL.data_file_name = fullfile( ...

@@ -47,7 +47,8 @@ params = p.Results;
     
 %% Limpieza y creación de folders
 SS = get(MODEL.M, 'sstate');
-
+SS.D4L_GDP_RW = 2;
+SS.D4_GDP_RW_SM = 1.83;
 %SavePath
 if  strcmp(params.Esc_add{1}, MODEL.CORR_DATE_ANT)
     params.SavePath = fullfile('plots', MODEL.CORR_DATE, 'v0', 'prediction_compared');
@@ -71,9 +72,11 @@ end
 
 %% Estados estacionarios
 MODEL.toplot.ss = get(MODEL.MF, 'Sstatelevel');
-
+MODEL.toplot.ss.D4L_GDP_RW = 2;
+MODEL.toplot.ss.D4_GDP_RW_SM = 1.83;
 %% Bloque 1: Variables del modelo (xlist) (libre vs otro)
 list = params.PlotList;
+list = list + {'D4L_GDP_RW', 'D4_GDP_RW_SM'};
 % Iteración para los rangos de ploteo
 for rng = 1 : length(params.StartDate)
     % Recorte de base da datos para cada plot
@@ -861,7 +864,7 @@ for corr = 1:length(params.LegendsNames)
             D4L_MB_g = full_data_add.D4L_MB;
         else
             D4L_VEL_g = F_pred_temp.D4L_VEL;
-            D4L_CPIXFE_g = F_pred_temp.D4L_CPIXFEW;
+            D4L_CPIXFE_g = F_pred_temp.D4L_CPIXFE;
             D4L_GDP_g = F_pred_temp.D4L_GDP;
             D4L_MB_g = F_pred_temp.D4L_MB;
         end

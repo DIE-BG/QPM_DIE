@@ -32,10 +32,15 @@ for i = 1:length(folder_name)
                      'HorizontalAlignment', 'center','fontsize', 45);
                  
         %% Descripción
+        if ~ strcmp(MODEL.esc_names{i}, 'Escenario Libre') 
         exportToPPTX('addslide','Layout','Título y objetos');
         exportToPPTX('addtext',sprintf("%s", MODEL.esc_names{i}),'Position',...
                      'title','fontsize',36,...
                      'HorizontalAlignment','Left');
+                 
+        else
+            
+        end
 
         %% CONTENIDO
         exportToPPTX('addslide','Layout','Título y objetos');
