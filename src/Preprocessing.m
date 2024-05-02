@@ -126,7 +126,7 @@ end
 % Estructura para observables
 MODEL.PreProc.obs = struct();
 % Lista de observables (debe coincidir con .model)
-obs_list = {'L_GDP', 'L_S','L_CPI','RS','L_CPIXFE','L_CPI_RW','RS_RW', 'L_GDP_RW_GAP', 'L_GDP_RW','REM_GDP', 'L_MB'}; 
+obs_list = {'L_GDP', 'L_S','L_CPI','RS','L_CPIXFE','L_CPI_RW','RS_RW', 'L_GDP_RW_GAP','REM_GDP', 'L_MB'}; 
 
 for i = 1:length(obs_list)
    MODEL.PreProc.obs.(strcat('m_',obs_list{i})) = temp.(obs_list{i}); 

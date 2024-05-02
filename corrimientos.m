@@ -20,10 +20,12 @@ disp('Preprocesamiento de Observables: ok');
 
 %% Lectura de Modelo, proceso de filtrado y simulación
 MODEL = SimTools.sim.read_model(MODEL);
+
 % Filtrado 
 [MODEL.MF,MODEL.F] = filter(MODEL.M, MODEL.PreProc.obs,... 
                             MODEL.DATES.hist_start:MODEL.DATES.hist_end, ... 
                             'meanOnly=',true);
+
 fcstrng = MODEL.DATES.pred_start:MODEL.DATES.pred_end;
 MODEL.F_pred = simulate(MODEL.MF, MODEL.F, fcstrng, 'anticipate', false, 'DbOverlay=', true);
 
@@ -100,7 +102,7 @@ if do_graphs == true
         );
     
     % Descomposición de choques para variables seleccionadas
-    Desc_shocks
+    Desc_shocks;
 
     % Real exchange rate (subplot)
     tcr_subplot(MODEL,...
