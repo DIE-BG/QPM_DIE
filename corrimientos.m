@@ -20,21 +20,30 @@ disp('Preprocesamiento de Observables: ok');
 
 %% Lectura de Modelo, proceso de filtrado y simulación
 MODEL = SimTools.sim.read_model(MODEL);
+
 % Filtrado 
 [MODEL.MF,MODEL.F] = filter(MODEL.M, MODEL.PreProc.obs,... 
                             MODEL.DATES.hist_start:MODEL.DATES.hist_end, ... 
                             'meanOnly=',true);
+
 fcstrng = MODEL.DATES.pred_start:MODEL.DATES.pred_end;
 MODEL.F_pred = simulate(MODEL.MF, MODEL.F, fcstrng, 'anticipate', false, 'DbOverlay=', true);
 
 %% Post-Procesamiento de variables seleccionadas.
-pp_list = {'L_MB', 'L_VEL', 'L_CPI_RW', 'L_CPI_RW_Q','L_Z', 'L_GDP'};
+pp_list = {'L_MB', 'L_VEL', 'L_CPI_RW', 'L_CPI_RW_Q','L_Z', 'L_GDP', 'L_GDP_RW'};
 list_nivel = {'L_S','L_MB'};
+
+[MODEL.F_pred.L_GDP_RW, MODEL.F_pred.L_GDP_RW_BAR,...
+    MODEL.F_pred.D4L_GDP_RW, MODEL.F_pred.DLA_GDP_RW,...
+    MODEL.F_pred.D4_GDP_RW_SM] = rec_GDP_RW(MODEL.PreProc.quarterly,...
+                                            MODEL.F_pred,...
+                                            MODEL.DATES);
 
 MODEL = PostProcessing(MODEL,...
     'list',pp_list,...
     'list_niv', list_nivel,...
     'Esc',{MODEL.CORR_VER, MODEL.F_pred});
+
 disp('Postprocesamiento: ok');
 
 %% Gráficas
@@ -97,17 +106,11 @@ if do_graphs == true
         );
     
     % Descomposición de choques para variables seleccionadas
-    Desc_shocks
+    Desc_shocks;
 
-    
-    % Real exchange rate
-    tc_real(MODEL,...
-        'Esc_add', {'v0', MODEL_ANT.F_pred},...
-        'tab_range', tab_range);
-    
     % Real exchange rate (subplot)
     tcr_subplot(MODEL,...
-        'Esc_add', {'v0', MODEL_ANT},...
+        'Esc_add', {'v0', MODEL_ANT.F_pred},...
         'tab_range', tab_range,...
         'LegendsNames',{MODEL.leg_ant, MODEL.leg_act});
     
@@ -120,8 +123,13 @@ if do_graphs == true
     
 end
 
-%%
+%% Escenarios alternos
+esc_alt = true;
 
+if esc_alt == true
+    CPI_RW;
+    v2_CP1;
+end
 %% Presentación
 prs = true;
 if prs == true

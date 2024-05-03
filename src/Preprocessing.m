@@ -97,9 +97,7 @@ end
 q.GDP = q.GDP.x12;
 q.REM_GDP = q.REM_GDP.x12;
 
-% Estructura Preproc (monthly, quarterly, obs)
-MODEL.PreProc.monthly = m;
-MODEL.PreProc.quarterly = q;
+% Variables seleccionadas
 list_mobs = {'GDP', 'CPI', 'CPIXFE', 'S', 'RS', 'GDP_RW', 'CPI_RW', 'RS_RW', 'REM_GDP', 'MB'};
 temp = q*list_mobs;
 
@@ -128,15 +126,17 @@ end
 % Estructura para observables
 MODEL.PreProc.obs = struct();
 % Lista de observables (debe coincidir con .model)
-obs_list = {'L_GDP', 'L_S','L_CPI','RS','L_CPIXFE','L_CPI_RW','RS_RW', 'L_GDP_RW_GAP', 'L_GDP_RW','REM_GDP', 'L_MB'}; 
+obs_list = {'L_GDP', 'L_S','L_CPI','RS','L_CPIXFE','L_CPI_RW','RS_RW', 'L_GDP_RW_GAP','REM_GDP', 'L_MB'}; 
 
 for i = 1:length(obs_list)
    MODEL.PreProc.obs.(strcat('m_',obs_list{i})) = temp.(obs_list{i}); 
    MODEL.PreProc.obs.(strcat('m_',obs_list{i})).UserData.endhist = dat2char(MODEL.DATES.hist_end); 
 end
 
-clear temp;
+MODEL.PreProc.monthly = m;
+MODEL.PreProc.quarterly = temp;
 
+clear temp;
 %% Almacenamiento de csv con datos que entran al proceso de filtrado.
 databank.toCSV(MODEL.PreProc.obs, MODEL.data_file_name, Inf, 'Decimals=', 5, 'UserDataFields=', 'endhist');
 
