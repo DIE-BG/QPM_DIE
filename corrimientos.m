@@ -33,7 +33,11 @@ MODEL.F_pred = simulate(MODEL.MF, MODEL.F, fcstrng, 'anticipate', false, 'DbOver
 pp_list = {'L_MB', 'L_VEL', 'L_CPI_RW', 'L_CPI_RW_Q','L_Z', 'L_GDP', 'L_GDP_RW'};
 list_nivel = {'L_S','L_MB'};
 
-MODEL = rec_GDP_RW(MODEL);
+[MODEL.F_pred.L_GDP_RW, MODEL.F_pred.L_GDP_RW_BAR,...
+    MODEL.F_pred.D4L_GDP_RW, MODEL.F_pred.DLA_GDP_RW,...
+    MODEL.F_pred.D4_GDP_RW_SM] = rec_GDP_RW(MODEL.PreProc.quarterly,...
+                                            MODEL.F_pred,...
+                                            MODEL.DATES);
 
 MODEL = PostProcessing(MODEL,...
     'list',pp_list,...
@@ -106,7 +110,7 @@ if do_graphs == true
 
     % Real exchange rate (subplot)
     tcr_subplot(MODEL,...
-        'Esc_add', {'v0', MODEL_ANT},...
+        'Esc_add', {'v0', MODEL_ANT.F_pred},...
         'tab_range', tab_range,...
         'LegendsNames',{MODEL.leg_ant, MODEL.leg_act});
     
@@ -119,8 +123,13 @@ if do_graphs == true
     
 end
 
-%%
+%% Escenarios alternos
+esc_alt = true;
 
+if esc_alt == true
+    CPI_RW;
+    v2_CP1;
+end
 %% Presentación
 prs = true;
 if prs == true

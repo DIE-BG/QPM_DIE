@@ -1,4 +1,4 @@
-function MODEL = rec_GDP_RW(MODEL, varargin)
+function [L_GDP_RW, L_GDP_RW_BAR, D4L_GDP_RW, DLA_GDP_RW, D4_GDP_RW_SM] = rec_GDP_RW(q, F_pred, d, varargin)
 
 %{
 Se realiza la reconstrucción de GDP_RW partiendo de pornósticos . 
@@ -21,9 +21,12 @@ simulación MODEL.F_pred.
 p = inputParser;
     addParameter(p, 'list', {});
     addParameter(p, 'list_niv', {});
-    addParameter(p, 'Esc', {MODEL.CORR_VER, MODEL.F_pred});
 parse(p, varargin{:});
 params = p.Results; 
+
+MODEL.PreProc.quarterly = q;
+MODEL.F_pred = F_pred;
+MODEL.DATES = d;
 
 %% Modelo ARIMA(1,1,0)
 md = arima(1,1,0);
@@ -54,7 +57,6 @@ MODEL.F_pred.GDP_RW_SM.Data = temp_movsum;
 % Tasa de variación de la suma movil
 MODEL.F_pred.D4_GDP_RW_SM = MODEL.F_pred.GDP_RW_SM.diff(-4)/4; 
 
-
 % Nombres de las variables
 MODEL.F_pred.L_GDP_RW.comment = 'Producto Interno Bruto Real EEUU (Logaritmo)';
 MODEL.F_pred.L_GDP_RW_BAR.comment= 'Tendencia del Producto Interno Bruto Real EEUU';
@@ -62,6 +64,12 @@ MODEL.F_pred.D4L_GDP_RW.comment = 'Tasa de Variación Internual del PIB de EEUU'
 MODEL.F_pred.DLA_GDP_RW.comment = 'Tasa de Variación Intertrimestral anualizada del PIB de EEUU';
 MODEL.F_pred.D4_GDP_RW_SM.comment = 'Tasa de Variación Interanual de la suma de 4 Trimestres del PIB de EEUU';
 
+
+L_GDP_RW = MODEL.F_pred.L_GDP_RW;
+L_GDP_RW_BAR = MODEL.F_pred.L_GDP_RW_BAR;
+D4L_GDP_RW = MODEL.F_pred.D4L_GDP_RW;
+DLA_GDP_RW = MODEL.F_pred.DLA_GDP_RW;
+D4_GDP_RW_SM = MODEL.F_pred.D4_GDP_RW_SM;
 
 end
 

@@ -182,7 +182,7 @@ L_GDP_GAP = b1*L_GDP_GAP{-1} - b2*MCI + b3*L_GDP_RW_GAP +...
 
 % 2
 'Real monetary condition index' 
-MCI = b4*(RR_GAP ) + (1 - b4)*(-L_Z_GAP) - b6*(D4L_MB{-1} - ss_D4L_MB);
+MCI = b4*(RR_GAP) + (1 - b4)*(-L_Z_GAP) - b6*(D4L_MB{-1} - ss_D4L_MB);
 
 % 3 Phillips Curve
 'Phillips Curve (core inflation)'

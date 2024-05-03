@@ -48,7 +48,9 @@ MODEL.DATES.hist_start_mm = mm(2005,1);
 tab_range_mm = MODEL.DATES.hist_end_mm-8:MODEL.DATES.hist_end_mm;
 
 %% Nombres de los escenarios
-MODEL.esc_names = {'Escenario Libre'}; %v0;
+MODEL.esc_names = {'Escenario Libre',... v0
+                   'Esc CPI_RW',... v1
+                   'Escenario Tasa Líder'}; %v2
 
 %% Carga de info mes previo
 MODEL_ANT = load(sprintf('MODEL-%s.mat',MODEL.CORR_DATE_ANT));
