@@ -32,9 +32,7 @@ addParameter(p, 'StartDate', {MODEL.DATES.hist_start_mm, MODEL.DATES.hist_end_mm
 addParameter(p, 'EndDatePlot', {MODEL.DATES.hist_end_mm});
 addParameter(p, 'SavePath', {});
 addParameter(p, 'Esc_add', {}); % libre v0, alterno v1, contrafactual v2...
-addParameter(p, 'tab_range', {});
 addParameter(p, 'tab_range_mm', {});
-addParameter(p, 'TabRange', qq(2021,4):4:qq(2024,4));
 
 parse(p, varargin{:});
 params = p.Results;

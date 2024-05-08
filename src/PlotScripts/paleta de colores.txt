@@ -1,0 +1,11 @@
+Producto doméstico 0.435 0.584 0.851
+MCI 0.988 0.624 0.345
+Producto externo 0.604 0.553 0.514
+Remesas 1 0.529 0.82
+shock de producto doméstico (brecha) 0.812 0.89 0.604
+Base Monetaria 0.804 0.345 0.988
+Tipo de cambio real 0.729 0.98 0.306
+Tasa real 0.345 0.922 0.988
+Inflación subyacente 1 0.373 0.263
+shock de inflaicón subyacente 
+RMC 

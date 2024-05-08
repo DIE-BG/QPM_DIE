@@ -47,7 +47,7 @@ MODEL = PostProcessing(MODEL,...
 disp('Postprocesamiento: ok');
 
 %% Gráficas
-do_graphs = true;
+do_graphs = false;
 
 if do_graphs == true
     % Pre-processing
@@ -107,6 +107,10 @@ if do_graphs == true
     
     % Descomposición de choques para variables seleccionadas
     Desc_shocks;
+    
+    % Contribuciones
+    contributions(MODEL,...
+                  'Esc_add', {'v0', MODEL_ANT});
 
     % Real exchange rate (subplot)
     tcr_subplot(MODEL,...
@@ -128,10 +132,10 @@ esc_alt = true;
 
 if esc_alt == true
     CPI_RW;
-    v2_CP1;
+%   v2_CP1;
 end
 %% Presentación
-prs = true;
+prs = false;
 if prs == true
     presentacion;
 end
