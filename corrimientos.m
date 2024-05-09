@@ -47,7 +47,7 @@ MODEL = PostProcessing(MODEL,...
 disp('Postprocesamiento: ok');
 
 %% Gráficas
-do_graphs = false;
+do_graphs = true;
 
 if do_graphs == true
     % Pre-processing
@@ -108,6 +108,13 @@ if do_graphs == true
     % Descomposición de choques para variables seleccionadas
     Desc_shocks;
     
+    % Descomposición de chosques para variables seleccionadas
+    % (Primeras diferencias)
+    plot_diff_shd_dsc(MODEL,...
+                  'variables', sh_list,...
+                  'SavePath', fullfile('plots', MODEL.CORR_DATE, MODEL.CORR_VER, 'Shock_dec', 'diff'),...
+                  'Esc_add', {'v0'});
+    
     % Contribuciones
     contributions(MODEL,...
                   'Esc_add', {'v0', MODEL_ANT});
@@ -132,10 +139,10 @@ esc_alt = true;
 
 if esc_alt == true
     CPI_RW;
-%   v2_CP1;
+    v2_CP1;
 end
 %% Presentación
-prs = false;
+prs = true;
 if prs == true
     presentacion;
 end
