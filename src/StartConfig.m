@@ -17,7 +17,7 @@ MODEL.leg_ant = 'Febrero 2024';
 % Fechas de fin de historia
 MODEL.DATES.hist_end_ant = qq(2023, 4);
 MODEL.DATES.hist_end = qq(2024, 1);%qq(2023,4);%
-MODEL.DATES.hist_end_mm = mm(2024, 04);
+MODEL.DATES.hist_end_mm = mm(2024, 03);
 
 %% Otros elementos y fechas
 MODEL.data_file_name = fullfile( ...
@@ -48,9 +48,9 @@ MODEL.DATES.hist_start_mm = mm(2005,1);
 tab_range_mm = MODEL.DATES.hist_end_mm-8:MODEL.DATES.hist_end_mm;
 
 %% Nombres de los escenarios
-MODEL.esc_names = {'Escenario Libre',... v0
-                   'Esc CPI_RW',... v1
-                   'Escenario Tasa Líder'}; %v2
+MODEL.esc_names = {'Escenario Libre'};%,... v0
+                   %'Esc CPI_RW'};%,... v1
+                   %'Escenario Tasa Líder'}; %v2
 
 %% Carga de info mes previo
 MODEL_ANT = load(sprintf('MODEL-%s.mat',MODEL.CORR_DATE_ANT));

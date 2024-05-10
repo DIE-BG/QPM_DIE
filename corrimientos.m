@@ -139,7 +139,7 @@ esc_alt = true;
 
 if esc_alt == true
     CPI_RW;
-    v2_CP1;
+%     v2_CP1;
 end
 %% Presentación
 prs = true;
