@@ -1,6 +1,6 @@
 %% Modelo y setparam
-MODEL.mod_file_name = 'QPM.model';
-MODEL.param_file_name = 'setparam.m';
+MODEL.mod_file_name = 'QPM_v2.model';
+MODEL.param_file_name = 'setparam_v2.m';
 
 %% Configuración del corrimiento
 
@@ -49,8 +49,9 @@ tab_range_mm = MODEL.DATES.hist_end_mm-8:MODEL.DATES.hist_end_mm;
 
 %% Nombres de los escenarios
 MODEL.esc_names = {'Escenario Libre',... v0
-                   'Esc CPI_RW',... v1
-                   'Escenario Tasa Líder'}; %v2
+                   'Escenario Base',... v1
+                   'Esc CPI_RW',... v2
+                   'Escenario Tasa Líder'}; %v3
 
 %% Carga de info mes previo
 MODEL_ANT = load(sprintf('MODEL-%s.mat',MODEL.CORR_DATE_ANT));
