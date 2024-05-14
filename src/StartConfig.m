@@ -6,18 +6,16 @@ MODEL.param_file_name = 'setparam_v2.m';
 
 MODEL.CORR_VER = 'v0';
 
-MODEL.CORR_DATE = '2024-04';
-% MODEL.CORR_DATE = '2024-02';
-MODEL.CORR_DATE_ANT = '2024-02';
+MODEL.CORR_DATE = '2024-05';
+MODEL.CORR_DATE_ANT = '2024-04';
 
-MODEL.leg_act = 'Abril 2024';  
-% MODEL.leg_act = 'Febrero 2024';  
-MODEL.leg_ant = 'Febrero 2024'; 
+MODEL.leg_act = 'Mayo 2024';  
+MODEL.leg_ant = 'Abril 2024'; 
 
 % Fechas de fin de historia
-MODEL.DATES.hist_end_ant = qq(2023, 4);
+MODEL.DATES.hist_end_ant = qq(2024, 1);
 MODEL.DATES.hist_end = qq(2024, 1);%qq(2023,4);%
-MODEL.DATES.hist_end_mm = mm(2024, 03);
+MODEL.DATES.hist_end_mm = mm(2024, 04);
 
 %% Otros elementos y fechas
 MODEL.data_file_name = fullfile( ...
@@ -49,9 +47,7 @@ tab_range_mm = MODEL.DATES.hist_end_mm-8:MODEL.DATES.hist_end_mm;
 
 %% Nombres de los escenarios
 MODEL.esc_names = {'Escenario Libre',... v0
-                   'Escenario Base',... v1
-                   'Esc CPI_RW',... v2
-                   'Escenario Tasa Líder'}; %v3
+                   'Escenario Tasa Líder'}; %v2
 
 %% Carga de info mes previo
 MODEL_ANT = load(sprintf('MODEL-%s.mat',MODEL.CORR_DATE_ANT));

@@ -11,19 +11,19 @@
 %}
 
 %% Escenario IPEI Observado
-% Historia hasta 2021Q4 y anclaje de IPEI de 2022Q1 hasta 2023Q2
-alt1 = MODEL.F;
+% Datos para anclaje
+
 
 % Trimestres de anclaje
-MODEL.DATES.E1_dates = qq(2022,1):qq(2023,2);
+MODEL.DATES.E1_dates = MODEL.DATES.pred_start:MODEL.DATES.pred_start+8;
 
 %% %%%%%%%%%%%%%%%% Creación de escenario alternativo %%%%%%%%%%%%%%%%%%%%%%
 % Shocks del escenario base
-% shocks = MODEL.F*get(MODEL.MF, 'elist');
+shocks = MODEL.F*get(MODEL.MF, 'elist');
 
 % Concatenación de bd con condiciones iniciales (MODEL.F) y shocks Esc.
 % Libre
-% MODEL.Esc.v1.dbi = dboverlay(MODEL.F,shocks);
+MODEL.Esc.v3.dbi = dboverlay(MODEL.F,shocks);
 MODEL.Esc.v1.dbi = databank.clip(alt1, MODEL.F_pred.L_CPIXFE.Start, qq(2021,4));
 
 % Imposición de anclajes provenientes del QPM en base de datos
@@ -56,12 +56,8 @@ MODEL.Esc.v1.shd = simulate(MODEL.MF,...
 %% Post-Procesamiento de variables seleccionadas.
 pp_list = {'L_MB', 'L_VEL', 'L_CPI_RW', 'L_CPI_RW_Q','L_Z', 'L_GDP', 'L_GDP_RW'};
 list_nivel = {'L_S','L_MB'};
-
-[MODEL.Esc.v1.pred.L_GDP_RW, MODEL.Esc.v1.pred.L_GDP_RW_BAR,...
-    MODEL.Esc.v1.pred.D4L_GDP_RW, MODEL.Esc.v1.pred.DLA_GDP_RW,...
-    MODEL.Esc.v1.pred.D4_GDP_RW_SM] = rec_GDP_RW(databank.clip(MODEL.PreProc.quarterly, MODEL.DATES.hist_start, qq(2021,4)),...
-                                            MODEL.Esc.v1.pred,...
-                                            MODEL.DATES);
+                                        
+MODEL = rec_GDP_RW(MODEL, 'Esc', 'v3');
 
 MODEL = PostProcessing(MODEL,...
     'list',pp_list,...
