@@ -154,7 +154,8 @@ for rng = 1:length(params.StartDate)
         
         
         if ~isempty(params.LegendsNames)
-            legend('Location', params.LegendLocation);
+            legend('Location', params.LegendLocation,...
+                'Interpreter','none');
         end
         
         
