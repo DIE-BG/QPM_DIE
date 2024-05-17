@@ -18,9 +18,9 @@ simulación MODEL.F_pred.
 * 'EndDatePlot' = {} [ `Cell` ] - fechas de fin del plot (pueden ser una o mas).
 
 * 'Esc_add' = {}  [ `Cell` ] - Escenario adicional a plotear. Cell array 
-    con dos elementos: (1) Versión o fecha del escenario adicional y (2)
+    con tres elementos: (1) Versión o fecha del escenario adicional, (2)
     Base de datos con los pronósticos del modelo (ambas estructuras deben
-    tener los mismos campos por compatibilidad.
+    tener los mismos campos por compatibilidad, y (3) Color para plots.
 
 - DIE
 - Marzo 2024
@@ -30,7 +30,7 @@ p = inputParser;
     addParameter(p, 'StartDate', MODEL.DATES.hist_start);
     addParameter(p, 'EndDatePlot', MODEL.DATES.pred_end);
     addParameter(p, 'SavePath', {});
-    addParameter(p, 'Esc_add', {});
+    addParameter(p, 'Esc_add', {});%
     addParameter(p, 'PlotList', get(MODEL.MF, 'xlist'));
     addParameter(p, 'LegendsNames', {});
     addParameter(p, 'LegendLocation', 'best');
@@ -67,7 +67,11 @@ end
 %% Carga de base de datos adicional
 
 if ~isempty(params.Esc_add)
-    full_data_add = params.Esc_add{2}; 
+    full_data_add = params.Esc_add{2};
+    esc_col = params.Esc_add{3};
+end
+if isempty(params.Esc_add{3})
+    esc_col = 	[1 0 0];
 end
 
 %% Estados estacionarios
@@ -118,7 +122,8 @@ for rng = 1 : length(params.StartDate)
             
             plot(...
                 params.StartDate{rng}:params.EndDatePlot{rng}, ...
-                full_data_add_temp.(list{var}),'.-r', ...'MarkerSize', 15, ...
+                full_data_add_temp.(list{var}),...
+                'Color',[esc_col], ...
                 'LineWidth', 1.65, ...
                 'LineStyle', '--' ...
                 );
@@ -223,7 +228,7 @@ for rng = 1 : length(params.StartDate)
                     full_data_add_temp.((list{var}))(params.AnnoRange), ...
                     string(num2str(full_data_add_temp.((list{var}))(params.AnnoRange), '%0.2f')), ...
                     'Container', plot_p, ...
-                    'Color', 'r', ...
+                    'Color', esc_col, ...
                     'IsAnt', true, ...
                     'XAdjustment', params.AnnotationXAdjustment, ...
                     'YAdjustment', params.AnnotationYAdjustment ...
@@ -242,7 +247,7 @@ for rng = 1 : length(params.StartDate)
         if ~isempty(params.Esc_add)
             data_table(:, 1) = full_data_add_temp.(list{var})(params.TabRange);
             data_table(:, 2) = F_pred_temp.(list{var})(params.TabRange);
-            text_Color = [1,0,0 ; 0,0,1];
+            text_Color = [esc_col ; 0,0,1];
         else
             data_table(:, 1) = full_data_add_temp.(list{var})(params.TabRange);
             text_Color = [1, 1, 1];

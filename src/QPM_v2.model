@@ -41,7 +41,6 @@
 'Inflacion Total Interanual (Objetivo)'                                                    D4L_CPI_TAR, %14
 'Desviaciones de la Inflación Total respecto del Objetivo'                                 D4L_CPI_DEV, %15
 
-
 % Core Inflation
 'Indice Inflación Subyacente Optima MSE (Logaritmo)'                                       L_CPIXFE, % 16
 'Inflacion Subyacente Optima MSE Intertrimestral Anualizada'                               DLA_CPIXFE,%17
@@ -131,7 +130,6 @@ SHK_D4_GDP_SM_ADJ,
 SHK_D4L_CPI_TAR, %3
 SHK_DLA_CPIXFE, %4
 SHK_D4L_CPI_NOSUBY, %5
-SHK_D4L_CPI_ADJ,
 % Cambiarios
 SHK_L_S, %8
 SHK_DLA_S_TAR, %9
@@ -409,10 +407,6 @@ RS_EXTERNAL = 4*(L_S{+1} - L_S) + RS_RW + PREM; %64
 i_adj = rho_i_adj*(i_adj{-1}) + SHK_i_adj;
 i_EP = RS + i_adj;
 
-% % Inflación
-% D4L_CPI_ADJ = rho_D4L_CPI_ADJ * D4L_CPI_ADJ{-1} + SHK_D4L_CPI_ADJ;
-% D4L_CPI_EP  = D4L_CPI + D4L_CPI_ADJ;
-
 % Crecimiento Económico
 D4_GDP_SM_ADJ = rho_D4_GDP_SM_ADJ * D4_GDP_SM_ADJ{-1} + SHK_D4_GDP_SM_ADJ;
 D4_GDP_SM_EP  = D4_GDP_SM + D4_GDP_SM_ADJ;
@@ -470,4 +464,4 @@ DLA_           q-o-q change
 D4L_           y-o-y change  
 _RW_           foreign variable
 SHK_           shock
-m_           measurement variables
+OBS_           measurement variables
