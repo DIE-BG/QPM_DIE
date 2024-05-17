@@ -43,6 +43,15 @@ params = p.Results;
 
 MODEL.PostProc.(params.Esc{1}) = struct();
 
+%% Datos
+if strcmp(params.Esc{1}, 'v0')
+   pred = MODEL.F_pred;
+   
+else
+   pred = params.Esc{2};
+    
+end
+    
 %% Logaritmos
 
 temp_db = databank.copy(params.Esc{2}, params.list); 
@@ -54,7 +63,7 @@ list_gaps_mod = params.list + list_gaps_mod;
 % cosa = struct;
 for i = 1:length(list_gaps_mod)
     if startsWith(list_gaps_mod{i}, 'L_') && ~endsWith(list_gaps_mod{i}, '_BAR') && ~endsWith(list_gaps_mod{i}, '_GAP')
-       MODEL.PostProc.(params.Esc{1}).l_sa.(strcat(list_gaps_mod{i},'_SA')) = MODEL.F_pred.(list_gaps_mod{i});
+       MODEL.PostProc.(params.Esc{1}).l_sa.(strcat(list_gaps_mod{i},'_SA')) = pred.(list_gaps_mod{i});
     end
 end  
 
@@ -79,7 +88,7 @@ list_gaps_mod = get(MODEL.MF, 'xlist');
 % cosa = struct;
 for i = 1:length(list_gaps_mod)
     if startsWith(list_gaps_mod{i}, 'L_') && endsWith(list_gaps_mod{i}, '_BAR')
-       MODEL.PostProc.(params.Esc{1}).l_bar.(list_gaps_mod{i}) = MODEL.F_pred.(list_gaps_mod{i});
+       MODEL.PostProc.(params.Esc{1}).l_bar.(list_gaps_mod{i}) = pred.(list_gaps_mod{i});
     end
 end  
  
@@ -89,7 +98,7 @@ list_gaps_mod = get(MODEL.MF, 'xlist');
 % cosa = struct;
 for i = 1:length(list_gaps_mod)
     if endsWith(list_gaps_mod{i}, '_GAP')
-       MODEL.PostProc.(params.Esc{1}).l_gap.(list_gaps_mod{i}) = MODEL.F_pred.(list_gaps_mod{i});
+       MODEL.PostProc.(params.Esc{1}).l_gap.(list_gaps_mod{i}) = pred.(list_gaps_mod{i});
     end
 end  
 

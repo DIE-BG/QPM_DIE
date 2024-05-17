@@ -64,7 +64,7 @@ params = p.Results;
 
     else
 
-            % Modelo ARIMA(1,1,0)
+        % Modelo ARIMA(1,1,0)
         md = arima(1,1,0);
         estmd = estimate(md, MODEL.PreProc.quarterly.L_GDP_RW_BAR.Data);
 

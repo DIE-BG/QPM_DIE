@@ -8,17 +8,17 @@
 % (8 Trimestres)
 
 %Base de datos
-alt1 = databank.fromCSV(...
-        fullfile('data', 'corrimientos',MODEL.CORR_DATE,...
-                 'v1', 'fulldata_SVAR.csv')); 
-             
-alt1.dla_ipei = alt1.dla_ipei.x12;
+% alt1 = databank.fromCSV(...
+%         fullfile('data', 'corrimientos',MODEL.CORR_DATE,...
+%                  'v1', 'fulldata_SVAR.csv')); 
+%              
+% alt1.dla_ipei = alt1.dla_ipei.x12;
              
 
-% alt1 = load(fullfile('data', 'corrimientos',MODEL.CORR_DATE,...
-%             'v1', sprintf('MODEL-%s.mat',MODEL.CORR_DATE)));
+alt1 = load(fullfile('data', 'corrimientos',MODEL.CORR_DATE,...
+            'v1', sprintf('MODEL-%s.mat',MODEL.CORR_DATE)));
 
-% alt1 = alt1.MODEL.PostProc.v0.l_sa;
+alt1 = alt1.MODEL.PostProc.v0.l_sa;
         
 % Trimestres de anclaje
 MODEL.DATES.E1_dates = MODEL.DATES.pred_start:MODEL.DATES.pred_start+7;
@@ -31,14 +31,14 @@ shocks = MODEL.F*get(MODEL.MF, 'elist');
 MODEL.Esc.v3.dbi = dboverlay(MODEL.F,shocks);
 
 % Imposición de anclajes provenientes del QPM en base de datos
-MODEL.Esc.v3.dbi.DLA_CPI_RW(MODEL.DATES.E1_dates) = alt1.dla_ipei(MODEL.DATES.E1_dates);
+MODEL.Esc.v3.dbi.L_CPI_RW(MODEL.DATES.E1_dates) = alt1.ln_ipei_sa(MODEL.DATES.E1_dates);
 
 % Plan de simulación
 MODEL.Esc.v3.planSim = plan(MODEL.MF, MODEL.DATES.pred_start:MODEL.DATES.pred_end);
 % Variable a endogenizar (shock propio?? No necesariamente)
 MODEL.Esc.v3.planSim = endogenize(MODEL.Esc.v3.planSim,{'SHK_DLA_CPI_RW'},MODEL.DATES.E1_dates); 
 % Variable a exogenizar (Anclaje)
-MODEL.Esc.v3.planSim = exogenize(MODEL.Esc.v3.planSim,{'DLA_CPI_RW'},MODEL.DATES.E1_dates);
+MODEL.Esc.v3.planSim = exogenize(MODEL.Esc.v3.planSim,{'L_CPI_RW'},MODEL.DATES.E1_dates);
 
 % Simulación.
 MODEL.Esc.v3.pred = simulate(MODEL.MF,...
