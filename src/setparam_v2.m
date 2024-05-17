@@ -153,7 +153,6 @@ s.rho_D4L_CPI_TAR = 0.8723;
 % Persistencia de variables de ajuste (baja persistencia para que converjan
 % a 0 rápido)
 s.rho_i_adj = 0.05;
-s.rho_D4L_CPI_ADJ = 0.05;
 s.rho_D4_GDP_SM_ADJ = 0.05;
 s.rho_D4L_S_ADJ = 0.05;
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
