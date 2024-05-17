@@ -41,7 +41,7 @@ MODEL = PostProcessing(MODEL,...
     'Esc',{MODEL.CORR_VER, MODEL.F_pred});
 
 disp('Postprocesamiento: ok');
-return
+
 %% Gráficas
 do_graphs = true;
 

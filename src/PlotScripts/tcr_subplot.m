@@ -42,7 +42,15 @@ end
 
 %% Carga de base de datos mes anterior
 full_data_add = params.Esc_add{2};
-  
+
+%% Colores
+if ~isempty(params.Esc_add)
+    esc_col = params.Esc_add{3};
+end
+if isempty(params.Esc_add{3})
+    esc_col = 	[1 0 0];
+end
+
 %% Datos para el excenario libre
 if strcmp(params.Esc_add{1}, 'v0')
 %    MODEL.Esc.v0 = MODEL.F_pred;
@@ -76,7 +84,7 @@ toplot = {'L_Z', 'L_S', 'L_CPI_RW', 'L_CPIXFE'};
                     'Marker', '.',...
                     'MarkerSize', 7,...
                     'LineWidth', 1.25,...
-                    'Color', 'r');
+                    'Color', esc_col);
                 
                 hold off
                 %linea vertical
@@ -128,7 +136,7 @@ toplot = {'L_Z', 'L_S', 'L_CPI_RW', 'L_CPIXFE'};
                     'Marker', '.',...
                     'MarkerSize', 7,...
                     'LineWidth', 1.25,...
-                    'Color', 'r');
+                    'Color', esc_col);
                 hold off
 
                 % leyenda

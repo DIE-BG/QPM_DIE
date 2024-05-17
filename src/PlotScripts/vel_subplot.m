@@ -43,6 +43,14 @@ end
 %% Carga de base de datos mes anterior
 full_data_add = params.Esc_add{2};
 
+%% Colores
+if ~isempty(params.Esc_add)
+    esc_col = params.Esc_add{3};
+end
+if isempty(params.Esc_add{3})
+    esc_col = 	[1 0 0];
+end
+
 %% Gráfica
 toplot = {'L_VEL_SA', 'L_CPIXFE_SA', 'L_GDP_SA', 'L_MB_SA'};
 
@@ -69,7 +77,7 @@ for rng = params.StartDate
             'Marker', '.',...
             'MarkerSize', 7,...
             'LineWidth', 0.5,...
-            'color', 'r');
+            'color', esc_col);
 
         % leyenda
         legend({params.LegendsNames{2}, params.LegendsNames{1}},...
