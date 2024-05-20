@@ -117,25 +117,26 @@ if do_graphs == true
 
     % Real exchange rate (subplot)
     tcr_subplot(MODEL,...
-        'Esc_add', {'v0', MODEL_ANT.F_pred},...
+        'Esc_add', {'v0', MODEL_ANT.F_pred, []},...
         'tab_range', tab_range,...
         'LegendsNames',{MODEL.leg_ant, MODEL.leg_act});
     
     % Money Velocity (subplot)
     vel_subplot(MODEL,...
         'tab_range', tab_range,...
-        'Esc_add', {'v0', MODEL_ANT.PostProc},...
+        'Esc_add', {'v0', MODEL_ANT.PostProc, []},...
         'tab_range', tab_range,...
         'LegendsNames',{MODEL.leg_ant, MODEL.leg_act});
     
 end
 
 %% Escenarios alternos
-esc_alt = true;
+esc_alt = false;
 
 if esc_alt == true
-    v1_CP1;
-    v2_IPEI;
+    v1_IPEI;
+    v2_CP1;
+    v3_Comb;
 end
 %% Presentación
 prs = true;
