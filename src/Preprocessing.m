@@ -95,8 +95,9 @@ end
 %% Desestacionalización
 % Se desestacionaliza GDP y REM_GDP
 q.GDP = q.GDP.x12;
+q.GDP.comment = 'Producto Interno Bruto real de Guatemala (desestacionalizado)';
 q.REM_GDP = q.REM_GDP.x12;
-
+q.REM_GDP.Comment = 'Remesas como porcentaje del producto (desestacionalizado)';
 % Variables seleccionadas
 list_mobs = {'GDP', 'CPI', 'CPIXFE', 'S', 'RS', 'GDP_RW', 'CPI_RW', 'RS_RW', 'REM_GDP', 'MB'};
 temp = q*list_mobs;

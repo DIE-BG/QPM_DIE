@@ -6,9 +6,6 @@
     Crecimiento Económico
     - D4_GDP_SM_ADJ
     - D4_GDP_SM_EP
-    Inflación Total
-    - D4L_CPI_ADJ
-    - D4L_CPI_EP
     Depreciación Cambiaria interanual y Tipo de cambio relacionado
     - D4L_S_ADJ
     - D4L_S_EP
@@ -20,7 +17,7 @@
 !transition_variables
 % 59 Variables (?)
 % Growth
-'Producto Interno Bruto Real Guatemala (Logaritmo)'                                        L_GDP, %1
+'Producto Interno Bruto Real Guatemala (Logaritmo desestacionalizado)'                     L_GDP, %1
 'Tendencia del Producto Interno Bruto Real Guatemala (Logaritmo)'                          L_GDP_BAR, %2
 'Producto Interno Bruto Real Guatemala (Brecha)'                                           L_GDP_GAP, %3
 'Tasa de Variación Intertrimestral Anualizada del del PIB de Guatemala'                    DLA_GDP, %4
@@ -65,7 +62,7 @@
 'Velocidad de circulacion de la Base Monetaria(Logaritmo)'                                 L_VEL; %28
 'Tasa de Variación Interanual de la Velocidad de circulacion de la Base Monetaria'         D4L_VEL, %29
 'Tasa de Variación Intertrimestral Anualizada de la Base Monetaria'                        DLA_VEL, % 30
-'Shock de Base Monetaria'                                                                  PM_D4L_MB, % 31
+'Shock Persistente de Base Monetaria'                                                      PM_D4L_MB, % 31
 
 % Nominal Exchange Rates
 'Tipo de Cambio Nominal (Logaritmo)'                                                       L_S, % 32
