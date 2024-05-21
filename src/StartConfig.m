@@ -47,12 +47,16 @@ tab_range_mm = MODEL.DATES.hist_end_mm-8:MODEL.DATES.hist_end_mm;
 
 %% Configuración Escenarios
 % Nombres
-MODEL.esc_names = {'Escenario Libre',...     v0
-                   'Escenario Tasa Líder',...v1
-                   'Escenario IPEI'};       %v2
+%% Nombres de escenarios
+MODEL.esc_names = {'Escenario Libre',...v0
+                   'Escenario IPEI',...v1
+                   'Escenario Tasa Líder',...v2
+                   'Escenario Combinado'};%,...v3
 % Colores para escenarios ALTERNOS
 MODEL.esc_col = {[0.4660 0.6740 0.1880],...   v1
-                 [0.8500 0.3250 0.0980]};    %v2           
+                 [0.8500 0.3250 0.0980],...    %v2           
+                 [0.4940 0.1840 0.5560]}; %v3
+                      
 %% Carga de info mes previo
 MODEL_ANT = load(sprintf('MODEL-%s.mat',MODEL.CORR_DATE_ANT));
 MODEL_ANT = MODEL_ANT.MODEL;

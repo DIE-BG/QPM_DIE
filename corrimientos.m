@@ -131,11 +131,12 @@ if do_graphs == true
 end
 
 %% Escenarios alternos
-esc_alt = true;
+esc_alt = false;
 
 if esc_alt == true
-    v1_CP1;
-    v2_IPEI;
+    v1_IPEI;
+    v2_CP1;
+    v3_Comb;
 end
 %% Presentación
 prs = true;
