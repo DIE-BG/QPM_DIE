@@ -1,5 +1,5 @@
 "Variables ->","m_L_GDP","m_L_S","m_L_CPI","m_RS","m_L_CPIXFE","m_L_CPI_RW","m_RS_RW","m_L_GDP_RW_GAP","m_REM_GDP","m_L_MB"
-"Comments ->","Producto Interno Bruto real de Guatemala","Tipo de Cambio Nominal","Indice de Precios al Consumidor","Tasa de interes de Política Monetaria","Indice de Inflación Subyacente","Indice de precios de importaciones e importaciones","Tasa de Fondos Federales","Producto Interno Bruto de EEUU","Remesas como porcentaje del producto","Base Monetaria"
+"Comments ->","Producto Interno Bruto real de Guatemala (desestacionalizado)","Tipo de Cambio Nominal","Indice de Precios al Consumidor","Tasa de interes de Política Monetaria","Indice de Inflación Subyacente","Indice de precios de importaciones e importaciones","Tasa de Fondos Federales","Producto Interno Bruto de EEUU","Remesas como porcentaje del producto (desestacionalizado)","Base Monetaria"
 "Class[Size] ->","tseries[93-by-1]","tseries[93-by-1]","tseries[93-by-1]","tseries[93-by-1]","tseries[93-by-1]","tseries[93-by-1]","tseries[93-by-1]","tseries[93-by-1]","tseries[93-by-1]","tseries[93-by-1]"
 ".endhist","2024Q1","2024Q1","2024Q1","2024Q1","2024Q1","2024Q1","2024Q1","2024Q1","2024Q1","2024Q1"
 "2001Q1",1112.48592,204.12203,342.18029,5.40000,463.68132,459.53266,5.29000,1.05144,NaN,938.94652
