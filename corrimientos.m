@@ -26,21 +26,19 @@ MODEL = SimTools.sim.read_model(MODEL);
                             MODEL.DATES.hist_start:MODEL.DATES.hist_end, ... 
                             'meanOnly=',true);
 
+% Creación de plan de simulación con ajustes para EP
+PlanSim_v0;
+% Simulación
 fcstrng = MODEL.DATES.pred_start:MODEL.DATES.pred_end;
-MODEL.F_pred = simulate(MODEL.MF, MODEL.F, fcstrng, 'anticipate', false, 'DbOverlay=', true);
-
+MODEL.F_pred = simulate(MODEL.MF,... Modelo Filtrado
+                        MODEL.Esc.v0.dbi,...Base de datos inicial filtrada
+                        fcstrng,... Rango de Simulación
+                        'plan',MODEL.Esc.v0.planSim,... plan de Simulación
+                        'anticipate', false,...
+                        'DbOverlay=', true);
+                    
 %% Post-Procesamiento de variables seleccionadas.
-pp_list = {'L_MB', 'L_VEL', 'L_CPI_RW', 'L_CPI_RW_Q','L_Z', 'L_GDP', 'L_GDP_RW'};
-list_nivel = {'L_S','L_MB'};
-
-MODEL = rec_GDP_RW(MODEL);
-                                        
-MODEL = PostProcessing(MODEL,...
-    'list',pp_list,...
-    'list_niv', list_nivel,...
-    'Esc',{MODEL.CORR_VER, MODEL.F_pred});
-
-disp('Postprocesamiento: ok');
+PostProcess;
 
 %% Gráficas
 do_graphs = true;
@@ -114,7 +112,8 @@ if do_graphs == true
     % Contribuciones
     contributions(MODEL,...
                   'Esc_add', {'v0', MODEL_ANT});
-
+    diff_contributions(MODEL,...
+                  'Esc_add', {'v0', MODEL_ANT});
     % Real exchange rate (subplot)
     tcr_subplot(MODEL,...
         'Esc_add', {'v0', MODEL_ANT.F_pred, []},...
@@ -131,7 +130,7 @@ if do_graphs == true
 end
 
 %% Escenarios alternos
-esc_alt = false;
+esc_alt = true;
 
 if esc_alt == true
     v1_IPEI;
