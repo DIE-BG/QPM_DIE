@@ -150,7 +150,12 @@ s.rho_DLA_CPI_RW = 0.7;%0.4724;%0.5666;
 % D4L_CPI_TAR = f1*D4L_CPI_TAR{-1} + (1-f1)*ss_D4L_CPI_TAR + SHK_D4L_CPI_TAR;
 s.rho_D4L_CPI_TAR = 0.8723;
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Persistencia de variables de ajuste (baja persistencia para que converjan
+% a 0 rápido)
+s.rho_i_adj = 0.05;
+s.rho_D4_GDP_SM_ADJ = 0.05;
+s.rho_D4L_S_ADJ = 0.05;
+%% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Calibrated Steady States
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Foreign trend inflation or inflation target
@@ -173,6 +178,9 @@ s.ss_D4L_MB = 10;
 s.ss_D4L_CPIXFE = 4;
 s.ss_D4L_VEL = -2.37;
 s.ss_D4L_GDP = 3.5;
+
+s.ss_i_adj = 0;
+s.ss_i_pol = 5;
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Standard Deviation for Shocks in QPM

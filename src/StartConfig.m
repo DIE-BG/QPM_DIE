@@ -1,6 +1,6 @@
 %% Modelo y setparam
-MODEL.mod_file_name = 'QPM_v2.model';
-MODEL.param_file_name = 'setparam_v2.m';
+MODEL.mod_file_name = 'QPM.model';
+MODEL.param_file_name = 'setparam.m';
 
 %% Configuración del corrimiento
 
