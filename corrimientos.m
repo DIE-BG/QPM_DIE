@@ -3,7 +3,7 @@
 QPM
 %}
 
-% clear all;
+clear all;
 PATH.data = genpath('data');
 PATH.src = genpath('src');
 PATH.temp = genpath('temp');
@@ -41,7 +41,7 @@ MODEL.F_pred = simulate(MODEL.MF,... Modelo Filtrado
 PostProcess;
 
 %% Gráficas
-do_graphs = true;
+do_graphs = false;
 
 if do_graphs == true
     % Pre-processing
@@ -131,6 +131,7 @@ end
 
 %% Escenarios alternos
 esc_alt = true;
+graph_esc = false;
 
 if esc_alt == true
     v1_IPEI;
@@ -138,7 +139,7 @@ if esc_alt == true
     v3_Comb;
 end
 %% Presentación
-prs = true;
+prs = false;
 if prs == true
     presentacion;
 end
