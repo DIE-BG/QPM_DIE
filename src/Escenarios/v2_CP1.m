@@ -9,7 +9,7 @@
 %}
 
 %% 1. Tasa de interés invariable en el primer trimestre de pronóstico
-
+MODEL.Esc.v2.name = MODEL.esc_names{3};
 MODEL.Esc.v2.dbi = MODEL.F;
 
 % Mantener la tasa invariable
@@ -49,7 +49,7 @@ MODEL = PostProcessing(MODEL,...
     'Esc',{'v2', MODEL.Esc.v2.pred});            
 
 %% Graficas
-
+if graph_esc == true
     % Pre-processing
     % monthly
     PreProcPlots_m(MODEL,...
@@ -147,5 +147,5 @@ MODEL = PostProcessing(MODEL,...
         'tab_range', tab_range,...
         'LegendsNames',{MODEL.esc_names{3}, MODEL.leg_act},...
         'SavePath', fullfile('plots', MODEL.CORR_DATE, 'v2', 'otras'));
-    
+end    
 disp('Escenario 2: ok');
