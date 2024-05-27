@@ -122,30 +122,29 @@
 % Demanda agregada
 SHK_L_GDP_GAP, %1
 SHK_DLA_GDP_BAR, %2
-SHK_D4_GDP_SM_ADJ,
+SHK_D4_GDP_SM_ADJ,%3
 % Inflacionarios
-SHK_D4L_CPI_TAR, %3
-SHK_DLA_CPIXFE, %4
-SHK_D4L_CPI_NOSUBY, %5
+SHK_D4L_CPI_TAR, %4
+SHK_DLA_CPIXFE, %5
+SHK_D4L_CPI_NOSUBY, %6
 % Cambiarios
-SHK_L_S, %8
-SHK_DLA_S_TAR, %9
-SHK_DLA_Z_BAR, %10
-SHK_D4L_S_ADJ,
+SHK_L_S, %7
+SHK_DLA_S_TAR, %8
+SHK_DLA_Z_BAR, %9
+SHK_D4L_S_ADJ, %10
 % Politica Monetaria
 SHK_RS, %12
-SHK_i_adj,
+SHK_i_adj,%12
 SHK_RR_BAR,  %13
 % Monetarios
-% SHK_D4L_VEL, %6
-SHK_D4L_MB, %7
+SHK_D4L_MB, %14
 % Externos
-SHK_REM_GDP, %14
-SHK_PREM, %11
-SHK_L_GDP_RW_GAP,  %15
-SHK_RS_RW, %16
-SHK_DLA_CPI_RW, %17
-SHK_RR_RW_BAR, %18
+SHK_REM_GDP, %15
+SHK_PREM, %16
+SHK_L_GDP_RW_GAP,  %17
+SHK_RS_RW, %18
+SHK_DLA_CPI_RW, %19
+SHK_RR_RW_BAR, %20
 
 !parameters
 % 35 incluyendo persistencias + 8 Estados Estacionarios
@@ -172,7 +171,7 @@ j1, j2
 rho_DLA_GDP_BAR,
 rho_D4L_CPI_NOSUBY
 rho_D4L_CPI_TAR, 
-rho_D4L_VEL
+% rho_D4L_VEL
 rho_SHKN_PREM, 
 rho_DLA_Z_BAR, 
 rho_RR_BAR,
@@ -183,7 +182,7 @@ rho_RR_RW_BAR,
 rho_DLA_CPI_RW,
 rho_PM_D4L_MB,
 rho_i_adj,
-rho_D4L_CPI_ADJ,
+% rho_D4L_CPI_ADJ,
 rho_D4_GDP_SM_ADJ,
 rho_D4L_S_ADJ,
 

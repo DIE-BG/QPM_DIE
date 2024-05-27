@@ -138,7 +138,7 @@ s.rho_REM_GDP = 0.9894;%0.9883;
 % adding persistence shock to D4L_CPI_NOSUBY 
 s.rho_D4L_CPI_NOSUBY = 0.7893;%0.7823;
 %adding persistence shock to money velocity
-s.rho_D4L_VEL = 0.8528;%0.8513;
+% s.rho_D4L_VEL = 0.8528;%0.8513;
 s.rho_PM_D4L_MB = 0.7;
 
 % persistence in foreign interest rates (and inflation);
@@ -175,12 +175,12 @@ s.ss_REM_GDP  = 15.0;
 %adding money growth steady state
 s.ss_D4L_MB = 10;
 
-s.ss_D4L_CPIXFE = 4;
+% s.ss_D4L_CPIXFE = 4;
 s.ss_D4L_VEL = -2.37;
-s.ss_D4L_GDP = 3.5;
-
-s.ss_i_adj = 0;
-s.ss_i_pol = 5;
+% s.ss_D4L_GDP = 3.5;
+% 
+% s.ss_i_adj = 0;
+% s.ss_i_pol = 5;
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Standard Deviation for Shocks in QPM
