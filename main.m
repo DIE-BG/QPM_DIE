@@ -14,6 +14,8 @@ structfun(@addpath, PATH)
 tic
 StartConfig;
 
+
+
 %% Preprocessing
 Preprocessing;
 disp('Preprocesamiento de Observables: ok');
@@ -114,6 +116,7 @@ if do_graphs == true
                   'Esc_add', {'v0', MODEL_ANT});
     diff_contributions(MODEL,...
                   'Esc_add', {'v0', MODEL_ANT});
+              
     % Real exchange rate (subplot)
     tcr_subplot(MODEL,...
         'Esc_add', {'v0', MODEL_ANT.F_pred, []},...
@@ -138,6 +141,10 @@ if esc_alt == true
     v2_CP1;
     v3_Comb;
 end
+
+
+
+
 %% Presentación
 prs = false;
 if prs == true

@@ -15,7 +15,7 @@
     - i_EP
 %}
 !transition_variables
-% 59 Variables (?)
+% 64 Variables (?)
 % Growth
 'Producto Interno Bruto Real Guatemala (Logaritmo desestacionalizado)'                     L_GDP, %1
 'Tendencia del Producto Interno Bruto Real Guatemala (Logaritmo)'                          L_GDP_BAR, %2
@@ -133,7 +133,7 @@ SHK_DLA_S_TAR, %8
 SHK_DLA_Z_BAR, %9
 SHK_D4L_S_ADJ, %10
 % Politica Monetaria
-SHK_RS, %12
+SHK_RS, %11
 SHK_i_adj,%12
 SHK_RR_BAR,  %13
 % Monetarios
@@ -205,7 +205,7 @@ ss_D4L_VEL,
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % 1. IS CURVE
-'Aggregate demand' 
+'Aggregate Sdemand' 
 L_GDP_GAP = b1*L_GDP_GAP{-1} - b2*MCI + b3*L_GDP_RW_GAP +...
             b5*(REM_GDP - ss_REM_GDP) + SHK_L_GDP_GAP;
 
@@ -424,8 +424,8 @@ m_L_CPIXFE, %5
 m_L_CPI_RW,  %6
 m_RS_RW %7
 m_REM_GDP %8
-m_L_GDP_RW_GAP %10
-m_L_MB; %11
+m_L_GDP_RW_GAP %9
+m_L_MB; %10
 
 !measurement_equations
 m_L_GDP        = L_GDP;

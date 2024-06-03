@@ -4,8 +4,8 @@
     instrumentos de Política Monetaria.
 
     Este Escenario: Se anclan pronósticos de IPEI. 
-    Se usan los pronósticos de nivel desestacionalizados provenientes del
-    post-procesamiento del SVAR50-4b
+    Se usan los pronósticos del logaritmo desestacionalizado provenientes 
+    del post-procesamiento del SVAR50-4b
 %}
 
 %% Anclaje de IPEI proveniente de SVAR en horizonte de pronóstico

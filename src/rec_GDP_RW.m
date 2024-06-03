@@ -19,8 +19,6 @@ simulación MODEL.F_pred.
 %}
 
 p = inputParser;
-    addParameter(p, 'list', {});
-    addParameter(p, 'list_niv', {});
     addParameter(p, 'Esc', {});
 parse(p, varargin{:});
 params = p.Results; 

@@ -46,8 +46,7 @@ MODEL.DATES.hist_start_mm = mm(2005,1);
 tab_range_mm = MODEL.DATES.hist_end_mm-8:MODEL.DATES.hist_end_mm;
 
 %% Configuración Escenarios
-% Nombres
-%% Nombres de escenarios
+% Nombres de escenarios
 MODEL.esc_names = {'Escenario Libre',...v0
                    'Escenario IPEI',...v1
                    'Escenario Tasa Líder',...v2
