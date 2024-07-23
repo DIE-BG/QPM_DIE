@@ -191,11 +191,15 @@ for rng = 1 : length(params.StartDate)
                 'LineStyle', ':');
             
             end
-            % Ajuste manual de rango que gráfica incluya el ss y no de
-            % error al hacer la anotación
-            if rng == 2 && strcmp(list{var},'RS')
-               ylim([1.5 5.5]); 
-            end
+            % Ajuste de rango para incluir Estado Estacionario
+            test_axis = get(gca, 'YLim');
+            
+            if test_axis(1) > SS.(list{var})
+                ylim([real(SS.(list{var}))-0.1 test_axis(2)]);
+            elseif test_axis(2) < SS.(list{var})
+                ylim([test_axis(1) real(SS.(list{var}))+0.1]);
+            end 
+            
             % Anotación
             clear x_lims;
             x_lims = get(gca, 'XLim');
