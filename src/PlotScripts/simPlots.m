@@ -191,8 +191,13 @@ for rng = 1 : length(params.StartDate)
                 'LineStyle', ':');
             
             end
-            
+            % Ajuste manual de rango que gráfica incluya el ss y no de
+            % error al hacer la anotación
+            if rng == 2 && strcmp(list{var},'RS')
+               ylim([1.5 5.5]); 
+            end
             % Anotación
+            clear x_lims;
             x_lims = get(gca, 'XLim');
             SimTools.scripts.anotaciones_simples(...
                 x_lims(1), ...
