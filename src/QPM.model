@@ -13,6 +13,12 @@
     Tasa de interés líder de política monetaria
     - i_adj
     - i_EP
+
+    Versión 2 - DIE 16/07/2024.
+    - Se sustituye D4L_MB por PM_D4L_MB en MCI y UIP
+    - Se define MCI como promedio ponderado de sus tres elementos
+    - Se cambia L_CPI_RW por la inflación PCE Core de Estados Unidos.
+    - Se re-estiman los parámetros del modelo
 %}
 !transition_variables
 % 59 Variables (?)
@@ -102,12 +108,12 @@
 'Remesas Familiares (%PIB Nominal, desestacionalizadas)'                                   REM_GDP, %59
 
 % Import Prices
-'Índice de Precios de transables (Logaritmo)'                                              L_CPI_RW, %60
-'Tasa de Variación Intertrimestral Anualizada del Índice de Precios de Transables'         DLA_CPI_RW, %61
-'Tasa de Variación Interanual del Índice de Precios de Transables'                         D4L_CPI_RW,%62
-'Índice de Precios de Transables GTQ (Logaritmo)'                                          L_CPI_RW_Q, %63
-'Tasa de Variación Intertrimestral Anualizada del Índice de Precios de Transables en GTQ'  DLA_CPI_RW_Q, %64
-'Tasa de Variación Interanual del Índice de Precios de Transables en GTQ'                  D4L_CPI_RW_Q, %65
+'Índice de precios de PCE Subyacente (Logaritmo)'                                          L_CPI_RW, %60
+'Inflación Subyacente PCE Intertrimestral Anualizada'                                      DLA_CPI_RW, %61
+'Inflación Subyacente PCE Interanual'                                                      D4L_CPI_RW,%62
+'Índice de Precios PCE Subyacente GTQ (Logaritmo)'                                         L_CPI_RW_Q, %63
+'Tasa de Variación Intertrimestral Anualizada del Índice PCE Subyacente en GTQ'            DLA_CPI_RW_Q, %64
+'Tasa de Variación Interanual del Índice de PCE Subyacente en GTQ'                         D4L_CPI_RW_Q, %65
 
 'Producto Interno Bruto EEUU (Brecha)'                                                     L_GDP_RW_GAP, %66
 
