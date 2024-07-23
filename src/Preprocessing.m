@@ -28,8 +28,8 @@ m = databank.fromCSV(fullfile('data', 'raw', MODEL.CORR_DATE, 'monthly.csv'));
 
 %% Construcción de CPI_RW y REM_GDP
 % CPI_RW
-m.CPI_RW = m.A_prom*m.ind_prec_expus + (1- m.A_prom)*m.ind_prec_impus;
-m.CPI_RW.Comment = 'Indice de precios de importaciones e importaciones';
+% m.CPI_RW = m.A_prom*m.ind_prec_expus + (1- m.A_prom)*m.ind_prec_impus;
+% m.CPI_RW.Comment = 'Indice de precios de importaciones e importaciones';
 
 % REM_GDP
 q.REM = m.REM.convert('Q', 'method=', @sum);
@@ -38,7 +38,7 @@ q.REM_GDP = ((q.REM*q.S)/q.NGDP)*100;
 q.REM_GDP.Comment = 'Remesas como porcentaje del producto';
 
 %% Otras transformaciones
-% tasas de variacion de CPI, CPIXFE, CPINOSUBY
+% tasas de variacion de CPI, CPIXFE, CPINOSUBY, CPI_RW(PCE)
 % CPI Intermensual 
 m.CPI_mom = m.CPI.pct(-1);
 m.CPI_mom.Comment = 'Inflación total';
@@ -66,17 +66,16 @@ m.CPINOSUBY_yoy = m.CPI_yoy - m.CPIXFE_yoy;
 m.CPINOSUBY_yoy.Comment = 'Inflación no subyacente';
 m.CPINOSUBY_yoy.Caption = 'Tasa de variación Intermensual';
 
-% Precios de importaciones
-m.DLA_ind_prec_impus = m.ind_prec_impus.pct(-1)*12;
-m.DLA_ind_prec_impus.Comment =  'Tasa Intermensual anualizada Precio de Importaciones de EEUU';
-m.D4L_ind_prec_impus = m.ind_prec_impus.pct(-12);
-m.D4L_ind_prec_impus.Comment = 'Tasa de variación interanual Precio de Importaciones de EEUU';
 
-% Precios de exportaciones
-m.DLA_ind_prec_expus = m.ind_prec_expus.pct(-1)*12;
-m.DLA_ind_prec_expus.Comment =  'Tasa Intermensual anualizada Precio de Exportaciones de EEUU';
-m.D4L_ind_prec_expus = m.ind_prec_expus.pct(-12);
-m.D4L_ind_prec_expus.Comment = 'Tasa de variación interanual Precio de Exportaciones de EEUU';
+% PCE Intermensual 
+m.CPI_RW_mom = m.CPI_RW.pct(-1);
+m.CPI_RW_mom.Comment = 'Inflación Subyacente PCE - EEUU';
+m.CPI_RW_mom.Caption = 'Tasa de variación Intermensual'; 
+% PCE interanual
+m.CPI_RW_yoy = m.CPI_RW.pct(-12);
+m.CPI_RW_yoy.Comment = 'Inflación Subyacente PCE - EEUU';
+m.CPI_RW_yoy.Caption = 'Tasa de variación Interanual';
+
 
 %% Trimestralización
 % Se tienen variables stock y de flujo por lo que el proceso de
