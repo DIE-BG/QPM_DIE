@@ -37,7 +37,7 @@ MODEL.DATES.pred_end = MODEL.DATES.hist_end + 30;
 
 % Rango de tablas para gráficos de simulación
 tab_range = [MODEL.DATES.hist_end, MODEL.DATES.pred_start:MODEL.DATES.pred_start+5, qq(2025,4)];
-
+arrow_range = qq(2023,4):4:qq(2025,4);
 % Rango de tablas para gráficos de Pre - procesamiento
 % Trimestral
 tab_range_source_data = MODEL.DATES.hist_end-8:MODEL.DATES.hist_end;

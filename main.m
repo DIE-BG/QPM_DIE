@@ -43,7 +43,7 @@ MODEL.F_pred = simulate(MODEL.MF,... Modelo Filtrado
 PostProcess;
 
 %% Gráficas
-do_graphs = false;
+do_graphs = true;
 
 if do_graphs == true
     % Pre-processing
@@ -64,7 +64,8 @@ if do_graphs == true
         'Esc_add', {MODEL.CORR_DATE_ANT, MODEL_ANT.F_pred,[]},...
         'PlotList', get(MODEL.MF, 'xlist'),...
         'LegendsNames',{MODEL.leg_ant, MODEL.leg_act},...
-        'TabRange', tab_range...
+        'TabRange', tab_range,...
+        'AnnoRange', arrow_range...
         );
     
     % Post Procesamiento
@@ -133,7 +134,7 @@ if do_graphs == true
 end
 
 %% Escenarios alternos
-esc_alt = true;
+esc_alt = false;
 graph_esc = false;
 
 if esc_alt == true
@@ -146,7 +147,7 @@ end
 
 
 %% Presentación
-prs = false;
+prs = true;
 if prs == true
     presentacion;
 end
