@@ -26,12 +26,7 @@ q = databank.fromCSV(fullfile('data', 'raw', MODEL.CORR_DATE, 'quarterly.csv'));
 % a, a_prom, exp_indx, imp_indx, i_star, cpi_sub, s, bm, cpi
 m = databank.fromCSV(fullfile('data', 'raw', MODEL.CORR_DATE, 'monthly.csv'));
 
-%% Construcción de CPI_RW y REM_GDP
-% CPI_RW
-% m.CPI_RW = m.A_prom*m.ind_prec_expus + (1- m.A_prom)*m.ind_prec_impus;
-% m.CPI_RW.Comment = 'Indice de precios de importaciones e importaciones';
-
-% REM_GDP
+%% Construcción de REM_GDP
 q.REM = m.REM.convert('Q', 'method=', @sum);
 q.S = m.S.convert('Q', 'method=', 'last');
 q.REM_GDP = ((q.REM*q.S)/q.NGDP)*100;
@@ -65,7 +60,6 @@ m.CPINOSUBY_mom.Caption = 'Tasa de variación Intermensual';
 m.CPINOSUBY_yoy = m.CPI_yoy - m.CPIXFE_yoy;
 m.CPINOSUBY_yoy.Comment = 'Inflación no subyacente';
 m.CPINOSUBY_yoy.Caption = 'Tasa de variación Intermensual';
-
 
 % PCE Intermensual 
 m.CPI_RW_mom = m.CPI_RW.pct(-1);
@@ -137,6 +131,17 @@ MODEL.PreProc.monthly = m;
 MODEL.PreProc.quarterly = temp;
 
 clear temp;
+
+%%
+% Variaciones PCE
+MODEL.PreProc.quarterly.D4L_CPI_RW = q.CPI_RW.pct(-4);
+MODEL.PreProc.quarterly.D4L_CPI_RW.Comment = 'Inflación PCE Subyacente Interanual';
+MODEL.PreProc.quarterly.D4L_CPI_RW.Caption = 'Tasa de variación Interanual'; 
+
+MODEL.PreProc.quarterly.DLA_CPI_RW = q.CPI_RW.pct(-1);
+MODEL.PreProc.quarterly.DLA_CPI_RW.Comment = 'Inflación PCE Subyacente Intertrimestral';
+MODEL.PreProc.quarterly.DLA_CPI_RW.Caption = 'Tasa de variación Intertrimestral'; 
+
 %% Almacenamiento de csv con datos que entran al proceso de filtrado.
 databank.toCSV(MODEL.PreProc.obs, MODEL.data_file_name, Inf, 'Decimals=', 5, 'UserDataFields=', 'endhist');
 
