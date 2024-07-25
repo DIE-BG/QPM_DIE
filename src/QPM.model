@@ -1,24 +1,11 @@
 %{
-  Modelo QPM
-    13/05/2024
+  Modelo QPM Versión 2 (DIE)
+    13/07/2024
     
-    Incluye variables de ajuste para presentaciones EP
-    Crecimiento Económico
-    - D4_GDP_SM_ADJ
-    - D4_GDP_SM_EP
-    Depreciación Cambiaria interanual y Tipo de cambio relacionado
-    - D4L_S_ADJ
-    - D4L_S_EP
-    - L_S_EP
-    Tasa de interés líder de política monetaria
-    - i_adj
-    - i_EP
+Se incluyen variables de ajuste.
+Se incluyen cambios a la estructura en MCI y UIP realizados en julio de
+2024 (MJGM)
 
-    Versión 2 - DIE 16/07/2024.
-    - Se sustituye D4L_MB por PM_D4L_MB en MCI y UIP
-    - Se define MCI como promedio ponderado de sus tres elementos
-    - Se cambia L_CPI_RW por la inflación PCE Core de Estados Unidos.
-    - Se re-estiman los parámetros del modelo
 %}
 !transition_variables
 % 59 Variables (?)
@@ -40,7 +27,7 @@
 % Inflation
 'Indice de Precios al Consumidor (Logaritmo)'                                              L_CPI, %13
 'Inflacion Total Intertrimestral Anualizada'                                               DLA_CPI, %14
-'Inflacion Total Internual'                                                                D4L_CPI, %15
+'Inflacion Total Interanual'                                                                D4L_CPI, %15
 'Inflacion Total Interanual (Objetivo)'                                                    D4L_CPI_TAR, %16
 'Desviaciones de la Inflación Total respecto del Objetivo'                                 D4L_CPI_DEV, %17
 
@@ -108,12 +95,12 @@
 'Remesas Familiares (%PIB Nominal, desestacionalizadas)'                                   REM_GDP, %59
 
 % Import Prices
-'Índice de precios de PCE Subyacente (Logaritmo)'                                          L_CPI_RW, %60
-'Inflación Subyacente PCE Intertrimestral Anualizada'                                      DLA_CPI_RW, %61
-'Inflación Subyacente PCE Interanual'                                                      D4L_CPI_RW,%62
-'Índice de Precios PCE Subyacente GTQ (Logaritmo)'                                         L_CPI_RW_Q, %63
-'Tasa de Variación Intertrimestral Anualizada del Índice PCE Subyacente en GTQ'            DLA_CPI_RW_Q, %64
-'Tasa de Variación Interanual del Índice de PCE Subyacente en GTQ'                         D4L_CPI_RW_Q, %65
+'Índice de Precios de Core PCE EEUU  (Logaritmo)'                                          L_CPI_RW, %60
+'Inflacion Subyacente PCE EEUU Intertrimestral Anualizada'                                 DLA_CPI_RW, %61
+'Inflación Subyacente PCE EEUU Interanual'                                                 D4L_CPI_RW,%62
+'Índice de Precios de Core PCE EEUU en GTQ (Logaritmo)'                                    L_CPI_RW_Q, %63
+'Inflacion Subyacente PCE EEUU en GTQ'                                                     DLA_CPI_RW_Q, %64
+'Inflación Subyacente PCE EEUU Interanual en GTQ'                                          D4L_CPI_RW_Q, %65
 
 'Producto Interno Bruto EEUU (Brecha)'                                                     L_GDP_RW_GAP, %66
 
@@ -210,14 +197,14 @@ ss_D4L_VEL,
 %%%%%%%%%%%%%%%%%% Estructura Endógena del modelo %%%%%%%%%%%%%%%%%%%%%%%%% 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% 1. IS CURVE
+% 1. Curva IS
 'Aggregate demand' 
 L_GDP_GAP = b1*L_GDP_GAP{-1} - b2*MCI + b3*L_GDP_RW_GAP +...
             b5*(REM_GDP - ss_REM_GDP) + SHK_L_GDP_GAP;
 
 % 2
 'Real monetary condition index' 
-MCI = b4*(RR_GAP) - b6*(L_Z_GAP) - (1-b4-b6)*(PM_D4L_MB);
+MCI = b4*(RR_GAP ) + b6*(-L_Z_GAP) - (1-b4-b6)*(PM_D4L_MB);
 
 % 3 Phillips Curve
 'Phillips Curve (core inflation)'
@@ -262,9 +249,7 @@ L_MB = L_MB{-4} + D4L_MB; %10
 
 % 9 Velocity %%%%%%%%%%%%%%%%%% CHANGE %%%%%%%%%%%%% 
 'Money velocity equation' %20
-% (D4L_VEL - ss_D4L_VEL) = (D4L_CPIXFE - ss_D4L_CPI_TAR) + ...
-%           (D4L_GDP - ss_DLA_GDP_BAR) - ...
-%           (D4L_MB - ss_D4L_MB) ;
+
 D4L_VEL = D4L_CPIXFE + D4L_GDP - D4L_MB;
       
 % Definiciones
