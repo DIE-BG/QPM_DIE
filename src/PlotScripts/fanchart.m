@@ -54,6 +54,7 @@ p = inputParser;
     addParameter(p, 'StartDatePlot', MODEL.DATES.hist_end-20);
     addParameter(p, 'EndDatePlot', MODEL.DATES.pred_start+7);
     addParameter(p, 'SavePath', {});
+    addParameter(p, 'Esc', {});
     addParameter(p, 'PlotList', {'D4L_CPI'});
     addParameter(p, 'Grilla', 0.10:0.10:0.90);
     addParameter(p, 'apertura', {});
