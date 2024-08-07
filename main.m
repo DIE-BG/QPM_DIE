@@ -131,6 +131,11 @@ if do_graphs == true
         'tab_range', tab_range,...
         'LegendsNames',{MODEL.leg_ant, MODEL.leg_act});
     
+    fanchart(MODEL,...
+            'PlotList', {'L_GDP_GAP','D4L_CPI'},...
+            'apertura', [0.25 0.50 0.75 0.75 0.75 0.75 0.75 0.75]',... Vector Columna
+            'sesgo', [1 1 1 1 1 1.5 1.5 1.5 1.5]...Vector fila
+            );
 end
 
 %% Escenarios alternos
@@ -147,7 +152,7 @@ end
 
 
 %% Presentación
-prs = true;
+prs = false;
 if prs == true
     presentacion;
 end
