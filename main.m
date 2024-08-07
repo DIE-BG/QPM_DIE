@@ -144,7 +144,7 @@ if do_graphs == true
 end
 
 %% Escenarios alternos
-esc_alt = false;
+esc_alt = true;
 graph_esc = false;
 
 if esc_alt == true
@@ -152,9 +152,6 @@ if esc_alt == true
     v2_CP1;
     v3_Comb;
 end
-
-
-
 
 %% Presentación
 prs = false;
