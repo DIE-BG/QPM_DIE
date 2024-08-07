@@ -1,4 +1,4 @@
-function fanchart(MODEL, varargin)
+function MODEL = fanchart(MODEL, varargin)
 
 %{
     Genera las gráficas de las variables que son parte del Modelo. Pueden
@@ -51,8 +51,8 @@ vector para ajustar la forma del abanico.
 - MJGM
 %}
 p = inputParser;
-    addParameter(p, 'StartDate', MODEL.DATES.hist_start);
-    addParameter(p, 'EndDatePlot', MODEL.DATES.pred_end);
+    addParameter(p, 'StartDatePlot', MODEL.DATES.hist_end-20);
+    addParameter(p, 'EndDatePlot', MODEL.DATES.pred_start+7);
     addParameter(p, 'SavePath', {});
     addParameter(p, 'Esc', {});
     addParameter(p, 'PlotList', {'D4L_CPI'});
@@ -97,13 +97,15 @@ end
 
 
 % Cálculo del Forecast Mean Squared Error
-[~,~,MODEL.FMSE] = fmse(MODEL.MF,20,'Select',params.PlotList);
-MODEL.FMSE = MODEL.FMSE*params.PlotList;
+[~,~,FMSE] = fmse(MODEL.MF,...
+                        length(MODEL.DATES.pred_start:params.EndDatePlot),...
+                        'Select',params.PlotList);
+FMSE = FMSE*params.PlotList;
 
 % Fechas para cálculos del abanico (8 períodos)
-MODEL.DATES.Fanchart   = MODEL.DATES.pred_start:MODEL.DATES.pred_start+7;
+MODEL.DATES.Fanchart   = MODEL.DATES.pred_start:params.EndDatePlot;
 % Fechas para gráfico
-MODEL.DATES.FanchGraph = MODEL.DATES.hist_end-20:MODEL.DATES.pred_start+7;
+MODEL.DATES.FanchGraph = params.StartDatePlot:params.EndDatePlot;
 
 
 % DISTRIBUCIÓN
@@ -132,13 +134,19 @@ for i = 1:length(params.PlotList)
 
     % Creación de matriz para gráfica y cálculos
     % Error Estándar ajustado
-    std_adj = MODEL.FMSE.(params.PlotList{i})(1:length(MODEL.DATES.Fanchart)).*params.apertura{i};
+    if length(FMSE.(params.PlotList{i})) == length(params.apertura{i})
+        std_adj = FMSE.(params.PlotList{i}).*params.apertura{i};
+    else
+       error('ERROR: El número de períodos no es consistente entre el FMSE (%d) y del vector de ajuste de sesgo (%d)',...
+                      length(FMSE.(params.PlotList{i})), length(params.apertura{i}));
+    end
+    
     % percentiles ajustados por sesgo
     if length(params.Grilla) == length(params.sesgo{i})
         dist_adj = dist.*params.sesgo{i};
     else
-       error('ERROR: El tamaño de la grilla y del vector de ajuste de sesgo no es igual');
-       return
+       error('ERROR: El tamaño de la grilla (%d) y del vector de ajuste (%d) de sesgo no es igual',...
+              length(params.Grilla), length(params.sesgo{i}));
     end
 
     % Construcción de matriz
@@ -235,9 +243,10 @@ codigo_color=abs(codigo_color);
             );
 
 
-        
+     MODEL.Fanchart.(params.PlotList{i}).FAN =  tseries(MODEL.DATES.FanchGraph, FAN);
+     MODEL.Fanchart.(params.PlotList{i}).DIFF_FAN =  DIFF_FAN;
+     MODEL.Fanchart.(params.PlotList{i}).FMSE =  FMSE.(params.PlotList{i});
 end
 
-MODEL = MODEL;
 
 end
