@@ -240,9 +240,17 @@ codigo_color=abs(codigo_color);
             );
 
 
-     MODEL.Fanchart.(params.PlotList{i}).FAN =  tseries(MODEL.DATES.FanchGraph, FAN);
-     MODEL.Fanchart.(params.PlotList{i}).DIFF_FAN =  DIFF_FAN;
-     MODEL.Fanchart.(params.PlotList{i}).FMSE =  FMSE.(params.PlotList{i});
+        
+        if  isempty(params.Esc)
+            MODEL.Esc.v0.Fanchart.(params.PlotList{i}).FAN =  tseries(MODEL.DATES.FanchGraph, FAN);
+            MODEL.Esc.v0.Fanchart.(params.PlotList{i}).DIFF_FAN =  DIFF_FAN;
+            MODEL.Esc.v0.Fanchart.(params.PlotList{i}).FMSE =  FMSE.(params.PlotList{i});
+        else
+            MODEL.Esc.(params.Esc).Fanchart.(params.PlotList{i}).FAN =  tseries(MODEL.DATES.FanchGraph, FAN);
+            MODEL.Esc.(params.Esc).Fanchart.(params.PlotList{i}).DIFF_FAN =  DIFF_FAN;
+            MODEL.Esc.(params.Esc).Fanchart.(params.PlotList{i}).FMSE =  FMSE.(params.PlotList{i});
+        end
+       
 end
 
 
