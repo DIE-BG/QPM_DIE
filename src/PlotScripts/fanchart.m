@@ -22,14 +22,14 @@ simulación MODEL.F_pred.
 no se le da la lista genera por default la de inflación total interanual
 
 
-* 'apertura' = [] [numeric] - Vector COLUMNA con valores de ajuste para el error
-estándar (re-escala el error estándar por trimestre). 
+* 'apertura' = [] [ `Cell` ] - array con Vectores COLUMNA con valores de ajuste para el error
+estándar (re-escala el error estándar por trimestre), por cada variable de la lista PlotList. 
 Abre/cierra el abanico de forma Simétrica. Debe contener el mismo número 
 de valores que trimestres de abanico.
 
 
-* 'sesgo' = [] [numeric] - Vector FILA con valores de ajuste para los valores de
-los percentiles (re-escala la distribución).
+* 'sesgo' = [] [ `Cell` ] - array con Vectores FILA con valores de ajuste para los valores de
+los percentiles (re-escala la distribución), por cada variable de la lista PlotList.
 Aumento de sesgo: valores mayores a 1.
 Reducción del sesgo: valores menores a 1.
 
@@ -56,8 +56,9 @@ p = inputParser;
     addParameter(p, 'SavePath', {});
     addParameter(p, 'Esc', {});
     addParameter(p, 'PlotList', {'D4L_CPI'});
-    addParameter(p, 'apertura', []);
-    addParameter(p, 'sesgo', []);
+    addParameter(p, 'Grilla', 0.10:0.10:0.90);
+    addParameter(p, 'apertura', {});
+    addParameter(p, 'sesgo', {});
     addParameter(p, 'fin_y1', qq(2024,4));
     addParameter(p, 'fin_y2', qq(2025,4));
     addParameter(p, 'LegendLocation', 'best');  
@@ -82,6 +83,19 @@ else
 end  
 
 %% Cálculo de Insumos
+
+if isempty(params.apertura)
+    for j = 1:length(params.PlotList)
+        params.apertura{j} = {};
+    end
+end
+if isempty(params.sesgo)
+    for j = 1:length(params.PlotList)
+        params.sesgo{j} = {};
+    end
+end
+
+
 % Cálculo del Forecast Mean Squared Error
 [~,~,MODEL.FMSE] = fmse(MODEL.MF,20,'Select',params.PlotList);
 MODEL.FMSE = MODEL.FMSE*params.PlotList;
@@ -95,7 +109,7 @@ MODEL.DATES.FanchGraph = MODEL.DATES.hist_end-20:MODEL.DATES.pred_start+7;
 % DISTRIBUCIÓN
 % Percentiles a utilizar (puede variar para agregar más divisiones en la
 % distribución: percentiles del 10 al 90 en pasos de 5 por ciento
-grilla = 0.10:0.10:0.90;
+grilla = params.Grilla;
 % del 5 al 95 grilla = 0.05:0.05:0.950001;
 
 % Distribución a utilizar: Normal Estándar (Inversa)
@@ -103,24 +117,31 @@ dist = norminv(grilla);
 % Cantidad de percentiles
 s_dist = size(dist);
 
-% Apertura del abanico (simétrica)
-if isempty(params.apertura)
-   params.apertura = ones(length(MODEL.DATES.Fanchart),1); 
-end
-% Sesgo (asímetría al alza/baja)
-if isempty(params.sesgo)
-    params.sesgo = ones(1, s_dist(2));
-end
 
 %% GRÁFICO
 for i = 1:length(params.PlotList)
+    
+    % Apertura del abanico (simétrica)
+    if isempty(params.apertura{i})
+       params.apertura{i} = ones(length(MODEL.DATES.Fanchart),1); 
+    end
+    % Sesgo (asímetría al alza/baja)
+    if isempty(params.sesgo{i})
+        params.sesgo{i} = ones(1, s_dist(2));
+    end
+
     % Creación de matriz para gráfica y cálculos
     % Error Estándar ajustado
-    std_adj = MODEL.FMSE.(params.PlotList{i})(1:length(MODEL.DATES.Fanchart)).*params.apertura;
+    std_adj = MODEL.FMSE.(params.PlotList{i})(1:length(MODEL.DATES.Fanchart)).*params.apertura{i};
     % percentiles ajustados por sesgo
-    dist_adj = dist.*params.sesgo;
-%     dist_adj = dist_adj(1:length(MODEL.DATES.Fanchart), :);
-    % Matriz de ceros
+    if length(params.Grilla) == length(params.sesgo{i})
+        dist_adj = dist.*params.sesgo{i};
+    else
+       error('ERROR: El tamaño de la grilla y del vector de ajuste de sesgo no es igual');
+       return
+    end
+
+    % Construcción de matriz
     FAN = zeros(length(MODEL.DATES.FanchGraph),s_dist(2)+1);
     % Primera Columna con serie (historia + pronósticos)
     FAN(:,1) = MODEL.F_pred.(params.PlotList{i}){MODEL.DATES.FanchGraph};
@@ -135,7 +156,7 @@ for i = 1:length(params.PlotList)
     % Cálculo de diferencias para gráfico de stacked areas
     DIFF_FAN = [FAN(:,1), FAN(:,2:end) - FAN(:,1:end-1)];
     DIFF_FAN = tseries(MODEL.DATES.FanchGraph, DIFF_FAN);
-    FAN_ts = tseries(MODEL.DATES.FanchGraph, FAN);
+
     
     %% GRÁFICA
 

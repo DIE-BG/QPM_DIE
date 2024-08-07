@@ -43,7 +43,7 @@ MODEL.F_pred = simulate(MODEL.MF,... Modelo Filtrado
 PostProcess;
 
 %% Gráficas
-do_graphs = true;
+do_graphs = false;
 
 if do_graphs == true
     % Pre-processing
@@ -130,11 +130,15 @@ if do_graphs == true
         'Esc_add', {'v0', MODEL_ANT.PostProc, []},...
         'tab_range', tab_range,...
         'LegendsNames',{MODEL.leg_ant, MODEL.leg_act});
-    
-    fanchart(MODEL,...
-            'PlotList', {'L_GDP_GAP','D4L_CPI'},...
-            'apertura', [0.25 0.50 0.75 0.75 0.75 0.75 0.75 0.75]',... Vector Columna
-            'sesgo', [1 1 1 1 1 1.5 1.5 1.5 1.5]...Vector fila
+ 
+    fanchart(MODEL,'PlotList',{'D4L_CPI','L_GDP_GAP','RS'},...
+            'apertura', {[0.25 0.50 0.75 0.75 0.75 0.75 0.75 0.75]',...
+                         {},{}},... Vector Columna
+            'Grilla',[0.05:0.05:0.95],... 
+            'sesgo', {[1 1 1 1 1 1 1 1 1,... Percentiles por debajo de la mediana
+                       1,... percentil 50
+                       1.5 1.5 1.5 1.5 1.5 1.5 1.5 1.5 1.5],... percentiles por arriba de la mediana
+                      {},{}}...Vector fila         
             );
 end
 
