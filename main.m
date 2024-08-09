@@ -130,21 +130,20 @@ if do_graphs == true
         'Esc_add', {'v0', MODEL_ANT.PostProc, []},...
         'tab_range', tab_range,...
         'LegendsNames',{MODEL.leg_ant, MODEL.leg_act});
- 
-    MODEL = fanchart(MODEL,'PlotList',{'D4L_CPI','L_GDP_GAP','RS'},...
+
+    MODEL = fanchart(MODEL,...
                     'EndDatePlot',qq(2025,4),...
-                    'apertura', {[0.25 0.50 0.75 0.75 0.75 0.75 0.75]',...
-                                {},{}},... Vector Columna
+                    'apertura', {[0.25 0.50 0.75 0.75 0.75 0.75 0.75]'},... Vector Columna
                     'Grilla',[0.05:0.05:0.95],...
                     'sesgo', {[1 1 1 1 1 1 1 1 1,... Percentiles por debajo de la mediana
                                1,... percentil 50
                                1.5 1.5 1.5 1.5 1.5 1.5 1.5 1.5 1.5],... percentiles por arriba de la mediana
-                               {},{}}...Vector fila
+                               }...Vector fila
                     );  
 end
 
 %% Escenarios alternos
-esc_alt = true;
+esc_alt = false;
 graph_esc = false;
 
 if esc_alt == true
