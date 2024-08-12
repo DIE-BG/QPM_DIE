@@ -57,7 +57,7 @@ MODEL.esc_col = {[0.4660 0.6740 0.1880],...   v1
                  [0.4940 0.1840 0.5560]}; %v3
                       
 %% Carga de info mes previo
-MODEL_ANT = load(sprintf('MODEL-%s.mat',MODEL.CORR_DATE_ANT));
+MODEL_ANT = load(fullfile('data','fulldata',MODEL.CORR_DATE_ANT,sprintf('MODEL-%s.mat',MODEL.CORR_DATE_ANT)));
 MODEL_ANT = MODEL_ANT.MODEL;
 
 
