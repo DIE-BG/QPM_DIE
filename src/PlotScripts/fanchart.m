@@ -1,4 +1,4 @@
-function MODEL = fanchart(MODEL, varargin)
+function MODEL = fanchart(MODEL, MODEL_ANT, varargin)
 
 %{
     Genera las gráficas de las variables que son parte del Modelo. Pueden
@@ -166,13 +166,6 @@ for i = 1:length(params.PlotList)
     DIFF_FAN = [FAN(:,1), FAN(:,2:end) - FAN(:,1:end-1)];
     FAN = tseries(MODEL.DATES.FanchGraph, FAN);
     DIFF_FAN = tseries(MODEL.DATES.FanchGraph, DIFF_FAN);
-
-    if strcmp(params.PlotList{i},'D4L_CPI')
-        MODEL = balance_riesgos(MODEL, params,...
-                                'iter', i,...
-                                'FMSE',std_adj,...
-                                'Sesgo', params.sesgo{i});
-    end
     %% GRÁFICA
 
     % Colores
@@ -325,6 +318,14 @@ codigo_color=abs(codigo_color);
             MODEL.Esc.(params.Esc).Fanchart.(params.PlotList{i}).FMSE =  FMSE.(params.PlotList{i});
         end
        
+        
+        %% Balance de Riesgos
+        if strcmp(params.PlotList{i},'D4L_CPI')
+            MODEL = balance_riesgos(MODEL, MODEL_ANT, params,...
+                'iter', i,...
+                'FMSE',std_adj,...
+                'Sesgo', params.sesgo{i});
+        end
 end
 
 
