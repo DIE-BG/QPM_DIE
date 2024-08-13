@@ -273,7 +273,9 @@ codigo_color=abs(codigo_color);
         axis on
         % Tabla
         % Fechas
-        params.TabRange = MODEL.DATES.Fanchart;
+        if isempty(params.TabRange)
+            params.TabRange = MODEL.DATES.Fanchart;
+        end
         
         table_p = uipanel( ...
             main_p, ...
