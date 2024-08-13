@@ -26,7 +26,7 @@ res = p.Results;
          % Probabilidad de que sea menor a 3
          p_less_3 = normcdf(3,...
              med_var{fan_params.AnnoRange(j)}.data,...
-             std_dev{fan_params.AnnoRange(j)}.data*fact_der)-0.5;
+             std_dev{fan_params.AnnoRange(j)}.data*fact_der);
          
          % Probabilidad de estar por encima de 5
          p_above_5 = 1 - normcdf(5,...
@@ -34,7 +34,9 @@ res = p.Results;
              std_dev{fan_params.AnnoRange(j)}.data*fact_der);
          
          % Probabilidad de estar entre 3 y 5
-         p_3_5 = 0.5 - p_less_3 - p_above_5;
+         p_3_5 = normcdf(5,...
+             med_var{fan_params.AnnoRange(j)}.data,...
+             std_dev{fan_params.AnnoRange(j)}.data*fact_der) - p_less_3;
          
      elseif med_var{fan_params.AnnoRange(j)}.data > 3 && med_var{fan_params.AnnoRange(j)}.data < 5
          % Pronóstico entre 3 y 5
