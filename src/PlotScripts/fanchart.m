@@ -273,9 +273,8 @@ codigo_color=abs(codigo_color);
         axis on
         % Tabla
         % Fechas
-        if isempty(params.TabRange)
-            params.TabRange = MODEL.DATES.Fanchart;
-        end
+        params.TabRange = MODEL.DATES.Fanchart;
+        
         table_p = uipanel( ...
             main_p, ...
             'Position', [0, 1 - 0.9 - 0.10, 1, 0.10], ...
