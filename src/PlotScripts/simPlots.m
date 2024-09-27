@@ -38,7 +38,7 @@ p = inputParser;
     addParameter(p, 'PlotAnnotations', true);
     addParameter(p, 'AnnotationXAdjustment', 0);
     addParameter(p, 'AnnotationYAdjustment', 0);
-    addParameter(p, 'AnnoRange', qq(2022,4):4:qq(2024,4));
+    addParameter(p, 'AnnoRange', qq(2023,4):4:qq(2025,4));
     addParameter(p, 'TabRange', qq(2021,4):4:qq(2024,4));   
     addParameter(p, 'CloseAll', true);    
     addParameter(p, 'AutoSave', true);

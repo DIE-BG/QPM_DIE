@@ -6,16 +6,16 @@ MODEL.param_file_name = 'setparam.m';
 
 MODEL.CORR_VER = 'v0';
 
-MODEL.CORR_DATE = '2024-05';
-MODEL.CORR_DATE_ANT = '2024-04';
+MODEL.CORR_DATE = '2024-09';
+MODEL.CORR_DATE_ANT = '2024-08';
 
-MODEL.leg_act = 'Mayo 2024';  
-MODEL.leg_ant = 'Abril 2024'; 
+MODEL.leg_act = 'Septiembre 2024';  
+MODEL.leg_ant = 'Agosto 2024'; 
 
 % Fechas de fin de historia
 MODEL.DATES.hist_end_ant = qq(2024, 1);
-MODEL.DATES.hist_end = qq(2024, 1);%qq(2023,4);%
-MODEL.DATES.hist_end_mm = mm(2024, 04);
+MODEL.DATES.hist_end = qq(2024, 2);%qq(2023,4);%
+MODEL.DATES.hist_end_mm = mm(2024, 08);
 
 %% Otros elementos y fechas
 MODEL.data_file_name = fullfile( ...
@@ -50,14 +50,19 @@ tab_range_mm = MODEL.DATES.hist_end_mm-8:MODEL.DATES.hist_end_mm;
 MODEL.esc_names = {'Escenario Libre',...v0
                    'Escenario IPEI',...v1
                    'Escenario Tasa Líder',...v2
-                   'Escenario Combinado'};%,...v3
+                   'Escenario Combinado',...v3
+                   'Escenario Tasa Externa',...v4
+                   'Escenario Anclajes Corto Plazo'};%,...v5
+
 % Colores para escenarios ALTERNOS
 MODEL.esc_col = {[0.4660 0.6740 0.1880],...   v1
-                 [0.8500 0.3250 0.0980],...    %v2           
-                 [0.4940 0.1840 0.5560]}; %v3
+                 [0.8500 0.3250 0.0980],...    %v2
+                 [0.4940 0.1840 0.5560],...    %v3
+                 [0.9800 0.0001 0.9500],...    %v4
+                 [0.251 0.1843 0.01569]};      %v5
                       
 %% Carga de info mes previo
-MODEL_ANT = load(sprintf('MODEL-%s.mat',MODEL.CORR_DATE_ANT));
+MODEL_ANT = load(sprintf('MODEL-%s-QPM.mat',MODEL.CORR_DATE_ANT));
 MODEL_ANT = MODEL_ANT.MODEL;
 
 

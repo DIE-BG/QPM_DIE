@@ -2,6 +2,11 @@
 # Windows default autosave extension
 *.asv
 
+# Data 
+data/raw/
+data/corrimientos/**/*.mat
+data/fulldata/**/*.mat
+
 # OSX / *nix default autosave extension
 *.m~
 
@@ -44,3 +49,4 @@ plots\*\.png
 *.~f1
 *.evsettings
 *.~rg
+*.db

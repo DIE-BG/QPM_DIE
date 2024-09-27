@@ -29,7 +29,7 @@ m = databank.fromCSV(fullfile('data', 'raw', MODEL.CORR_DATE, 'monthly.csv'));
 %% Construcción de CPI_RW y REM_GDP
 % CPI_RW
 m.CPI_RW = m.A_prom*m.ind_prec_expus + (1- m.A_prom)*m.ind_prec_impus;
-m.CPI_RW.Comment = 'Indice de precios de importaciones e importaciones';
+m.CPI_RW.Comment = 'Indice de precios de exportaciones e importaciones';
 
 % REM_GDP
 q.REM = m.REM.convert('Q', 'method=', @sum);

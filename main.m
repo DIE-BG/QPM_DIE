@@ -10,11 +10,12 @@ PATH.temp = genpath('temp');
 
 structfun(@addpath, PATH)
 
+% return
 %% Carga de configuraciones generales del corrimiento base (v0)
 tic
-StartConfig;
+StartConfig_QPM;
 
-
+% return
 
 %% Preprocessing
 Preprocessing;
@@ -43,7 +44,7 @@ MODEL.F_pred = simulate(MODEL.MF,... Modelo Filtrado
 PostProcess;
 
 %% Gráficas
-do_graphs = false;
+do_graphs = true;
 
 if do_graphs == true
     % Pre-processing
@@ -132,27 +133,40 @@ if do_graphs == true
     
 end
 
+%% fulldata libre
+
+if ~isfolder(fullfile('data', 'fulldata', MODEL.CORR_DATE))
+    mkdir(fullfile('data', 'fulldata', MODEL.CORR_DATE))
+end
+
+%Creación de fulldata para escenario IPEI del SVAR-50-4B
+databank.toCSV(MODEL.F_pred*{'L_CPI_RW','DLA_CPI_RW', 'D4L_CPI_RW' }, fullfile('data', 'fulldata', MODEL.CORR_DATE, 'fulldata_QPM.csv'), Inf);
+
+%Creación de fulldata completo del escenario libre QPM
+databank.toCSV(MODEL.F_pred, fullfile('data', 'fulldata', MODEL.CORR_DATE, 'fulldata.csv'), Inf);
+
+% return; %Correr hasta esta linea la primera vez para Generar los anclajes necesarios para el Escneario IPEI del SVAR
 %% Escenarios alternos
 esc_alt = true;
-graph_esc = false;
+graph_esc = true;
 
 if esc_alt == true
     v1_IPEI;
     v2_CP1;
     v3_Comb;
+    v4_Istar;
+    v5_Anclaje_mm;
 end
 
 
-
-
 %% Presentación
-prs = false;
+prs = true;
 if prs == true
     presentacion;
 end
 
 %% Almacenamiento de Estructura MODEL del mes corriente.
-save(fullfile('data','fulldata',MODEL.CORR_DATE, sprintf("MODEL-%s.mat", MODEL.CORR_DATE)), 'MODEL');
+save(fullfile('data','fulldata',MODEL.CORR_DATE, sprintf("MODEL-%s-QPM.mat", MODEL.CORR_DATE)), 'MODEL');
 disp('Almacenamiento estructura MODEL: ok');
 disp('---- FIN ----');
 toc
