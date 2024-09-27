@@ -130,10 +130,19 @@ if do_graphs == true
         'tab_range', tab_range,...
         'LegendsNames',{MODEL.leg_ant, MODEL.leg_act});
     
+     MODEL = fanchart(MODEL, MODEL_ANT,...
+                    'EndDatePlot',qq(2025,4),...
+                    'apertura', {[0.25 0.25 0.25 0.25 0.25 0.25 0.25]'},... Vector Columna
+                    'sesgo', {[1 1 1 1,... Percentiles por debajo de la mediana
+                               1,... percentil 50
+                               1.5 1.5 1.5 1.5],... percentiles por arriba de la mediana
+                               }...Vector fila
+                    );  
+    
 end
 
 %% Escenarios alternos
-esc_alt = true;
+esc_alt = false;
 graph_esc = false;
 
 if esc_alt == true
@@ -152,7 +161,13 @@ if prs == true
 end
 
 %% Almacenamiento de Estructura MODEL del mes corriente.
-save(fullfile('data','fulldata',MODEL.CORR_DATE, sprintf("MODEL-%s.mat", MODEL.CORR_DATE)), 'MODEL');
-disp('Almacenamiento estructura MODEL: ok');
-disp('---- FIN ----');
+save_MOD = true;
+if save_MOD == true
+    save(fullfile('data','fulldata',MODEL.CORR_DATE, sprintf("MODEL-%s.mat", MODEL.CORR_DATE)), 'MODEL');
+    disp('Almacenamiento estructura MODEL: ok');
+    disp('---- FIN ----');
+else
+    disp('No se almacenó estructura MODEL');
+    disp('---- FIN ----');    
+end
 toc
