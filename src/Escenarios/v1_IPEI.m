@@ -14,10 +14,12 @@ MODEL.Esc.v1.name = MODEL.esc_names{2};
 alt1 = load(fullfile('data', 'corrimientos',MODEL.CORR_DATE,...
             'v1', sprintf('MODEL-%s.mat',MODEL.CORR_DATE)));
 
-alt1 = alt1.MODEL.PostProc.v0.l_sa;
-        
+alt1 = alt1.MODEL.F_pred;
+
 % Trimestres de anclaje
 MODEL.DATES.E1_dates = MODEL.DATES.pred_start:MODEL.DATES.pred_start+7;
+
+
 
 %% %%%%%%%%%%%%%%%% Creación de escenario alternativo %%%%%%%%%%%%%%%%%%%%%%
 % Shocks del escenario base
@@ -27,14 +29,14 @@ shocks = MODEL.F*get(MODEL.MF, 'elist');
 MODEL.Esc.v1.dbi = dboverlay(MODEL.F,shocks);
 
 % Imposición de anclajes provenientes del QPM en base de datos
-MODEL.Esc.v1.dbi.L_CPI_RW(MODEL.DATES.E1_dates) = alt1.ln_ipei_sa(MODEL.DATES.E1_dates);
+MODEL.Esc.v1.dbi.D4L_IPEI(MODEL.DATES.E1_dates) = alt1.d4_ln_ipei(MODEL.DATES.E1_dates);
 
 % Plan de simulación
 MODEL.Esc.v1.planSim = plan(MODEL.MF, MODEL.DATES.pred_start:MODEL.DATES.pred_end);
 % Variable a endogenizar (shock propio?? No necesariamente)
-MODEL.Esc.v1.planSim = endogenize(MODEL.Esc.v1.planSim,{'SHK_DLA_CPI_RW'},MODEL.DATES.E1_dates); 
+MODEL.Esc.v1.planSim = endogenize(MODEL.Esc.v1.planSim,{'SHK_D4L_IPEI'}, MODEL.DATES.E1_dates); 
 % Variable a exogenizar (Anclaje)
-MODEL.Esc.v1.planSim = exogenize(MODEL.Esc.v1.planSim,{'L_CPI_RW'},MODEL.DATES.E1_dates);
+MODEL.Esc.v1.planSim = exogenize(MODEL.Esc.v1.planSim,{'D4L_IPEI'}, MODEL.DATES.E1_dates);
 
 % Simulación.
 MODEL.Esc.v1.pred = simulate(MODEL.MF,...
@@ -54,7 +56,9 @@ MODEL.Esc.v1.shd = simulate(MODEL.MF,...
 
 
 %% Post-Procesamiento de variables seleccionadas.
+% Desestacionalizar y obtener brechas y tendencias de estas variables
 pp_list = {'L_MB', 'L_VEL', 'L_CPI_RW', 'L_CPI_RW_Q','L_Z', 'L_GDP', 'L_GDP_RW'};
+% Recuperar niveles de estas variables
 list_nivel = {'L_S','L_MB'};
                                         
 MODEL = rec_GDP_RW(MODEL, 'Esc', 'v1');

@@ -5,7 +5,7 @@ MODEL.Esc.v3.name = MODEL.esc_names{4};
 alt3 = load(fullfile('data', 'corrimientos',MODEL.CORR_DATE,...
             'v1', sprintf('MODEL-%s.mat',MODEL.CORR_DATE)));
 
-alt3 = alt3.MODEL.PostProc.v0.l_sa;
+alt3 = alt3.MODEL.F_pred;
         
 % Trimestres de anclaje
 MODEL.DATES.E3_dates = MODEL.DATES.E1_dates;
@@ -16,17 +16,17 @@ shocks = MODEL.F*get(MODEL.MF, 'elist');
 MODEL.Esc.v3.dbi = dboverlay(MODEL.F,shocks);
 
 % Imposición de anclajes provenientes del QPM en base de datos
-MODEL.Esc.v3.dbi.L_CPI_RW(MODEL.DATES.E3_dates) = alt3.ln_ipei_sa(MODEL.DATES.E3_dates);
+MODEL.Esc.v3.dbi.D4L_IPEI(MODEL.DATES.E3_dates) = alt3.d4_ln_ipei(MODEL.DATES.E3_dates);
 % Mantenimiento de Tasa un trimestre
 MODEL.Esc.v3.dbi.RS(MODEL.DATES.pred_start) = MODEL.Esc.v3.dbi.RS(MODEL.DATES.hist_end);
 
 % Plan de simulación
 MODEL.Esc.v3.planSim = plan(MODEL.MF, MODEL.DATES.pred_start:MODEL.DATES.pred_end);
 % Variable a endogenizar (shock propio?? No necesariamente)
-MODEL.Esc.v3.planSim = endogenize(MODEL.Esc.v3.planSim,{'SHK_DLA_CPI_RW'},MODEL.DATES.E1_dates); 
-MODEL.Esc.v3.planSim = endogenize(MODEL.Esc.v3.planSim,{'SHK_RS'},MODEL.DATES.pred_start); 
+MODEL.Esc.v3.planSim = endogenize(MODEL.Esc.v3.planSim,{'SHK_D4L_IPEI'}, MODEL.DATES.E1_dates); 
+MODEL.Esc.v3.planSim = endogenize(MODEL.Esc.v3.planSim,{'SHK_RS'}, MODEL.DATES.pred_start); 
 % Variable a exogenizar (Anclaje)
-MODEL.Esc.v3.planSim = exogenize(MODEL.Esc.v3.planSim,{'L_CPI_RW'},MODEL.DATES.E1_dates);
+MODEL.Esc.v3.planSim = exogenize(MODEL.Esc.v3.planSim,{'D4L_IPEI'}, MODEL.DATES.E1_dates);
 MODEL.Esc.v3.planSim = exogenize(MODEL.Esc.v3.planSim,{'RS'},MODEL.DATES.pred_start);
 
 %% Simulación.
@@ -47,7 +47,9 @@ MODEL.Esc.v3.shd = simulate(MODEL.MF,...
 
 
 %% Post-Procesamiento de variables seleccionadas.
+% Desestacionalizar y obtener brechas y tendencias de estas variables
 pp_list = {'L_MB', 'L_VEL', 'L_CPI_RW', 'L_CPI_RW_Q','L_Z', 'L_GDP', 'L_GDP_RW'};
+% Recuperar niveles de estas variables
 list_nivel = {'L_S','L_MB'};
                                         
 MODEL = rec_GDP_RW(MODEL, 'Esc', 'v3');
