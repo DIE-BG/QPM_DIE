@@ -9,25 +9,25 @@ s = struct();
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %output persistence;
 %b1 varies between 0.1 (extremely flexible) and 0.95(extremely persistent)
-s.b1 = 0.3526; %0.4310;
+s.b1 = 0.3602;
 
 %policy passthrough (the impact of monetary policy on real economy); 
 %b2 varies between 0.1 (low impact) to 0.5 (strong impact)
-s.b2 = 0.1422;%0.1572; 
+s.b2 =0.1719;
 
 %the impact of external demand on domestic output; 
 %b3 varies between 0.1 and 0.7
-s.b3 = 0.558;%0.5905; 
+s.b3 = 0.5996;
 
 %the weight of the real interest rate and real exchange rate gaps in MCI;
 %b4 varies from 0.3 to 0.8
-s.b4 = 0.8061;%0.8013;
+s.b4 = 0.4556;
 
 %Direct effect of remmittances on output gap (after controlling by foreign GDP) 
-s.b5 = 0.1183;%0.0702;
+s.b5 = 0.15;
 
 %Effect of money growth in MCI
-s.b6 = 1; %0;
+s.b6 = 0.4536;
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -41,16 +41,19 @@ s.b6 = 1; %0;
 % inflation persistence; 
 % a1 varies between 0.4 (implying low persistence) to 0.9 
 % (implying high persistence)
-s.a1 = 0.3707;%0.4053; 
+s.a1 = 0.4134;
 
 % policy passthrough (the impact of rmc on inflation); 
 % a2 varies between 0.1 (a flat Phillips curve and a high sacrifice ratio) 
 % to 0.5 (a steep Phillips curve and a low sacrifice ratio)
-s.a2 = 0.05;%0.017;%0.0176;
+s.a2 = 0.0434;
 
 % the ratio of imported goods in firms' marginal costs (1-a3); 
 % a3 varies between 0.9 for a closed economy to 0.5 for an open economy
-s.a3 = 0.5;%0.8193;%0.7396;
+s.a3 = 0.7739;
+
+% Effect of imports/exports prices on non-core inflation
+s.a4 = 0.1097; %%%%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % 3. Uncovered Interest Rate Parity (UIP)
@@ -65,17 +68,17 @@ s.a3 = 0.5;%0.8193;%0.7396;
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % Setting e1 equal to 0 reduces the equation to the simple UIP
-s.e1 = 0.3988;%0.4948;
+s.e1 = 0.3894;
 
 % Setting h2 equal to 0 implies float based on the UIP, h2 equal to 1 means
 % managed FX following target appreciation.
-s.h2 = 0.822;%0.7256;
+s.h2 = 0.8167;
 
 % D. Exchange Rate Target
 % DLA_S_TAR = f1*DLA_S_TAR{-1} + (1-f1)*(D4L_CPI_TAR - ss_DLA_CPI_RW + ...
 %             DLA_Z_BAR + f2*(D4L_CPI-D4L_CPI_TAR) + f3*L_GDP_GAP) + SHK_DLA_S_TAR;
 % L_S_TAR = L_S_TAR{-1} + DLA_S_TAR/4;
-s.f1 = 0.845;%0.7437;
+s.f1 = 0.9723;
 s.f2 = 0;
 s.f3 = 0;
 
@@ -91,22 +94,22 @@ s.f3 = 0;
 
 % policy persistence; 
 % g1 varies from 0 (no persistence) to 0.8 ("wait and see" policy)
-s.g1 = 0.9578;%0.9832; 
+s.g1 = 0.9216;
 
 % policy reactiveness: the weight put on inflation by the policy maker); 
 % g2 has no upper limit but must be always higher then 0 (the Taylor principle)
-s.g2 = 0.5; 
+s.g2 = 0.4556;
 
 % policy reactiveness: the weight put on the output gap by the policy maker); 
 % g3 has no upper limit but must be always higher then 0
-s.g3 = 0.4932;%0.4520;
+s.g3 = 0.4503;
 
 % degree to which the central bank does not control domestic money market
 s.h1 = 0.0;
 
-s.h3 = 0.25;
+s.h3 = 0.2023;
 % reaction to exchange rate devaluation with respect its target
-s.g4 = 0; %1.7334;
+s.g4 = 0; 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % Money demand equation for monetary base or other monetary aggregate'
@@ -120,41 +123,46 @@ s.j2 = 0.1;
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % persistent shock to risk premium
 % SHKN_PREM = rho_SHKN_PREM*SHKN_PREM{-1} + SHK_PREM;
-s.rho_SHKN_PREM = 0.5;
+s.rho_SHKN_PREM         = 0.5;
 
 % persistence in convergence of trend variables to their steady-state levels
 % applies for:   DLA_GDP_BAR, DLA_Z_BAR, RR_BAR and RR_RW_BAR
 
-s.rho_DLA_Z_BAR   = 0.8368;%0.7523;
-s.rho_DLA_GDP_BAR = 0.8296;%0.7731;
-s.rho_RR_BAR      = 0.8452;%0.7662;
-s.rho_RR_RW_BAR   = 0.852;%0.8614;
+s.rho_DLA_Z_BAR         = 0.9098;
+s.rho_DLA_GDP_BAR       = 0.8178;
+s.rho_RR_BAR            = 0.9103;
+s.rho_RR_RW_BAR         = 0.8180;
 
 % persistence in foreign GDP 
 % L_GDP_RW_GAP = h2*L_GDP_RW_GAP{-1} + SHK_L_GDP_RW_GAP;
-s.rho_L_GDP_RW_GAP = 0.8;%0.7806;
+s.rho_L_GDP_RW_GAP      = 0.8037;
 % adding persistence of remittance shock 
-s.rho_REM_GDP = 0.9894;%0.9883;
+s.rho_REM_GDP           = 0.9884;
 % adding persistence shock to D4L_CPI_NOSUBY 
-s.rho_D4L_CPI_NOSUBY = 0.7893;%0.7823;
+s.rho_D4L_CPI_NOSUBY    = 0.6676; % 0.7998;
 %adding persistence shock to money velocity
-% s.rho_D4L_VEL = 0.8528;%0.8513;
-s.rho_PM_D4L_MB = 0.7;
+s.rho_PM_D4L_MB         = 0.7279;
 
 % persistence in foreign interest rates (and inflation);
 %RS_RW = rho_RS_RW*RS_RW{-1} + (1-rho_RS_RW)*(RR_BAR + DLA_CPI_RW) + SHK_RS_RW;
-s.rho_RS_RW      = 0.9876;%0.8742;
-s.rho_DLA_CPI_RW = 0.7;%0.4724;%0.5666;
+s.rho_RS_RW             = 0.8759;
+s.rho_DLA_CPI_RW        = 0.6529;
 
 % Speed of inflation target adjustment to the medium-term target (higher values mean slower adjustment)
 % D4L_CPI_TAR = f1*D4L_CPI_TAR{-1} + (1-f1)*ss_D4L_CPI_TAR + SHK_D4L_CPI_TAR;
-s.rho_D4L_CPI_TAR = 0.8723;
+s.rho_D4L_CPI_TAR       = 0.8723;
+
+% Imports/exports AR(2) dynamics
+s.rho_D4L_IPEI_1        = 1.195;
+s.rho_D4L_IPEI_2        = -0.5;
 
 % Persistencia de variables de ajuste (baja persistencia para que converjan
 % a 0 rápido)
+% Para variables de Ajuste
 s.rho_i_adj = 0.05;
 s.rho_D4_GDP_SM_ADJ = 0.05;
 s.rho_D4L_S_ADJ = 0.05;
+
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Calibrated Steady States
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -173,40 +181,27 @@ s.ss_D4L_CPI_TAR = 4;
 % Steady state value for Remittance to GDP ratio
 s.ss_REM_GDP  = 15.0;
 %adding money growth steady state
-s.ss_D4L_MB = 10;
+s.ss_D4L_MB = 7.5;
 
-% s.ss_D4L_CPIXFE = 4;
-s.ss_D4L_VEL = -2.37;
-% s.ss_D4L_GDP = 3.5;
-% 
-% s.ss_i_adj = 0;
-% s.ss_i_pol = 5;
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Standard Deviation for Shocks in QPM
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-s.std_SHK_L_GDP_GAP      = 1; %estimation: 1.2035
-s.std_SHK_DLA_GDP_BAR = 0.6; %estimation: 0.8201
-
-s.std_SHK_D4L_CPI_TAR = 0; %estimation: 0.0046
-
-s.std_SHK_DLA_CPIXFE     = 0.9; %estimation: 0.9935
-s.std_SHK_D4L_CPI_NOSUBY = 0.9; %estimation: 1.0522
-
-s.std_SHK_D4L_VEL  = 0.5;%2; %estimation: 1.9985
-s.std_SHK_D4L_MB   = 4.6711; 
-
-s.std_SHK_L_S      = 1.1784;%3; %estimation: 0.9710
-s.std_SHK_DLA_S_TAR   = 0.5;%1; %estimation: 1.9413
-s.std_SHK_DLA_Z_BAR   = 0.75; %estimation: 1.6697
-
-s.std_SHK_PREM         = 1;
-
-s.std_SHK_RS         = 0.4572;%1; %estimation: 0.4868
-s.std_SHK_RR_BAR      = 0.3; %estimation: 0.1854
-
-s.std_SHK_REM_GDP       = 0.5; %estimation: 0.5344
-s.std_SHK_L_GDP_RW_GAP  = 1; %estimation: 1.3091
-s.std_SHK_RS_RW         = 0.4713;%1; %estimation: 0.2952
-s.std_SHK_DLA_CPI_RW    = 9.7052;%estimation: 9.6428
-s.std_SHK_RR_RW_BAR     = 0.25;%0.5; %estimation: 1.5696
+s.std_SHK_L_GDP_GAP         = 1.165;
+s.std_SHK_DLA_GDP_BAR       = 0.6435;
+s.std_SHK_D4L_CPI_TAR       = 0; 
+s.std_SHK_DLA_CPIXFE        = 1.0792;
+s.std_SHK_D4L_CPI_NOSUBY    = 0.947;
+s.std_SHK_D4L_MB            = 4.6364;
+s.std_SHK_L_S               = 1.1758;
+s.std_SHK_DLA_S_TAR         = 0.1073;
+s.std_SHK_DLA_Z_BAR         = 0.8326;
+s.std_SHK_PREM              = 1;
+s.std_SHK_RS                = 0.4157;
+s.std_SHK_RR_BAR            = 1.1431;
+s.std_SHK_REM_GDP           = 0.536;
+s.std_SHK_L_GDP_RW_GAP      = 1.3236;
+s.std_SHK_RS_RW             = 0.2796;
+s.std_SHK_DLA_CPI_RW        = 1.0357;
+s.std_SHK_RR_RW_BAR         = 1.7438;
+s.std_SHK_D4L_IPEI          = 3.36;
