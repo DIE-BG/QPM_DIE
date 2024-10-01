@@ -3,9 +3,16 @@
 *.asv
 
 # Data 
-data/raw/
+data/raw/**/*.csv
+data/raw/**/*.xlsx
+data/raw/**/*.xls
+!data/raw/**/monthly.csv
+!data/raw/**/quarterly.csv
 data/corrimientos/**/*.mat
 data/fulldata/**/*.mat
+
+# Backup temp data
+backup/
 
 # OSX / *nix default autosave extension
 *.m~
