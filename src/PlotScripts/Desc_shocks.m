@@ -7,10 +7,6 @@
 MODEL = SimTools.sim.shd_dsc(MODEL);
 % Lista de variables a graficar
 % sh_list = get(MODEL.MF, 'xlist');;
-sh_list = {'L_GDP_RW_GAP', 'DLA_CPI_RW', 'RS_RW', 'D4L_CPI_NOSUBY','L_GDP_GAP','DLA_CPIXFE', 'DLA_S', 'D4L_MB', 'RS',...
-            'D4L_CPI', 'L_Z_GAP', 'D4L_VEL', 'RR', 'D4L_S', 'RMC', 'MCI'};
-
-
 
 %% Gráficas
 % Rango Completo

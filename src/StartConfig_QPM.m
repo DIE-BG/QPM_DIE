@@ -13,8 +13,8 @@ MODEL.leg_act = 'Septiembre 2024';
 MODEL.leg_ant = 'Agosto 2024'; 
 
 % Fechas de fin de historia
-MODEL.DATES.hist_end_ant = qq(2024, 1);
-MODEL.DATES.hist_end = qq(2024, 2);%qq(2023,4);%
+MODEL.DATES.hist_end_ant = qq(2024, 2);
+MODEL.DATES.hist_end = qq(2024, 2); 
 MODEL.DATES.hist_end_mm = mm(2024, 08);
 
 %% Otros elementos y fechas
@@ -80,3 +80,7 @@ tit_lev ={{'Tipo de Cambio Nominal (GTQ/USD)'},...
     
 % Lista de gráficas de brechas
 list_gaps = {'L_GDP_RW','L_Z', 'L_GDP','L_CPI_RW', 'L_MB', 'L_VEL', 'L_CPI_RW_Q'};
+
+% Lista de gráficas para descomposición histórica de shocks
+sh_list = {'L_GDP_RW_GAP', 'DLA_CPI_RW', 'RS_RW', 'D4L_CPI_NOSUBY','L_GDP_GAP','DLA_CPIXFE', 'DLA_S', 'D4L_MB', 'RS',...
+            'D4L_CPI', 'L_Z_GAP', 'D4L_VEL', 'RR', 'D4L_S', 'RMC', 'MCI'};
