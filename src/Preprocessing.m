@@ -31,6 +31,13 @@ m = databank.fromCSV(fullfile('data', 'raw', MODEL.CORR_DATE, 'monthly.csv'));
 m.IPEI = m.A_prom*m.ind_prec_expus + (1- m.A_prom)*m.ind_prec_impus;
 m.IPEI.Comment = 'Indice de precios de exportaciones e importaciones';
 
+m.IPEI_mom = m.IPEI.pct(-1); 
+m.IPEI_mom.Comment = 'Indice de precios de exportaciones e importaciones';
+m.IPEI_mom.Caption = 'Tasa de variación Intermensual';
+m.IPEI_yoy = m.CPI_RW.pct(-12);
+m.IPEI_yoy.Comment = 'Indice de precios de exportaciones e importaciones';
+m.IPEI_yoy.Caption = 'Tasa de variación Interanual';
+
 % REM_GDP
 q.REM = m.REM.convert('Q', 'method=', @sum);
 q.S = m.S.convert('Q', 'method=', 'last');
@@ -80,10 +87,10 @@ m.D4L_ind_prec_expus.Comment = 'Tasa de variación interanual Precio de Exportac
 
 % Inflación subyacente PCE de EEUU
 m.CPI_RW_mom = m.CPI_RW.pct(-1); 
-m.CPI_RW_mom.Comment = 'Inflación subyacente PCE de EEUU';
+m.CPI_RW_mom.Comment = 'Inflación subyacente PCE de EEUU (2017 = 100)';
 m.CPI_RW_mom.Caption = 'Tasa de variación Intermensual';
 m.CPI_RW_yoy = m.CPI_RW.pct(-12);
-m.CPI_RW_yoy.Comment = 'Inflación subyacente PCE de EEUU';
+m.CPI_RW_yoy.Comment = 'Inflación subyacente PCE de EEUU (2017 = 100)';
 m.CPI_RW_yoy.Caption = 'Tasa de variación Interanual';
 
 %% Trimestralización
