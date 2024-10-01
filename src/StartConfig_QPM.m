@@ -1,6 +1,6 @@
 %% Modelo y setparam
 MODEL.mod_file_name = 'QPM.model';
-MODEL.param_file_name = 'setparam.m';
+MODEL.param_file_name = fullfile('src', 'setparam.m');
 
 %% Configuración del corrimiento
 
@@ -69,7 +69,7 @@ MODEL_ANT = MODEL_ANT.MODEL;
 %% Lista de variables para post-procesamiento
 % Logaritmos desestacionalizados, tendencias y brechas
 pp_list = {'L_MB', 'L_VEL', 'L_CPI_RW', 'L_CPI_RW_Q'};
-% Niveles desestacinoalizados y tendencias
+% Niveles desestacionalizados y tendencias
 list_nivel = {'L_S','L_MB'};
 
 % Variables y titulos para gráficas de reconstrucción de nivel
