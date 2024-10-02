@@ -176,8 +176,8 @@ end
 
 
 %% Presentación
-prs = true;
-if prs == true
+MAKE_PRESENTATION = true;
+if MAKE_PRESENTATION
     presentacion;
 end
 

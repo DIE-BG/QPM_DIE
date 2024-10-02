@@ -1,4 +1,8 @@
+%% === Presentación larga de corrimientos === 
 %% Nombres de los escenarios
+% Se generan las presentaciones de acuerdo con las carpetas de cada
+% escenario en plots/
+
 name = dir(fullfile('plots', MODEL.CORR_DATE));
 folder_name = {};
 for i = 1:length(name)
@@ -15,6 +19,7 @@ for i = 1:length(folder_name)
             exportToPPTX('close');
         end
 
+        disp(['Generando presentación: ', folder_name{i}]); 
         exportToPPTX('open',fullfile('presentacion','dieTemplate.pptx'));
 
         %% Diapositiva de título
@@ -56,7 +61,7 @@ for i = 1:length(folder_name)
                      'title','fontsize',36,...
                      'HorizontalAlignment','Left');
                  
-       %% Resultados
+        %% Resultados
         exportToPPTX('addslide','Layout','Título y objetos');
         exportToPPTX('addtext','Descripción', 'Position',...
                      'title','fontsize',36,...
@@ -69,19 +74,27 @@ for i = 1:length(folder_name)
            corr_date = MODEL.CORR_DATE;
         end
         
-        VarExt;     
-        TCReal;
-        TCNominal;
-        Inflaciones;
-        TasasInteres;
-        Crecimiento;
-        BM_Vel;
+        disp('Presentación: Variables externas'); 
+        VarExt;         disp('ok'); 
+        disp('Presentación: Tipo de cambio real'); 
+        TCReal;         disp('ok'); 
+        disp('Presentación: Tipo de cambio nominal'); 
+        TCNominal;      disp('ok'); 
+        disp('Presentación: Inflación'); 
+        Inflaciones;    disp('ok'); 
+        disp('Presentación: Tasas de interés'); 
+        TasasInteres;   disp('ok'); 
+        disp('Presentación: Crecimiento económico'); 
+        Crecimiento;    disp('ok'); 
+        disp('Presentación: Base monetaria y velocidad de circulación '); 
+        BM_Vel;         disp('ok'); 
 
         %%
         exportToPPTX('addslide','Layout','Encabezado de sección');
         exportToPPTX('addtext','Muchas Gracias','Position','title','fontsize',48);
 
         %% Guardar y cerrar
+        disp(['Generando presentación: ', folder_name{i}, ' ok']);  
         save_path = fullfile('Resultados', MODEL.CORR_DATE);
         if ~isfolder(save_path)
             mkdir(save_path)
