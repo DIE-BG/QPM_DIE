@@ -16,8 +16,7 @@
     - RS_EP
     
 Se incluyen variables de ajuste.
-Se incluyen cambios a la estructura en MCI y UIP realizados en julio de
-2024 (MJGM)
+Se incluyen cambios a la estructura en MCI y UIP realizados en julio de 2024 (MJGM)
 Se incluyen cambios para incluir IPEI en inflación no subyacente
 
 %}
@@ -50,10 +49,10 @@ m_L_IPEI; %12
 'Ajuste de la suma móvil de 4 trimestres del PIB (EP)'                                     D4S4L_GDP_ADJ,%10
 'Tasa de Variación Interanual de la suma de 4 Trimestres del PIB de Guatemala (Adjusted)'  D4S4L_GDP_EP,%11
 
-'Indice de condiciones monetarias reales (%)'                                              MCI, %12
+'Índice de condiciones monetarias reales (%)'                                              MCI, %12
 
 % Inflation
-'Indice de Precios al Consumidor (Logaritmo)'                                              L_CPI, %13
+'Índice de Precios al Consumidor (Logaritmo)'                                              L_CPI, %13
 'Inflacion Total Intertrimestral Anualizada'                                               DLA_CPI, %14
 'Inflacion Total Interanual'                                                               D4L_CPI, %15
 'Inflacion Total Interanual (Objetivo)'                                                    D4L_CPI_TAR, %16
@@ -62,7 +61,7 @@ m_L_IPEI; %12
 'Inflacion Total Interanual (Adjusted)'                                                    D4L_CPI_EP,
 
 % Core Inflation
-'Indice Inflación Subyacente Optima MSE (Logaritmo)'                                       L_CPIXFE, % 18
+'Índice Inflación Subyacente Optima MSE (Logaritmo)'                                       L_CPIXFE, % 18
 'Inflacion Subyacente Optima MSE Intertrimestral Anualizada'                               DLA_CPIXFE,%19
 'Inflación Subyacente Optima MSE Interanual'                                               D4L_CPIXFE, %20
 
@@ -70,11 +69,11 @@ m_L_IPEI; %12
 'Costos Marginales Reales'                                                                 RMC, % 21
 
 % Imports/Exports Price index 
-'Indice de precios de exportaciones e importaciones'                                       L_IPEI;
+'Índice de precios de exportaciones e importaciones'                                       L_IPEI;
 'Inflación de transables Interanual'                                                       D4L_IPEI;
 
 % Non Core Inflation
-'Indice Inflación No subyacente (Logaritmo)'                                               L_CPI_NOSUBY % 22
+'Índice Inflación No subyacente (Logaritmo)'                                               L_CPI_NOSUBY % 22
 'Inflacion No Subyacente Intertrimestral Anualizada'                                       DLA_CPI_NOSUBY % 23
 'Inflacion No Subyacente Interanual'                                                       D4L_CPI_NOSUBY, % 24
 
@@ -86,8 +85,8 @@ m_L_IPEI; %12
 'Base Monetaria (Logaritmo)'                                                               L_MB, %27
 'Tasa de Variación Interanual de la Base Monetaria'                                        D4L_MB, % 28
 'Tasa de Variación Intertrimestral Anualizada de la Base Monetaria'                        DLA_MB, %29
-'Velocidad de circulacion de la Base Monetaria(Logaritmo)'                                 L_VEL; %30
-'Tasa de Variación Interanual de la Velocidad de circulacion de la Base Monetaria'         D4L_VEL, %31
+'Velocidad de circulación de la Base Monetaria(Logaritmo)'                                 L_VEL; %30
+'Tasa de Variación Interanual de la Velocidad de circulación de la Base Monetaria'         D4L_VEL, %31
 'Tasa de Variación Intertrimestral Anualizada de la Base Monetaria'                        DLA_VEL, % 32
 'Shock Persistente de Base Monetaria'                                                      PM_D4L_MB, % 33
 
@@ -104,7 +103,7 @@ m_L_IPEI; %12
 'Tipo de Cambio Nominal (Logaritmo/Adjusted)'                                              L_S_EP,%43
 
 % Real Exchange Rate
-'Indice Tipo de Cambio Real (Logaritmo)'                                                   L_Z, %44
+'Índice Tipo de Cambio Real (Logaritmo)'                                                   L_Z, %44
 'Tipo de Cambio Real (Tendencia)'                                                          L_Z_BAR, %45
 'Tipo de Cambio Real (Brecha)'                                                             L_Z_GAP, %46
 'Tasa de Variación Intertrimestral Anualizada del Tipo de Cambio Real'                     DLA_Z, %47
@@ -134,7 +133,7 @@ m_L_IPEI; %12
 'Inflación Subyacente PCE de EEUU Interanual'                                              D4L_CPI_RW,%62
 
 % Precios de importaciones y exportaciones
-'Indice de precios de exportaciones e importaciones (Logaritmo)'                           L_IPEI_Q, %63
+'Índice de precios de exportaciones e importaciones (Logaritmo)'                           L_IPEI_Q, %63
 'Inflación de transables en GTQ'                                                           DLA_IPEI_Q, %64
 'Inflación de transables Interanual Interanual en GTQ'                                     D4L_IPEI_Q, %65
 
@@ -183,7 +182,7 @@ SHK_D4L_IPEI %21
 
 % Demanda Agregada 4
 b1, b2, b3, b5
-% Indice de Condiciones monetarias reales 2
+% Índice de Condiciones monetarias reales 2
 b4, b6
 
 % Phillips Curve 2
