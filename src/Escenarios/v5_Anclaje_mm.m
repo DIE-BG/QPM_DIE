@@ -8,7 +8,6 @@
 %}
 
 %% Anclaje de último dato mensual observado
-MODEL.Esc.v5.name = MODEL.esc_names{6};
             
 % Dato de anclaje
 MODEL.DATES.E5_dates = MODEL.DATES.pred_start;
@@ -68,7 +67,7 @@ MODEL.Esc.v5.shd = simulate(MODEL.MF,...
 
 %% Post-Procesamiento de variables seleccionadas.
 % Desestacionalizar y obtener brechas y tendencias de estas variables
-pp_list = {'L_MB', 'L_VEL', 'L_CPI_RW', 'L_CPI_RW_Q','L_Z', 'L_GDP', 'L_GDP_RW'};
+pp_list = {'L_MB', 'L_VEL', 'L_CPI_RW', 'L_IPEI_Q','L_Z', 'L_GDP', 'L_GDP_RW'};
 % Recuperar niveles de estas variables
 list_nivel = {'L_S','L_MB'};
                                         

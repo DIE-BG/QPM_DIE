@@ -48,7 +48,7 @@ params = p.Results;
 %% Limpieza y creación de folders
 SS = get(MODEL.M, 'sstate');
 SS.D4L_GDP_RW = 2;
-SS.D4_GDP_RW_SM = 1.83;
+SS.D4S4L_GDP_RW = 1.83;
 %SavePath
 if  strcmp(params.Esc_add{1}, MODEL.CORR_DATE_ANT)
     params.SavePath = fullfile('plots', MODEL.CORR_DATE, 'v0', 'prediction_compared');
@@ -77,10 +77,10 @@ end
 %% Estados estacionarios
 MODEL.toplot.ss = get(MODEL.MF, 'Sstatelevel');
 MODEL.toplot.ss.D4L_GDP_RW = 2;
-MODEL.toplot.ss.D4_GDP_RW_SM = 1.83;
+MODEL.toplot.ss.D4S4L_GDP_RW = 1.83;
 %% Bloque 1: Variables del modelo (xlist) (libre vs otro)
 list = params.PlotList;
-list = list + {'D4L_GDP_RW', 'D4_GDP_RW_SM'};
+list = list + {'D4L_GDP_RW', 'D4S4L_GDP_RW'};
 % Iteración para los rangos de ploteo
 for rng = 1 : length(params.StartDate)
     % Recorte de base da datos para cada plot
@@ -589,11 +589,11 @@ for corr = 1:length(params.LegendsNames)
         end
         
         if corr ==1
-            D4L_CPI_RW_Q_g = full_data_add_temp.D4L_CPI_RW_Q;
+            D4L_IPEI_Q_g = full_data_add_temp.D4L_IPEI_Q;
             D4L_CPI_RW_g = full_data_add_temp.D4L_CPI_RW;
             D4L_S_g = full_data_add_temp.D4L_S;
         else
-            D4L_CPI_RW_Q_g = F_pred_temp.D4L_CPI_RW_Q;
+            D4L_IPEI_Q_g = F_pred_temp.D4L_IPEI_Q;
             D4L_CPI_RW_g = F_pred_temp.D4L_CPI_RW;
             D4L_S_g = F_pred_temp.D4L_S;
         end
@@ -633,7 +633,7 @@ for corr = 1:length(params.LegendsNames)
             );
         plot(...
             params.StartDate{rng}:params.EndDatePlot{rng}, ...
-            D4L_CPI_RW_Q_g,'.-', ...
+            D4L_IPEI_Q_g,'.-', ...
             'Color',"#0072BD",...
             'MarkerSize', 17, ...
             'LineWidth', 2 ...
@@ -679,7 +679,7 @@ for corr = 1:length(params.LegendsNames)
         data_table = [];
         data_table(:, 1) = D4L_CPI_RW_g(params.TabRange);
         data_table(:, 2) = D4L_S_g(params.TabRange);
-        data_table(:, 3) = D4L_CPI_RW_Q_g(params.TabRange);
+        data_table(:, 3) = D4L_IPEI_Q_g(params.TabRange);
         text_Color = [0.4660 0.6740 0.1880 ; 0.8500 0.3250 0.0980;0 0.4470 0.7410];
         
         SimTools.scripts.plot_data_table( ...

@@ -185,7 +185,7 @@ for rng = params.StartDate
         hold off
         
         if startsWith(names{i}, ["DLA_", "D4L_"]) || endsWith(names{i}, ["mom", "yoy"])
-            zeroline()
+            zeroline();
         end
         
         %Returns handles to the patch and line objects

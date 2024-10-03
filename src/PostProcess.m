@@ -1,5 +1,5 @@
 %% Variables
-pp_list = {'L_MB', 'L_VEL', 'L_CPI_RW', 'L_CPI_RW_Q','L_Z', 'L_GDP', 'L_GDP_RW'};
+pp_list = {'L_MB', 'L_VEL', 'L_CPI_RW', 'L_IPEI_Q','L_Z', 'L_GDP', 'L_GDP_RW'};
 list_nivel = {'L_S','L_MB'};
 
 % Reconstrucción y pronósticos de PIB de EEUU 

@@ -10,7 +10,7 @@
 
 %% Anclaje de IPEI proveniente de SVAR en horizonte de pronóstico
 % (8 Trimestres)
-MODEL.Esc.v1.name = MODEL.esc_names{2};
+
 alt1 = load(fullfile('data', 'corrimientos',MODEL.CORR_DATE,...
             'v1', sprintf('MODEL-%s.mat',MODEL.CORR_DATE)));
 
@@ -57,7 +57,7 @@ MODEL.Esc.v1.shd = simulate(MODEL.MF,...
 
 %% Post-Procesamiento de variables seleccionadas.
 % Desestacionalizar y obtener brechas y tendencias de estas variables
-pp_list = {'L_MB', 'L_VEL', 'L_CPI_RW', 'L_CPI_RW_Q','L_Z', 'L_GDP', 'L_GDP_RW'};
+pp_list = {'L_MB', 'L_VEL', 'L_CPI_RW', 'L_IPEI_Q','L_Z', 'L_GDP', 'L_GDP_RW'};
 % Recuperar niveles de estas variables
 list_nivel = {'L_S','L_MB'};
                                         

@@ -10,7 +10,7 @@
 
 %% Anclaje de tasa de interes de fondos federales
 % (Anclaje hasta 2025Q4)
-MODEL.Esc.v4.name = MODEL.esc_names{5};
+
 % Base de datos
 alt4 = databank.fromCSV(...
         fullfile('data', 'corrimientos',MODEL.CORR_DATE,...
@@ -55,7 +55,7 @@ MODEL.Esc.v4.shd = simulate(MODEL.MF,...
 
 
 %% Post-Procesamiento de variables seleccionadas.
-pp_list = {'L_MB', 'L_VEL', 'L_CPI_RW', 'L_CPI_RW_Q','L_Z', 'L_GDP', 'L_GDP_RW'};
+pp_list = {'L_MB', 'L_VEL', 'L_CPI_RW', 'L_IPEI_Q','L_Z', 'L_GDP', 'L_GDP_RW'};
 list_nivel = {'L_S','L_MB'};
                                         
 MODEL = rec_GDP_RW(MODEL, 'Esc', 'v4');

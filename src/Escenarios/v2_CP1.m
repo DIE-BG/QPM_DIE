@@ -9,7 +9,7 @@
 %}
 
 %% 1. Tasa de interés invariable en el primer trimestre de pronóstico
-MODEL.Esc.v2.name = MODEL.esc_names{3};
+
 MODEL.Esc.v2.dbi = MODEL.F;
 
 % Mantener la tasa invariable
@@ -38,7 +38,7 @@ MODEL.Esc.v2.shd = simulate(MODEL.MF,...
                   'contributions',true);
               
 %% Post-Procesamiento de variables seleccionadas.
-pp_list = {'L_MB', 'L_VEL', 'L_CPI_RW', 'L_CPI_RW_Q','L_Z', 'L_GDP', 'L_GDP_RW'};
+pp_list = {'L_MB', 'L_VEL', 'L_CPI_RW', 'L_IPEI_Q','L_Z', 'L_GDP', 'L_GDP_RW'};
 list_nivel = {'L_S','L_MB'};
 
 MODEL = rec_GDP_RW(MODEL, 'Esc', 'v2');

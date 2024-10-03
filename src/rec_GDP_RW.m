@@ -1,7 +1,7 @@
 function MODEL = rec_GDP_RW(MODEL, varargin)
 
 %{
-Se realiza la reconstrucción de GDP_RW partiendo de pornósticos . 
+Se realiza la reconstrucción de GDP_RW partiendo de pronósticos . 
 
 ## Syntax ##
 
@@ -47,18 +47,18 @@ params = p.Results;
         % suma movil
         temp_movsum = movsum(MODEL.F_pred.L_GDP_RW.Data, 4);
         temp_movsum = temp_movsum(3:end-1);
-        MODEL.F_pred.GDP_RW_SM = MODEL.F_pred.L_GDP_RW;
-        MODEL.F_pred.GDP_RW_SM.Data = temp_movsum;
+        MODEL.F_pred.S4_GDP_RW = MODEL.F_pred.L_GDP_RW;
+        MODEL.F_pred.S4_GDP_RW.Data = temp_movsum;
 
         % Tasa de variación de la suma movil
-        MODEL.F_pred.D4_GDP_RW_SM = MODEL.F_pred.GDP_RW_SM.diff(-4)/4; 
+        MODEL.F_pred.D4S4L_GDP_RW = MODEL.F_pred.S4_GDP_RW.diff(-4)/4; 
 
         % Nombres de las variables
         MODEL.F_pred.L_GDP_RW.comment = 'Producto Interno Bruto Real EEUU (Logaritmo)';
         MODEL.F_pred.L_GDP_RW_BAR.comment= 'Tendencia del Producto Interno Bruto Real EEUU';
         MODEL.F_pred.D4L_GDP_RW.comment = 'Tasa de Variación Internual del PIB de EEUU';
         MODEL.F_pred.DLA_GDP_RW.comment = 'Tasa de Variación Intertrimestral anualizada del PIB de EEUU';
-        MODEL.F_pred.D4_GDP_RW_SM.comment = 'Tasa de Variación Interanual de la suma de 4 Trimestres del PIB de EEUU';
+        MODEL.F_pred.D4S4L_GDP_RW.comment = 'Tasa de Variación Interanual de la suma de 4 Trimestres del PIB de EEUU';
 
     else
 
@@ -85,18 +85,18 @@ params = p.Results;
         % suma movil
         temp_movsum = movsum(MODEL.Esc.(params.Esc).pred.L_GDP_RW.Data, 4);
         temp_movsum = temp_movsum(3:end-1);
-        MODEL.Esc.(params.Esc).pred.GDP_RW_SM = MODEL.Esc.(params.Esc).pred.L_GDP_RW;
-        MODEL.Esc.(params.Esc).pred.GDP_RW_SM.Data = temp_movsum;
+        MODEL.Esc.(params.Esc).pred.S4_GDP_RW = MODEL.Esc.(params.Esc).pred.L_GDP_RW;
+        MODEL.Esc.(params.Esc).pred.S4_GDP_RW.Data = temp_movsum;
 
         % Tasa de variación de la suma movil
-        MODEL.Esc.(params.Esc).pred.D4_GDP_RW_SM = MODEL.Esc.(params.Esc).pred.GDP_RW_SM.diff(-4)/4; 
+        MODEL.Esc.(params.Esc).pred.D4S4L_GDP_RW = MODEL.Esc.(params.Esc).pred.S4_GDP_RW.diff(-4)/4; 
 
         % Nombres de las variables
         MODEL.Esc.(params.Esc).pred.L_GDP_RW.comment = 'Producto Interno Bruto Real EEUU (Logaritmo)';
         MODEL.Esc.(params.Esc).pred.L_GDP_RW_BAR.comment= 'Tendencia del Producto Interno Bruto Real EEUU';
         MODEL.Esc.(params.Esc).pred.D4L_GDP_RW.comment = 'Tasa de Variación Internual del PIB de EEUU';
         MODEL.Esc.(params.Esc).pred.DLA_GDP_RW.comment = 'Tasa de Variación Intertrimestral anualizada del PIB de EEUU';
-        MODEL.Esc.(params.Esc).pred.D4_GDP_RW_SM.comment = 'Tasa de Variación Interanual de la suma de 4 Trimestres del PIB de EEUU';
+        MODEL.Esc.(params.Esc).pred.D4S4L_GDP_RW.comment = 'Tasa de Variación Interanual de la suma de 4 Trimestres del PIB de EEUU';
 
     end
 end

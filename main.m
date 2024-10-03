@@ -1,8 +1,9 @@
 %%
 %{
-QPM
+QPM v3
 %}
 
+clc;
 clear all;
 PATH.data = genpath('data');
 PATH.src = genpath('src');
@@ -44,9 +45,9 @@ MODEL.F_pred = simulate(MODEL.MF,... Modelo Filtrado
 PostProcess;
 
 %% Gráficas
-do_graphs = true;
+MAKE_GRAPHS = true;
 
-if do_graphs
+if MAKE_GRAPHS
     % Pre-processing
     % monthly
     PreProcPlots_m(MODEL,...
@@ -138,18 +139,18 @@ if do_graphs
         'tab_range', tab_range,...
         'LegendsNames',{MODEL.leg_ant, MODEL.leg_act});
     
-    % Fanchart 
-    MODEL = fanchart(MODEL, MODEL_ANT,...
-        'EndDatePlot', MODEL.DATES.pred_start + 7, ...
-        'apertura', {[0.25 0.25 0.25 0.25 0.25 0.25 0.25 0.25]'}, ... Vector Columna
-        'sesgo', {
-            [1 1 1 1, ...           Percentiles por debajo de la mediana
-            1,...                   percentil 50
-            1.5 1.5 1.5 1.5],...    percentiles por arriba de la mediana
-        }...Vector fila
-    );  
-    
 end
+
+% Fanchart 
+MODEL = fanchart(MODEL, MODEL_ANT,...
+    'EndDatePlot', MODEL.DATES.pred_start + 7, ...
+    'apertura', {[0.25 0.25 0.25 0.25 0.25 0.25 0.25 0.25]'}, ... Vector Columna
+    'sesgo', {
+        [1 1 1 1, ...           Percentiles por debajo de la mediana
+        1,...                   percentil 50
+        1.5 1.5 1.5 1.5],...    percentiles por arriba de la mediana
+    }...Vector fila
+);  
 
 %% fulldata libre
 
@@ -165,10 +166,10 @@ databank.toCSV(MODEL.F_pred, fullfile('data', 'fulldata', MODEL.CORR_DATE, 'full
 
 % return; %Correr hasta esta linea la primera vez para Generar los anclajes necesarios para el Escneario IPEI del SVAR
 %% Escenarios alternos
-esc_alt = true;
+MAKE_ALT_SCENARIOS = false;
 graph_esc = true;
 
-if esc_alt == true
+if MAKE_ALT_SCENARIOS == true
     v1_IPEI;
     v2_CP1;
     v3_Comb;

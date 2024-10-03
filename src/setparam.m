@@ -159,9 +159,11 @@ s.rho_D4L_IPEI_2        = -0.5;
 % Persistencia de variables de ajuste (baja persistencia para que converjan
 % a 0 rápido)
 % Para variables de Ajuste
-s.rho_i_adj = 0.05;
-s.rho_D4_GDP_SM_ADJ = 0.05;
+s.rho_D4L_CPI_ADJ = 0.05;
+s.rho_RS_ADJ = 0.05;
+s.rho_D4S4L_GDP_ADJ = 0.05;
 s.rho_D4L_S_ADJ = 0.05;
+ 
 
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Calibrated Steady States
@@ -205,3 +207,8 @@ s.std_SHK_RS_RW             = 0.2796;
 s.std_SHK_DLA_CPI_RW        = 1.0357;
 s.std_SHK_RR_RW_BAR         = 1.7438;
 s.std_SHK_D4L_IPEI          = 3.36;
+% Variables de ajuste
+s.std_SHK_D4L_CPI_ADJ       = 0.01;
+s.std_SHK_RS_ADJ            = 0.01;
+s.std_SHK_D4S4L_GDP_ADJ     = 0.01;
+s.std_SHK_D4L_S_ADJ         = 0.01;

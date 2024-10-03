@@ -6,7 +6,7 @@ MODEL.param_file_name = fullfile('src', 'setparam.m');
 
 MODEL.CORR_VER = 'v0';
 
-MODEL.CORR_DATE = '2024-09';
+MODEL.CORR_DATE     = '2024-09';
 MODEL.CORR_DATE_ANT = '2024-08';
 
 % Fechas de fin de historia
@@ -57,6 +57,12 @@ MODEL.esc_names = {'Escenario Libre',...v0
                    'Escenario Tasa Externa',...v4
                    'Escenario Anclajes Corto Plazo'};%,...v5
 
+MODEL.Esc.v1.name = MODEL.esc_names{2};
+MODEL.Esc.v2.name = MODEL.esc_names{3};
+MODEL.Esc.v3.name = MODEL.esc_names{4};
+MODEL.Esc.v4.name = MODEL.esc_names{5};
+MODEL.Esc.v5.name = MODEL.esc_names{6};
+               
 % Colores para escenarios ALTERNOS
 MODEL.esc_col = {[0.4660 0.6740 0.1880],...   v1
                  [0.8500 0.3250 0.0980],...    %v2
@@ -71,7 +77,7 @@ MODEL_ANT = MODEL_ANT.MODEL;
 
 %% Lista de variables para post-procesamiento
 % Logaritmos desestacionalizados, tendencias y brechas
-pp_list = {'L_MB', 'L_VEL', 'L_CPI_RW', 'L_CPI_RW_Q'};
+pp_list = {'L_MB', 'L_VEL', 'L_CPI_RW', 'L_IPEI_Q'};
 % Niveles desestacionalizados y tendencias
 list_nivel = {'L_S','L_MB'};
 
@@ -82,7 +88,7 @@ tit_lev ={{'Tipo de Cambio Nominal (GTQ/USD)'},...
         {'Base Monetaria (Millones de Quetzales)'}};
     
 % Lista de gráficas de brechas
-list_gaps = {'L_GDP_RW','L_Z', 'L_GDP','L_CPI_RW', 'L_MB', 'L_VEL', 'L_CPI_RW_Q'};
+list_gaps = {'L_GDP_RW','L_Z', 'L_GDP','L_CPI_RW', 'L_MB', 'L_VEL', 'L_IPEI_Q'};
 
 % Lista de gráficas para descomposición histórica de shocks
 sh_list = {'L_GDP_RW_GAP', 'DLA_CPI_RW', 'RS_RW', 'D4L_CPI_NOSUBY','L_GDP_GAP','DLA_CPIXFE', 'DLA_S', 'D4L_MB', 'RS',...
