@@ -9,7 +9,9 @@ data/raw/**/*.xls
 !data/raw/**/monthly.csv
 !data/raw/**/quarterly.csv
 data/corrimientos/**/*.mat
+data/corrimientos/**/*.csv
 data/fulldata/**/*.mat
+data/fulldata/**/*.csv
 
 # Backup temp data
 backup/
@@ -57,3 +59,4 @@ plots\*\.png
 *.evsettings
 *.~rg
 *.db
+/data/fulldata
