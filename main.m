@@ -46,7 +46,7 @@ PostProcess;
 %% Gráficas
 do_graphs = true;
 
-if do_graphs == true
+if do_graphs
     % Pre-processing
     % monthly
     PreProcPlots_m(MODEL,...
@@ -138,14 +138,16 @@ if do_graphs == true
         'tab_range', tab_range,...
         'LegendsNames',{MODEL.leg_ant, MODEL.leg_act});
     
-     MODEL = fanchart(MODEL, MODEL_ANT,...
-                    'EndDatePlot',qq(2025,4),...
-                    'apertura', {[0.25 0.25 0.25 0.25 0.25 0.25 0.25]'},... Vector Columna
-                    'sesgo', {[1 1 1 1,... Percentiles por debajo de la mediana
-                               1,... percentil 50
-                               1.5 1.5 1.5 1.5],... percentiles por arriba de la mediana
-                               }...Vector fila
-                    );  
+    % Fanchart 
+    MODEL = fanchart(MODEL, MODEL_ANT,...
+        'EndDatePlot', MODEL.DATES.pred_start + 7, ...
+        'apertura', {[0.25 0.25 0.25 0.25 0.25 0.25 0.25 0.25]'}, ... Vector Columna
+        'sesgo', {
+            [1 1 1 1, ...           Percentiles por debajo de la mediana
+            1,...                   percentil 50
+            1.5 1.5 1.5 1.5],...    percentiles por arriba de la mediana
+        }...Vector fila
+    );  
     
 end
 
