@@ -23,7 +23,7 @@ Preprocessing;
 disp('Preprocesamiento de Observables: ok');
 
 %% Lectura de Modelo, proceso de filtrado y simulación
-MODEL = SimTools.sim.read_model(MODEL);
+MODEL = Sim.sim.read_model(MODEL);
 
 % Filtrado 
 [MODEL.MF,MODEL.F] = filter(MODEL.M, MODEL.PreProc.obs,... 
