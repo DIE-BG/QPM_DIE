@@ -232,7 +232,7 @@ ss_DLA_CPI_RW,
 ss_RR_RW_BAR,
 ss_REM_GDP,
 ss_D4L_MB,
-ss_D4L_VEL,
+%ss_D4L_VEL, Actualmente no se está usando dentro del modelo
 
 
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%% MODELO %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
