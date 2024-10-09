@@ -7,7 +7,7 @@ Las principales fuentes son:
     2) Banguat (Variables Internas)
 
 Departamento de Investigaciones Económicas - 2024.
-MJGM/JGOR
+MJGM/JGOR/RRCP
 
 %}
 %%
@@ -26,10 +26,17 @@ q = databank.fromCSV(fullfile('data', 'raw', MODEL.CORR_DATE, 'quarterly.csv'));
 % a, a_prom, exp_indx, imp_indx, i_star, cpi_sub, s, bm, cpi
 m = databank.fromCSV(fullfile('data', 'raw', MODEL.CORR_DATE, 'monthly.csv'));
 
-%% Construcción de CPI_RW y REM_GDP
-% CPI_RW
-m.CPI_RW = m.A_prom*m.ind_prec_expus + (1- m.A_prom)*m.ind_prec_impus;
-m.CPI_RW.Comment = 'Indice de precios de importaciones e importaciones';
+%% Construcción de IPEI y REM_GDP
+% IPEI
+m.IPEI = m.A_prom*m.ind_prec_expus + (1- m.A_prom)*m.ind_prec_impus;
+m.IPEI.Comment = 'Indice de precios de exportaciones e importaciones';
+
+m.IPEI_mom = m.IPEI.pct(-1); 
+m.IPEI_mom.Comment = 'Indice de precios de exportaciones e importaciones';
+m.IPEI_mom.Caption = 'Tasa de variación Intermensual';
+m.IPEI_yoy = m.CPI_RW.pct(-12);
+m.IPEI_yoy.Comment = 'Indice de precios de exportaciones e importaciones';
+m.IPEI_yoy.Caption = 'Tasa de variación Interanual';
 
 % REM_GDP
 q.REM = m.REM.convert('Q', 'method=', @sum);
@@ -78,11 +85,19 @@ m.DLA_ind_prec_expus.Comment =  'Tasa Intermensual anualizada Precio de Exportac
 m.D4L_ind_prec_expus = m.ind_prec_expus.pct(-12);
 m.D4L_ind_prec_expus.Comment = 'Tasa de variación interanual Precio de Exportaciones de EEUU';
 
+% Inflación subyacente PCE de EEUU
+m.CPI_RW_mom = m.CPI_RW.pct(-1); 
+m.CPI_RW_mom.Comment = 'Inflación subyacente PCE de EEUU (2017 = 100)';
+m.CPI_RW_mom.Caption = 'Tasa de variación Intermensual';
+m.CPI_RW_yoy = m.CPI_RW.pct(-12);
+m.CPI_RW_yoy.Comment = 'Inflación subyacente PCE de EEUU (2017 = 100)';
+m.CPI_RW_yoy.Caption = 'Tasa de variación Interanual';
+
 %% Trimestralización
 % Se tienen variables stock y de flujo por lo que el proceso de
 % trimestralización es disinta para cada una.
 % variables stock (trimestralización última del trimestre)
-stock = {'CPI', 'CPI_RW', 'CPIXFE', 'RS', 'RS_RW', 'MB'};
+stock = {'CPI', 'CPI_RW', 'CPIXFE', 'RS', 'RS_RW', 'MB', 'IPEI'};
 
 names = dbnames(m);
 
@@ -99,7 +114,8 @@ q.GDP.comment = 'Producto Interno Bruto real de Guatemala (desestacionalizado)';
 q.REM_GDP = q.REM_GDP.x12;
 q.REM_GDP.Comment = 'Remesas como porcentaje del producto (desestacionalizado)';
 % Variables seleccionadas
-list_mobs = {'GDP', 'CPI', 'CPIXFE', 'S', 'RS', 'GDP_RW', 'CPI_RW', 'RS_RW', 'REM_GDP', 'MB'};
+% IPEI? 
+list_mobs = {'GDP', 'CPI', 'CPIXFE', 'S', 'RS', 'GDP_RW', 'CPI_RW', 'RS_RW', 'REM_GDP', 'MB', 'IPEI'};
 temp = q*list_mobs;
 
 %% Construcción de variables observables para QPM
@@ -127,7 +143,7 @@ end
 % Estructura para observables
 MODEL.PreProc.obs = struct();
 % Lista de observables (debe coincidir con .model)
-obs_list = {'L_GDP', 'L_S','L_CPI','RS','L_CPIXFE','L_CPI_RW','RS_RW', 'L_GDP_RW_GAP','REM_GDP', 'L_MB'}; 
+obs_list = {'L_GDP', 'L_S','L_CPI','RS','L_CPIXFE','L_CPI_RW','RS_RW', 'L_GDP_RW_GAP','REM_GDP', 'L_MB', 'L_IPEI'}; 
 
 for i = 1:length(obs_list)
    MODEL.PreProc.obs.(strcat('m_',obs_list{i})) = temp.(obs_list{i}); 

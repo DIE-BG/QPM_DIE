@@ -9,7 +9,7 @@
 %}
 
 %% 1. Tasa de interés invariable en el primer trimestre de pronóstico
-MODEL.Esc.v2.name = MODEL.esc_names{3};
+
 MODEL.Esc.v2.dbi = MODEL.F;
 
 % Mantener la tasa invariable
@@ -38,7 +38,7 @@ MODEL.Esc.v2.shd = simulate(MODEL.MF,...
                   'contributions',true);
               
 %% Post-Procesamiento de variables seleccionadas.
-pp_list = {'L_MB', 'L_VEL', 'L_CPI_RW', 'L_CPI_RW_Q','L_Z', 'L_GDP', 'L_GDP_RW'};
+pp_list = {'L_MB', 'L_VEL', 'L_CPI_RW', 'L_IPEI_Q','L_Z', 'L_GDP', 'L_GDP_RW'};
 list_nivel = {'L_S','L_MB'};
 
 MODEL = rec_GDP_RW(MODEL, 'Esc', 'v2');
@@ -130,9 +130,15 @@ if graph_esc == true
     
     % Contribuciones
     contributions(MODEL,...
-                  'Esc_add', {'v2', MODEL.Esc.v2.pred});
-   diff_contributions(MODEL,...
-                  'Esc_add', {'v2', MODEL.Esc.v2.pred}); 
+        'Esc_add', {'v2', MODEL.Esc.v2.pred}, ... 
+        'SavePath', fullfile('plots', MODEL.CORR_DATE, 'v2', 'contributions') ...           
+    );
+              
+    contributions(MODEL,...
+        'Esc_add', {'v2', MODEL.Esc.v2.pred}, ... 
+        'SavePath', fullfile('plots', MODEL.CORR_DATE, 'v2', 'diff_contributions'), ... 
+        'Difference', true ...
+    );       
     
     % Real exchange rate (subplot)
     tcr_subplot(MODEL,...

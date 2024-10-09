@@ -1,4 +1,29 @@
+%% === Presentación larga de corrimientos === 
+
+%% Disposiciones para las gráficas
+% Single plot
+L1_SINGLE           = [3.25/2.54 0 27.38/2.54 17.55/2.54]; 
+% One-row layout
+L1x2_LEFT           = [0 0 16.93/2.54 17.57/2.54]; 
+L1x2_RIGHT          = [16.93/2.54 0 16.93/2.54 17.57/2.54];
+% 2x2 layout
+L2x2_UPPER_LEFT     = [0 0 16.93/2.54 8.79/2.54]; 
+L2x2_UPPER_RIGHT    = [16.93/2.54 0 16.93/2.54 8.79/2.54]; 
+L2x2_LOWER_LEFT     = [0 8.78/2.54 16.93/2.54 8.79/2.54]; 
+L2x2_LOWER_RIGHT    = [16.93/2.54 8.78/2.54 16.93/2.54 8.79/2.54]; 
+% Big left and 2x1 right
+L3_LEFT             = L1x2_LEFT; 
+L3_UPPER_RIGHT      = L2x2_UPPER_RIGHT; 
+L3_LOWER_RIGHT      = L2x2_LOWER_RIGHT; 
+% Star positions
+STAR_UPPER_RIGHT    = [16.93/2.54 0 0.9/2.54 0.9/2.54]; 
+STAR_UPPER_LEFT     = [0 0 0.9/2.54 0.9/2.54]; 
+STAR_LOWER_LEFT     = [0 8.79/2.54 0.9/2.54 0.9/2.54]; 
+
 %% Nombres de los escenarios
+% Se generan las presentaciones de acuerdo con las carpetas de cada
+% escenario en plots/
+
 name = dir(fullfile('plots', MODEL.CORR_DATE));
 folder_name = {};
 for i = 1:length(name)
@@ -15,6 +40,7 @@ for i = 1:length(folder_name)
             exportToPPTX('close');
         end
 
+        disp(['Generando presentación: ', folder_name{i}]); 
         exportToPPTX('open',fullfile('presentacion','dieTemplate.pptx'));
 
         %% Diapositiva de título
@@ -56,7 +82,7 @@ for i = 1:length(folder_name)
                      'title','fontsize',36,...
                      'HorizontalAlignment','Left');
                  
-       %% Resultados
+        %% Resultados
         exportToPPTX('addslide','Layout','Título y objetos');
         exportToPPTX('addtext','Descripción', 'Position',...
                      'title','fontsize',36,...
@@ -69,19 +95,27 @@ for i = 1:length(folder_name)
            corr_date = MODEL.CORR_DATE;
         end
         
-        VarExt;     
-        TCReal;
-        TCNominal;
-        Inflaciones;
-        TasasInteres;
-        Crecimiento;
-        BM_Vel;
+        fprintf('Presentación: Variables externas... '); 
+        VarExt;         fprintf('ok.\n'); 
+        fprintf('Presentación: Tipo de cambio real... '); 
+        TCReal;         fprintf('ok.\n'); 
+        fprintf('Presentación: Tipo de cambio nominal... '); 
+        TCNominal;      fprintf('ok.\n'); 
+        fprintf('Presentación: Inflación... '); 
+        Inflaciones;    fprintf('ok.\n'); 
+        fprintf('Presentación: Tasas de interés... '); 
+        TasasInteres;   fprintf('ok.\n'); 
+        fprintf('Presentación: Crecimiento económico... '); 
+        Crecimiento;    fprintf('ok.\n'); 
+        fprintf('Presentación: Base monetaria y velocidad de circulación... '); 
+        BM_Vel;         fprintf('ok.\n'); 
 
-        %%
+        %% Cierre
         exportToPPTX('addslide','Layout','Encabezado de sección');
         exportToPPTX('addtext','Muchas Gracias','Position','title','fontsize',48);
 
         %% Guardar y cerrar
+        
         save_path = fullfile('Resultados', MODEL.CORR_DATE);
         if ~isfolder(save_path)
             mkdir(save_path)
@@ -94,4 +128,5 @@ for i = 1:length(folder_name)
                                          folder_name{i},...
                                          MODEL.esc_names{i})));
         exportToPPTX('close');   
+        disp(['Presentación escenario ', folder_name{i}, ' completa.']);  
 end
