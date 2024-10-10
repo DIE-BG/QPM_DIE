@@ -175,6 +175,7 @@ if MAKE_ALT_SCENARIOS == true
     v3_Comb;
     v4_Istar;
     v5_Anclaje_mm;
+    v6_Anclaje_crecimiento; 
 end
 
 
