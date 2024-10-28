@@ -166,7 +166,7 @@ databank.toCSV(MODEL.F_pred, fullfile('data', 'fulldata', MODEL.CORR_DATE, 'full
 
 % return; %Correr hasta esta linea la primera vez para Generar los anclajes necesarios para el Escneario IPEI del SVAR
 %% Escenarios alternos
-MAKE_ALT_SCENARIOS = false;
+MAKE_ALT_SCENARIOS = true;
 graph_esc = true;
 
 if MAKE_ALT_SCENARIOS == true
