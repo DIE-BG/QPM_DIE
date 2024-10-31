@@ -50,6 +50,15 @@ function plot_shd_dsc_comparative(MODEL, HIST, SHD, varargin)
 parse(p, varargin{:});
 params = p.Results; 
 
+% Verificación y creación del directorio para las gráficas
+if ~isfolder(params.SavePath)
+    mkdir(params.SavePath)
+else
+    rmdir(params.SavePath, 's')
+    mkdir(params.SavePath)
+end
+
+
 if params.OnlyHist
    MODEL.shd_dsc = dbclip(MODEL.shd_dsc, MODEL.DATES.hist_start:MODEL.DATES.hist_end);
    MODEL.F_pred = dbclip(MODEL.F_pred, MODEL.DATES.hist_start:MODEL.DATES.hist_end);
