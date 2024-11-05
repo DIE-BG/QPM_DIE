@@ -7,7 +7,7 @@ MODEL.param_file_name = fullfile('src', 'setparam.m');
 MODEL.CORR_VER = 'v0';
 
 MODEL.CORR_DATE     = '2024-10';
-MODEL.CORR_DATE_ANT = '2024-09';
+MODEL.CORR_DATE_ANT = '2024-10';
 
 % Fechas de fin de historia
 MODEL.DATES.hist_end_ant = qq(2024, 3);
@@ -39,7 +39,7 @@ MODEL.DATES.pred_start = MODEL.DATES.hist_end + 1;
 MODEL.DATES.pred_end = MODEL.DATES.hist_end + 30;
 
 % Rango de tablas para gráficos de simulación
-tab_range = [MODEL.DATES.hist_end, MODEL.DATES.pred_start:MODEL.DATES.pred_start+5, qq(2025,4)];
+tab_range = [MODEL.DATES.hist_end, MODEL.DATES.pred_start:MODEL.DATES.pred_start+5, qq(2026,4)];
 
 % Rango de tablas para gráficos de Pre - procesamiento
 % Trimestral
@@ -51,24 +51,16 @@ tab_range_mm = MODEL.DATES.hist_end_mm-8:MODEL.DATES.hist_end_mm;
 %% Configuración Escenarios
 % Nombres de escenarios
 MODEL.esc_names = {'Escenario Libre',...v0
-                   'Escenario IPEI',...v1
+                   'Modelo QPM original',...v1
                    'Escenario Tasa Líder',...v2
                    'Escenario Combinado',...v3
                    'Escenario Tasa Externa',...v4
-                   'Escenario Anclajes Corto Plazo',...
-                   'Escenario mod 1',...
-                   'Escenario mod 2',...
-                   'Escenario mod 2'};%,...v5
+                   'Escenario Anclajes Corto Plazo'};%,...v5
 
 MODEL.Esc.v1.name = MODEL.esc_names{2};
 MODEL.Esc.v2.name = MODEL.esc_names{3};
 MODEL.Esc.v3.name = MODEL.esc_names{4};
 MODEL.Esc.v4.name = MODEL.esc_names{5};
-MODEL.Esc.v5.name = MODEL.esc_names{6};
-MODEL.Esc.v7.name = MODEL.esc_names{7};
-MODEL.Esc.v9.name = MODEL.esc_names{8};
-MODEL.Esc.v8.name = MODEL.esc_names{8};
-
 
 % Colores para escenarios ALTERNOS
 MODEL.esc_col = {[0.4660 0.6740 0.1880],...   v1
@@ -76,11 +68,10 @@ MODEL.esc_col = {[0.4660 0.6740 0.1880],...   v1
                  [0.4940 0.1840 0.5560],...    %v3
                  [0.9800 0.0001 0.9500],...    %v4
                  [0.251 0.1843 0.01569],...
-                 [0.878 0.4 0.722],...
-                 [0.643 0.769 0.133]};      %v5
+                 [0.878 0.4 0.722]};      %v5
                       
 %% Carga de info mes previo
-MODEL_ANT = load(sprintf('MODEL-%s-QPM.mat',MODEL.CORR_DATE_ANT));
+MODEL_ANT = load(sprintf('MODEL-%s-QPM_original.mat',MODEL.CORR_DATE_ANT));
 MODEL_ANT = MODEL_ANT.MODEL;
 
 
