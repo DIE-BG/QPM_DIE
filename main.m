@@ -44,9 +44,6 @@ MODEL.F_pred = simulate(MODEL.MF,... Modelo Filtrado
 %% Post-Procesamiento de variables seleccionadas.
 PostProcess;
 
-MODEL.leg_ant = 'Octubre 2024';
-MODEL.leg_act = 'Octubre 2024 remesas';
-
 %% Gráficas
 MAKE_GRAPHS = true;
 

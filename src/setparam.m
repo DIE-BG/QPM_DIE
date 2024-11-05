@@ -181,7 +181,7 @@ s.ss_RR_RW_BAR = 0.50; %0.5;
 % Domestic inflation target
 s.ss_D4L_CPI_TAR = 4;  
 % Steady state value for Remittance to GDP ratio
-s.ss_REM_GDP  = 18.0;
+s.ss_REM_GDP  = 15.0;
 %adding money growth steady state
 s.ss_D4L_MB = 7.5;
 

@@ -10,8 +10,8 @@ MODEL.CORR_DATE     = '2024-10';
 MODEL.CORR_DATE_ANT = '2024-10';
 
 % Fechas de fin de historia
-MODEL.DATES.hist_end_ant = qq(2024, 3);
-MODEL.DATES.hist_end = qq(2024, 3); 
+MODEL.DATES.hist_end_ant = qq(2024, 2);
+MODEL.DATES.hist_end = qq(2024, 2); 
 MODEL.DATES.hist_end_mm = mm(2024, 09);
 
 % Nombres de meses para corrimientos automáticos
@@ -61,6 +61,7 @@ MODEL.Esc.v1.name = MODEL.esc_names{2};
 MODEL.Esc.v2.name = MODEL.esc_names{3};
 MODEL.Esc.v3.name = MODEL.esc_names{4};
 MODEL.Esc.v4.name = MODEL.esc_names{5};
+MODEL.Esc.v5.name = MODEL.esc_names{6};
 
 % Colores para escenarios ALTERNOS
 MODEL.esc_col = {[0.4660 0.6740 0.1880],...   v1
