@@ -126,6 +126,7 @@ m_L_IPEI; %12
 % External variables
 % Remittances
 'Remesas Familiares (%PIB Nominal, desestacionalizadas)'                                   REM_GDP, %59
+'Remesas Familiares (Tendencia)'                                                           REM_GDP_BAR, 
 
 % Inflación externa 
 'Índice de Precios de Core PCE EEUU  (Logaritmo)'                                          L_CPI_RW, %60
@@ -169,6 +170,7 @@ SHK_RR_BAR,  %13
 SHK_D4L_MB, %14
 % Externos
 SHK_REM_GDP, %15
+SHK_REM_GDP_BAR,
 SHK_PREM, %16
 SHK_L_GDP_RW_GAP,  %17
 SHK_RS_RW, %18
@@ -257,7 +259,7 @@ m_L_IPEI       = L_IPEI;
 % 1. Curva IS
 'Aggregate demand' 
 L_GDP_GAP = b1*L_GDP_GAP{-1} - b2*MCI + b3*L_GDP_RW_GAP +...
-            b5*(REM_GDP - ss_REM_GDP) + SHK_L_GDP_GAP;
+            b5*(REM_GDP - REM_GDP_BAR) + SHK_L_GDP_GAP;
 
 % 2
 'Real monetary condition index' 
@@ -330,7 +332,9 @@ D4L_IPEI       = rho_D4L_IPEI_1 * D4L_IPEI{-1} + rho_D4L_IPEI_2 * D4L_IPEI{-2} +
 
 % 16
 'Remittances'
-REM_GDP = (1-rho_REM_GDP)*ss_REM_GDP + rho_REM_GDP*REM_GDP{-1} + SHK_REM_GDP;
+REM_GDP = (1-rho_REM_GDP)*REM_GDP_BAR + rho_REM_GDP*REM_GDP{-1} + SHK_REM_GDP;
+'Remittances (trend)'
+REM_GDP_BAR = (REM_GDP + REM_GDP{-1} + REM_GDP{-2} + REM_GDP{-3} + REM_GDP{-4} + REM_GDP{-5}) / 6 + SHK_REM_GDP_BAR; 
 
 % External Block
 % 1 Import prices

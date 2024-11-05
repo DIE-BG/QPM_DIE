@@ -202,6 +202,7 @@ s.std_SHK_PREM              = 1;
 s.std_SHK_RS                = 0.4157;
 s.std_SHK_RR_BAR            = 1.1431;
 s.std_SHK_REM_GDP           = 0.536;
+s.std_SHK_REM_GDP_BAR       = 0.2 * s.std_SHK_REM_GDP;
 s.std_SHK_L_GDP_RW_GAP      = 1.3236;
 s.std_SHK_RS_RW             = 0.2796;
 s.std_SHK_DLA_CPI_RW        = 1.0357;

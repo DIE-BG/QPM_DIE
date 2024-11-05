@@ -6,8 +6,8 @@ MODEL.param_file_name = fullfile('src', 'setparam.m');
 
 MODEL.CORR_VER = 'v0';
 
-MODEL.CORR_DATE     = '2024-08';
-MODEL.CORR_DATE_ANT = '2024-06';
+MODEL.CORR_DATE     = '2024-10';
+MODEL.CORR_DATE_ANT = '2024-10';
 
 % Fechas de fin de historia
 MODEL.DATES.hist_end_ant = qq(2024, 1);
