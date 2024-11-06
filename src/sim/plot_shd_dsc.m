@@ -45,6 +45,7 @@ function plot_shd_dsc(MODEL, HIST, SHD,varargin)
     addParameter(p, 'CloseAll', true);
     addParameter(p, 'OnlyHist', false);
     addParameter(p, 'Rng', MODEL.DATES.hist_start:MODEL.DATES.pred_end);
+    addParameter(p, 'MF', {MODEL.MF});    
 parse(p, varargin{:});
 params = p.Results; 
 
@@ -72,7 +73,7 @@ end
 var_plot = params.Variables;
 
 % Choques a las variables
-var_shd = get(MODEL.MF, 'elist');
+var_shd = get(params.MF, 'elist');
 
 % Paleta de colores
 col = distinguishable_colors(length(var_shd) + 1, ...

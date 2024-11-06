@@ -50,6 +50,7 @@ graficar.
     addParameter(p, 'CloseAll', true);
     addParameter(p, 'StartDate', {MODEL.DATES.hist_end - 20});
     addParameter(p, 'EndDatePlot', {MODEL.DATES.pred_end});
+    addParameter(p, 'MF', {MODEL.MF});
 parse(p, varargin{:});
 params = p.Results; 
 
@@ -65,7 +66,7 @@ end
 var_plot = params.Variables;
 
 % Choques a las variables
-var_shd = get(MODEL.MF, 'elist');
+var_shd = get(params.MF, 'elist');
 
 % Paleta de colores
 col = distinguishable_colors(length(var_shd) + 1, ...
