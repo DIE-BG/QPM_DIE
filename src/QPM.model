@@ -332,9 +332,9 @@ D4L_IPEI       = rho_D4L_IPEI_1 * D4L_IPEI{-1} + rho_D4L_IPEI_2 * D4L_IPEI{-2} +
 
 % 16
 'Remittances'
-REM_GDP = (1-rho_REM_GDP)*REM_GDP_BAR + rho_REM_GDP*REM_GDP{-1} + SHK_REM_GDP;
+REM_GDP = rho_REM_GDP*REM_GDP{-1} + SHK_REM_GDP;
 'Remittances (trend)'
-REM_GDP_BAR = (REM_GDP + REM_GDP{-1} + REM_GDP{-2} + REM_GDP{-3} + REM_GDP{-4} + REM_GDP{-5}) / 6 + SHK_REM_GDP_BAR; 
+REM_GDP_BAR = REM_GDP_BAR = movsum(REM_GDP, -8) / 8 + SHK_REM_GDP_BAR;
 
 % External Block
 % 1 Import prices
