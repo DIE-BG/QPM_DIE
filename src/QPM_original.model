@@ -1,0 +1,492 @@
+%{
+  Modelo QPM Versión 3 (DIE)
+    MJGM: 05/08/2024
+    Revisión con Juan Pablo Medina, asistencia CAPTAC-DR: 27/09/2024
+
+    Incluye variables de ajuste para presentaciones EP
+    Crecimiento Económico
+    - D4S4L_GDP_ADJ
+    - D4S4L_GDP_EP
+    Depreciación Cambiaria interanual y Tipo de cambio relacionado
+    - D4L_S_ADJ
+    - D4L_S_EP
+    - L_S_EP
+    Tasa de interés líder de política monetaria
+    - RS_ADJ
+    - RS_EP
+    
+Se incluyen variables de ajuste.
+Se incluyen cambios a la estructura en MCI y UIP realizados en julio de 2024 (MJGM)
+Se incluyen cambios para incluir IPEI en inflación no subyacente
+
+%}
+
+!measurement_variables
+m_L_GDP, %1
+m_L_S, %2
+m_L_CPI, %3
+m_RS, %4
+m_L_CPIXFE, %5
+m_L_CPI_RW,  %6
+m_RS_RW %7
+m_REM_GDP %8
+m_L_GDP_RW_GAP %10
+m_L_MB; %11
+m_L_IPEI; %12
+
+!transition_variables
+% 64 Variables (?)
+% Growth
+'Producto Interno Bruto Real Guatemala (Logaritmo desestacionalizado)'                     L_GDP,       %1
+'Tendencia del Producto Interno Bruto Real Guatemala (Logaritmo)'                          L_GDP_BAR, %2
+'Producto Interno Bruto Real Guatemala (Brecha)'                                           L_GDP_GAP, %3
+'Tasa de Variación Intertrimestral Anualizada del del PIB de Guatemala'                    DLA_GDP, %4
+'Tasa de Variación Interanual del PIB de Guatemala'                                        D4L_GDP, %5
+'Tasa de variación Intertrimestral Anualizada de la Tendencia del PIB de Guatemala'        DLA_GDP_BAR, %6
+'Brecha acumulada del PIB de Guatemala'                                                    CUM_L_GDP_GAP, %7
+'Producto Interno Bruto Real Guatemala, Suma movil de 4 trimestres (Logaritmo)'            S4L_GDP,%8
+'Tasa de Variación Interanual de la suma de 4 Trimestres del PIB de Guatemala (QPM)'       D4S4L_GDP,%9
+'Ajuste de la suma móvil de 4 trimestres del PIB (EP)'                                     D4S4L_GDP_ADJ,%10
+'Tasa de Variación Interanual de la suma de 4 Trimestres del PIB de Guatemala (Adjusted)'  D4S4L_GDP_EP,%11
+
+'Índice de condiciones monetarias reales (%)'                                              MCI, %12
+
+% Inflation
+'Índice de Precios al Consumidor (Logaritmo)'                                              L_CPI, %13
+'Inflacion Total Intertrimestral Anualizada'                                               DLA_CPI, %14
+'Inflacion Total Interanual'                                                               D4L_CPI, %15
+'Inflacion Total Interanual (Objetivo)'                                                    D4L_CPI_TAR, %16
+'Desviaciones de la Inflación Total respecto del Objetivo'                                 D4L_CPI_DEV, %17
+'Ajuste de Inflacion Total Interanual (EP)'                                                D4L_CPI_ADJ,
+'Inflacion Total Interanual (Adjusted)'                                                    D4L_CPI_EP,
+
+% Core Inflation
+'Índice Inflación Subyacente Optima MSE (Logaritmo)'                                       L_CPIXFE, % 18
+'Inflacion Subyacente Optima MSE Intertrimestral Anualizada'                               DLA_CPIXFE,%19
+'Inflación Subyacente Optima MSE Interanual'                                               D4L_CPIXFE, %20
+
+% Real Marginal Costs
+'Costos Marginales Reales'                                                                 RMC, % 21
+
+% Imports/Exports Price index 
+'Índice de precios de exportaciones e importaciones'                                       L_IPEI;
+'Inflación de transables Interanual'                                                       D4L_IPEI;
+
+% Non Core Inflation
+'Índice Inflación No subyacente (Logaritmo)'                                               L_CPI_NOSUBY % 22
+'Inflacion No Subyacente Intertrimestral Anualizada'                                       DLA_CPI_NOSUBY % 23
+'Inflacion No Subyacente Interanual'                                                       D4L_CPI_NOSUBY, % 24
+
+% Expected Inflation
+'Expectativas de Inflacion Total Intertrimestral Anualizada'                               E_DLA_CPI, % 25
+'Expectativas de Inflacion Subyacente Intertrimestral Anualizada'                          E_DLA_CPIXFE, % 26
+
+% Monetary Aggregates
+'Base Monetaria (Logaritmo)'                                                               L_MB, %27
+'Tasa de Variación Interanual de la Base Monetaria'                                        D4L_MB, % 28
+'Tasa de Variación Intertrimestral Anualizada de la Base Monetaria'                        DLA_MB, %29
+'Velocidad de circulación de la Base Monetaria(Logaritmo)'                                 L_VEL; %30
+'Tasa de Variación Interanual de la Velocidad de circulación de la Base Monetaria'         D4L_VEL, %31
+'Tasa de Variación Intertrimestral Anualizada de la Base Monetaria'                        DLA_VEL, % 32
+'Shock Persistente de Base Monetaria'                                                      PM_D4L_MB, % 33
+
+% Nominal Exchange Rates
+'Tipo de Cambio Nominal (Logaritmo)'                                                       L_S, % 34
+'Tasa de Variación Intertrimestral Anualizada del Tipo de Cambio Nominal'                  DLA_S, % 35
+'Tasa de Variación Interanual del Tipo de Cambio Nominal'                                  D4L_S, % 36
+'Desviaciones respecto del objetivo cambiario nominal'                                     DLA_S_DEV, %37
+'Objetivo de Tipo de Cambio Nominal (Logaritmo)'                                           L_S_TAR, %38
+'Tasa de Variación Intertrimestral Anualizada del Objetivo Tipo de Cambio Nominal'         DLA_S_TAR, %39
+'Tasa de Variación Interanual del Objetivo Tipo de Cambio Nominal'                         D4L_S_TAR, %40
+'Ajuste Depreciación Nominal (EP)'                                                         D4L_S_ADJ,%41
+'Tasa de Variación Interanual del Tipo de Cambio Nominal (Adjusted)'                       D4L_S_EP,%42
+'Tipo de Cambio Nominal (Logaritmo/Adjusted)'                                              L_S_EP,%43
+
+% Real Exchange Rate
+'Índice Tipo de Cambio Real (Logaritmo)'                                                   L_Z, %44
+'Tipo de Cambio Real (Tendencia)'                                                          L_Z_BAR, %45
+'Tipo de Cambio Real (Brecha)'                                                             L_Z_GAP, %46
+'Tasa de Variación Intertrimestral Anualizada del Tipo de Cambio Real'                     DLA_Z, %47
+'Tasa de Variación Interanual del Tipo de Cambio Real'                                     D4L_Z, % 48
+'Tasa de Variación Intertrimestral Anualizada del Tipo de Cambio Real (Tendencia)'         DLA_Z_BAR, %49
+
+% Risk Premiums
+'Prima Riesgo Pais'                                                                        PREM, % 50
+'Shock persistente en la Prima de Riesgo Pais'                                             SHKN_PREM, % 51
+
+% Interest Rates
+'Tasa de Interes Lider de Politica Monetaria (endógena)'                                   RS, % 52
+'Tasa de interes real de Politica Monetaria'                                               RR, % 53
+'Tasa de Interes real de Politica Monetaria (Tendencia)'                                   RR_BAR, %54
+'Tasa de Interes real de Politica Monetaria (Brecha)'                                      RR_GAP, % 55
+'Tasa de Interes Neutral'                                                                  RSNEUTRAL, %56
+'Ajuste a la Tasa Lider'                                                                   RS_ADJ,%57
+'Tasa de Interes Lider de Politica Monetaria'                                              RS_EP,%58
+ 
+% External variables
+% Remittances
+'Remesas Familiares (%PIB Nominal, desestacionalizadas)'                                   REM_GDP, %59
+
+% Inflación externa 
+'Índice de Precios de Core PCE EEUU  (Logaritmo)'                                          L_CPI_RW, %60
+'Inflacion Subyacente PCE de EEUU Intertrimestral Anualizada'                              DLA_CPI_RW, %61
+'Inflación Subyacente PCE de EEUU Interanual'                                              D4L_CPI_RW,%62
+
+% Precios de importaciones y exportaciones
+'Índice de precios de exportaciones e importaciones (Logaritmo)'                           L_IPEI_Q, %63
+'Inflación de transables en GTQ'                                                           DLA_IPEI_Q, %64
+'Inflación de transables Interanual Interanual en GTQ'                                     D4L_IPEI_Q, %65
+
+'Producto Interno Bruto EEUU (Brecha)'                                                     L_GDP_RW_GAP, %66
+
+'Tasa de Interes de fondos federales'                                                      RS_RW, %67
+'Tasa de Interés real externa'                                                             RR_RW,  %68
+'Tasa de Interes real externa (Tendencia)'                                                 RR_RW_BAR, %69
+'Tasa de Interes real externa (Brecha)'                	                                   RR_RW_GAP, %70
+'Tasa externa para la condicion UIP'                                                       RS_EXTERNAL, %71
+
+!transition_shocks 
+% 21 SHOCKS
+% Demanda agregada
+SHK_L_GDP_GAP, %1
+SHK_DLA_GDP_BAR, %2
+SHK_D4S4L_GDP_ADJ,%3
+% Inflacionarios
+SHK_D4L_CPI_TAR, %4
+SHK_DLA_CPIXFE, %5
+SHK_D4L_CPI_NOSUBY, %6
+SHK_D4L_CPI_ADJ,
+% Cambiarios
+SHK_L_S, %7
+SHK_DLA_S_TAR, %8
+SHK_DLA_Z_BAR, %9
+SHK_D4L_S_ADJ, %10
+% Politica Monetaria
+SHK_RS, %11
+SHK_RS_ADJ,%12
+SHK_RR_BAR,  %13
+% Monetarios
+SHK_D4L_MB, %14
+% Externos
+SHK_REM_GDP, %15
+SHK_PREM, %16
+SHK_L_GDP_RW_GAP,  %17
+SHK_RS_RW, %18
+SHK_DLA_CPI_RW, %19
+SHK_RR_RW_BAR, %20
+SHK_D4L_IPEI %21   
+
+
+!parameters
+% 35 incluyendo persistencias + 8 Estados Estacionarios
+
+% Demanda Agregada 4
+b1, b2, b3, b5
+% Índice de Condiciones monetarias reales 2
+b4, b6
+
+% Phillips Curve 2
+a1, a2, 
+% Real Marginal Costs 1
+a3
+% IPEI effect in non-core inflation 
+a4 
+% UIP 3
+e1, h2, h3,
+% Exchange Rate Target 3
+f1, f2, f3,
+% Taylor Rule 5
+h1, g1, g2, g3, g4
+% Money demand equation 2
+j1, j2
+
+% Persistances 13
+rho_DLA_GDP_BAR,
+rho_D4L_CPI_NOSUBY
+rho_D4L_CPI_TAR, 
+% rho_D4L_VEL
+% IPEI equation is an AR(2) model
+rho_D4L_IPEI_1,
+rho_D4L_IPEI_2,
+rho_SHKN_PREM, 
+rho_DLA_Z_BAR, 
+rho_RR_BAR,
+rho_REM_GDP
+rho_L_GDP_RW_GAP, 
+rho_RS_RW,
+rho_RR_RW_BAR, 
+rho_DLA_CPI_RW,
+rho_PM_D4L_MB,
+% Para variables de ajuste (AR)
+rho_RS_ADJ,
+rho_D4L_CPI_ADJ,
+rho_D4S4L_GDP_ADJ,
+rho_D4L_S_ADJ,
+
+% Steady States 8
+ss_D4L_CPI_TAR,
+ss_RR_BAR, 
+ss_DLA_Z_BAR, 
+ss_DLA_GDP_BAR
+ss_DLA_CPI_RW, 
+ss_RR_RW_BAR,
+ss_REM_GDP,
+ss_D4L_MB,
+%ss_D4L_VEL, Actualmente no se está usando dentro del modelo
+
+
+%% %%%%%%%%%%%%%%%%%%%%%%%%%%%%% MODELO %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+!measurement_equations
+m_L_GDP        = L_GDP;
+m_L_S          = L_S;
+m_L_CPI        = L_CPI;
+m_RS           = RS;
+m_L_CPI_RW     = L_CPI_RW;
+m_RS_RW        = RS_RW;
+m_L_CPIXFE     = L_CPIXFE;
+m_REM_GDP      = REM_GDP;
+m_L_GDP_RW_GAP = L_GDP_RW_GAP;
+m_L_MB         = L_MB;
+m_L_IPEI       = L_IPEI; 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%% Estructura Endógena del modelo %%%%%%%%%%%%%%%%%%%%%%%%% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+!transition_equations
+
+% 1. Curva IS
+'Aggregate demand' 
+L_GDP_GAP = b1*L_GDP_GAP{-1} - b2*MCI + b3*L_GDP_RW_GAP +...
+            b5*(REM_GDP - ss_REM_GDP) + SHK_L_GDP_GAP;
+
+% 2
+'Real monetary condition index' 
+% From v2 (MJGM): equation includes persistent shock of MB instead of D4L_MB gap 
+MCI = b4*(RR_GAP ) + b6*(-L_Z_GAP) - (1-b4-b6)*(PM_D4L_MB);
+
+% 3 Phillips Curve
+'Phillips Curve (core inflation)'
+DLA_CPIXFE =  a1*DLA_CPIXFE{-1} + (1 - a1)*DLA_CPIXFE{+1} + a2*RMC + ...
+              SHK_DLA_CPIXFE;
+
+% 4
+'Real Marginal Costs -- Core Inflation' 
+RMC = a3*L_GDP_GAP + (1 - a3)*(L_Z_GAP); 
+
+% 5 Taylor Rule
+'Monetary policy reaction function' 
+RS = h1*(4*(L_S{+1} - L_S) + RS_RW + PREM) + ...
+        (1 - h1)*...
+            (g1*RS{-1} + ...
+            (1 - g1)*(RSNEUTRAL + g2*(D4L_CPI{+4} - D4L_CPI_TAR{+4}) + ...
+                      g3*L_GDP_GAP + g4*(DLA_S{-1}-DLA_S_TAR{-1}))) + ...
+        SHK_RS;
+
+% 6 UIP Condition 
+% From v2 (MJGM): equation includes persistent shock of MB instead of D4L_MB gap 
+'Uncovered Interest Rate Parity (UIP)' % 13
+L_S = h2*(L_S{-1} + DLA_S_TAR/4) + ...
+      (1-h2)*(...
+        (1-e1)*L_S{+1} +...
+              e1*(L_S{-1} + 2/4*(D4L_CPI_TAR - ss_DLA_CPI_RW + DLA_Z_BAR)) + ...
+              (RS_RW - RS + h3*(PM_D4L_MB) + PREM)/4)+...
+     SHK_L_S;
+  
+% 7 
+'Exchange Rate Target' %16
+DLA_S_TAR = f1*DLA_S_TAR{-1} + ...
+            (1-f1)*(D4L_CPI_TAR - ss_DLA_CPI_RW + DLA_Z_BAR - ...
+                    f2*(D4L_CPI-D4L_CPI_TAR) - f3*L_GDP_GAP)...
+             + SHK_DLA_S_TAR;
+
+% 8 Money Demand
+'Money demand' 
+D4L_MB = D4L_CPI + j1*D4L_GDP - j2*(RS-RS{-4}) + PM_D4L_MB; %8
+% choque Monetario exógeno
+PM_D4L_MB = rho_PM_D4L_MB*PM_D4L_MB{-1} + SHK_D4L_MB; %9
+L_MB = L_MB{-4} + D4L_MB; %10
+
+% 9 Velocity 
+'Money velocity equation' %20
+
+D4L_VEL = D4L_CPIXFE + D4L_GDP - D4L_MB;
+      
+% Definiciones
+% 10 Real Exchange Rate
+L_Z = L_S + L_CPI_RW - L_CPIXFE; %12
+
+% 11 Tasa neutral
+RSNEUTRAL = RR_BAR + D4L_CPI{+3}; %13
+% 12 Tasa Real
+RR = RS - D4L_CPI{+1};%14
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%% AR processes and External variables %%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 15
+'Non Core Inflation' 
+D4L_CPI_NOSUBY = rho_D4L_CPI_NOSUBY*D4L_CPI_NOSUBY{-1} + a4 * D4L_IPEI +  SHK_D4L_CPI_NOSUBY;
+D4L_IPEI       = rho_D4L_IPEI_1 * D4L_IPEI{-1} + rho_D4L_IPEI_2 * D4L_IPEI{-2} + SHK_D4L_IPEI; 
+
+% 16
+'Remittances'
+REM_GDP = (1-rho_REM_GDP)*ss_REM_GDP + rho_REM_GDP*REM_GDP{-1} + SHK_REM_GDP;
+
+% External Block
+% 1 Import prices
+DLA_CPI_RW = rho_DLA_CPI_RW*DLA_CPI_RW{-1} + (1-rho_DLA_CPI_RW)*ss_DLA_CPI_RW + SHK_DLA_CPI_RW; 
+
+% 18 Brecha Externa
+L_GDP_RW_GAP = rho_L_GDP_RW_GAP*L_GDP_RW_GAP{-1} + SHK_L_GDP_RW_GAP;
+
+% 19 Tasas de interés Externa nominal
+RS_RW = rho_RS_RW*RS_RW{-1} + (1-rho_RS_RW)*(RR_RW_BAR + DLA_CPI_RW) + SHK_RS_RW; 
+
+% Tasa real externa 
+RR_RW = RS_RW - DLA_CPI_RW;  %20
+RR_RW_BAR = rho_RR_RW_BAR*RR_RW_BAR{-1} + (1-rho_RR_RW_BAR)*ss_RR_RW_BAR + SHK_RR_RW_BAR; %21
+RR_RW_GAP = RR_RW - RR_RW_BAR; %22
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%% Other Trends and gaps %%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% 23 Tasa Real tendencial
+RR_BAR = rho_RR_BAR*RR_BAR{-1} + (1-rho_RR_BAR)*ss_RR_BAR + SHK_RR_BAR;
+RR_GAP = RR - RR_BAR; % 24
+
+% 25 Crecimiento del pib potencial
+DLA_GDP_BAR = rho_DLA_GDP_BAR*DLA_GDP_BAR{-1} + (1-rho_DLA_GDP_BAR)*ss_DLA_GDP_BAR + SHK_DLA_GDP_BAR; 
+
+% 28 Shock Prima por riesgo pais
+SHKN_PREM     = rho_SHKN_PREM*SHKN_PREM{-1} + SHK_PREM;
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%  Otras transformaciones  %%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Niveles
+'Headline CPI' % 29
+L_CPI = L_CPI{-4} + D4L_CPI;
+% 30 Import Prices
+L_CPI_RW = L_CPI_RW{-1} + DLA_CPI_RW/4;
+% 31 Import Prices in domestic currency
+L_IPEI_Q = L_IPEI + L_S;
+% 32 Impor Prices in docmestic currency QoQ
+L_IPEI_Q = L_IPEI_Q{-1} + DLA_IPEI_Q/4;
+% 33 Impor Prices in docmestic currency QoQ
+L_IPEI_Q = L_IPEI_Q{-4} + D4L_IPEI_Q;
+% 34 L_GDP
+L_GDP_GAP = L_GDP - L_GDP_BAR; 
+% 35 Suma móvil de 4 trimestres
+S4L_GDP = movsum(L_GDP, -4);
+
+% Non Core Inflation
+L_CPI_NOSUBY = L_CPI_NOSUBY{-4} + D4L_CPI_NOSUBY; % 38
+% QoQ Non Core Inflation
+L_CPI_NOSUBY = L_CPI_NOSUBY{-1} + DLA_CPI_NOSUBY; % 39
+% Imports and exports inflation (Commodities and industrial equipment's inflation)
+L_IPEI       = L_IPEI{-4} + D4L_IPEI; 
+% Money Velocity
+L_VEL = L_VEL{-4} + D4L_VEL; % 40
+
+% Tasas de variación
+% PIB
+DLA_GDP    = 4*(L_GDP - L_GDP{-1}); %31
+D4L_GDP    = L_GDP - L_GDP{-4}; %42
+D4S4L_GDP = 1/4*(S4L_GDP - S4L_GDP{-4}); %43
+% PIB Potencial
+DLA_GDP_BAR = 4*(L_GDP_BAR - L_GDP_BAR{-1}); %44
+% Core Inflation
+DLA_CPIXFE = 4*(L_CPIXFE - L_CPIXFE{-1});  %45
+D4L_CPIXFE = L_CPIXFE - L_CPIXFE{-4}; %46
+% Headline Inflation
+DLA_CPI    = 4*(L_CPI - L_CPI{-1}); % 47
+'Headline inflation' 
+D4L_CPI   = D4L_CPIXFE + D4L_CPI_NOSUBY; % 48
+D4L_CPI_RW = L_CPI_RW - L_CPI_RW{-4}; %49
+% Monetary Base
+DLA_MB = 4*(L_MB - L_MB{-1}); %50
+% Money Velocity
+DLA_VEL = 4*(L_VEL - L_VEL{-1}); %51
+
+% Nominal Exchange Rate
+DLA_S      = 4*(L_S - L_S{-1});%52
+D4L_S      = L_S - L_S{-4};%53
+
+% Real Exchange Rate
+% L_Z = L_S + L_CPI_RW - L_CPIXFE; %12
+DLA_Z 		= 4*(L_Z - L_Z{-1});%54
+D4L_Z      = L_Z - L_Z{-4}; %%55
+% 52 Tipo de Cambio Real de equilibrio
+% 36 Tipo de Cambio Real de Equilibrio % 26 Tipo de cambio Real de Equilibrio
+L_Z_BAR = L_Z_BAR{-1} + DLA_Z_BAR/4; %37
+DLA_Z_BAR = rho_DLA_Z_BAR*DLA_Z_BAR{-1} + (1-rho_DLA_Z_BAR)*ss_DLA_Z_BAR + SHK_DLA_Z_BAR;
+DLA_Z_BAR{+1} = RR_BAR - RR_RW_BAR - PREM + SHKN_PREM; %56
+
+L_Z_GAP = L_Z - L_Z_BAR; %27
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%% Otras Ecuaciones %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+'Cummulative Output Gap' % 57
+CUM_L_GDP_GAP = CUM_L_GDP_GAP{-1} + L_GDP_GAP;
+'Inflation Target' % 58
+D4L_CPI_TAR = rho_D4L_CPI_TAR*D4L_CPI_TAR{-1} + ...
+              (1-rho_D4L_CPI_TAR)*ss_D4L_CPI_TAR + SHK_D4L_CPI_TAR;
+'Deviations from inflation target' %59
+D4L_CPI_DEV = D4L_CPI{+4} - D4L_CPI_TAR{+4};
+
+% Expectativas inflacionarias (no usadas (?))
+'Expected inflation' %60
+E_DLA_CPI = DLA_CPIXFE{+1};
+'Expected Core inflation' %61
+E_DLA_CPIXFE = DLA_CPIXFE{+1};
+
+% Exchange rate target
+L_S_TAR = L_S_TAR{-1} + DLA_S_TAR/4; %62
+D4L_S_TAR = L_S_TAR - L_S_TAR{-4}; %63
+DLA_S_DEV   = DLA_S{-1}-DLA_S_TAR{-1}; %64
+RS_EXTERNAL = 4*(L_S{+1} - L_S) + RS_RW + PREM; %64
+
+
+
+%%%%%%%% Ecuaciones para ajustes para EP/Comité de Ejecución %%%%%%%%%%%%%%%%%
+% Inflación total
+D4L_CPI_ADJ = rho_D4L_CPI_ADJ*(D4L_CPI_ADJ{-1}) + SHK_D4L_CPI_ADJ;
+D4L_CPI_EP = D4L_CPI + D4L_CPI_ADJ;
+
+% Tasa de política
+RS_ADJ = rho_RS_ADJ*(RS_ADJ{-1}) + SHK_RS_ADJ;
+RS_EP = RS + RS_ADJ;
+
+% Crecimiento Económico
+D4S4L_GDP_ADJ = rho_D4S4L_GDP_ADJ * D4S4L_GDP_ADJ{-1} + SHK_D4S4L_GDP_ADJ;
+D4S4L_GDP_EP  = D4S4L_GDP + D4S4L_GDP_ADJ;
+
+% Depreciación cambiaria nominal
+D4L_S_ADJ = rho_D4L_S_ADJ * D4L_S_ADJ{-1} + SHK_D4L_S_ADJ;
+D4L_S_EP  = D4L_S + D4L_S_ADJ;
+L_S_EP = L_S{-4} + D4L_S_EP;
+
+%%%%% Leyendas
+Legend
+L_CPI          log of price level
+RS_UNC     	   nominal interest rate (unconstrained by the zero bound)
+RR         	   real interest rate
+RSNEUTRAL_UNC  policy neutral rate (unconstrained by the zero bound)
+L_S            log of nominal exchange rate
+L_Z            log of real exchange rate
+L_GDP          log of gdp
+MCI            real monetary conditions index
+RMC            real marginal cost 
+_GAP           cyclical deviation from a trend
+_BAR           trend (equilibrium)
+ss_            steady-state value  
+DLA_           q-o-q change
+D4L_           y-o-y change of log var
+D4S4L_         y-o-y change of sum of 4 periods of log var (S4L_)
+S4L_           Sum of 4 periods of log var
+_RW_           foreign variable
+SHK_           shock
+OBS_           measurement variables
