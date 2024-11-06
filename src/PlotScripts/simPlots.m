@@ -81,6 +81,7 @@ MODEL.toplot.ss.D4S4L_GDP_RW = 1.83;
 %% Bloque 1: Variables del modelo (xlist) (libre vs otro)
 list = params.PlotList;
 list = list + {'D4L_GDP_RW', 'D4S4L_GDP_RW'};
+list = list - {'REM_GDP_BAR'};
 % Iteración para los rangos de ploteo
 for rng = 1 : length(params.StartDate)
     % Recorte de base da datos para cada plot
