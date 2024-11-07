@@ -109,13 +109,13 @@ end
 
 %% Desestacionalización
 % Se desestacionaliza GDP y REM_GDP
-q.GDP = q.GDP.x12;
-q.GDP.comment = 'Producto Interno Bruto real de Guatemala (desestacionalizado)';
+%q.GDP = q.GDP.x12; % la brecha del DAMP usa PIB sin desestacionalizar
+q.GDP.comment = 'Producto Interno Bruto real de Guatemala (sin desestacionalizar)'; % la brecha del DAMP usa PIB sin desestacionalizar
 q.REM_GDP = q.REM_GDP.x12;
 q.REM_GDP.Comment = 'Remesas como porcentaje del producto (desestacionalizado)';
 % Variables seleccionadas
 % IPEI? 
-list_mobs = {'GDP', 'CPI', 'CPIXFE', 'S', 'RS', 'GDP_RW', 'CPI_RW', 'RS_RW', 'REM_GDP', 'MB', 'IPEI'};
+list_mobs = {'GDP', 'CPI', 'CPIXFE', 'S', 'RS', 'GDP_RW', 'CPI_RW', 'RS_RW', 'REM_GDP', 'MB', 'IPEI','GDP_BAR'};
 temp = q*list_mobs;
 
 %% Construcción de variables observables para QPM
@@ -143,7 +143,7 @@ end
 % Estructura para observables
 MODEL.PreProc.obs = struct();
 % Lista de observables (debe coincidir con .model)
-obs_list = {'L_GDP', 'L_S','L_CPI','RS','L_CPIXFE','L_CPI_RW','RS_RW', 'L_GDP_RW_GAP','REM_GDP', 'L_MB', 'L_IPEI'}; 
+obs_list = {'L_GDP', 'L_GDP_BAR','L_S','L_CPI','RS','L_CPIXFE','L_CPI_RW','RS_RW', 'L_GDP_RW_GAP','REM_GDP', 'L_MB', 'L_IPEI'}; 
 
 for i = 1:length(obs_list)
    MODEL.PreProc.obs.(strcat('m_',obs_list{i})) = temp.(obs_list{i}); 
