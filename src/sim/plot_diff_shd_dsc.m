@@ -50,7 +50,7 @@ graficar.
     addParameter(p, 'CloseAll', true);
     addParameter(p, 'StartDate', {MODEL.DATES.hist_end - 20});
     addParameter(p, 'EndDatePlot', {MODEL.DATES.pred_end});
-    addParameter(p, 'MF', {MODEL.MF});
+    addParameter(p, 'MF', MODEL.MF);
 parse(p, varargin{:});
 params = p.Results; 
 
