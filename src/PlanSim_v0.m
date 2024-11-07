@@ -30,6 +30,9 @@ Los ajustes pueden hacerse de dos formas:
 MODEL.Esc.v0.dbi = MODEL.F;
 MODEL.Esc.v0.dates = MODEL.DATES.pred_start:MODEL.DATES.pred_start+7;
 
+%% Brecha DAMP
+MODEL.Esc.v0.dbi.L_GDP_GAP(MODEL.Esc.v0.dates) = [-0.14, -0.07, 0.01, 0.09, 0.16, 0.20, 0.23, 0.22];
+
 %% Tasa de interés líder (VARIABLE PARA RECOMENDACIÓN: i_EP)
 % Anclado Ajustes:
 MODEL.Esc.v0.dbi.RS_ADJ(MODEL.Esc.v0.dates) = [0, 0, 0, 0, 0, 0, 0, 0];
@@ -54,9 +57,9 @@ MODEL.Esc.v0.dbi.D4S4L_GDP_ADJ(MODEL.Esc.v0.dates) = [0, 0, 0, 0, 0, 0, 0, 0];
 
 %% Listado de variables a usar en el Plan de Simulación
 % Shocks (No cambian)
-ListShocksEP = {'SHK_D4S4L_GDP_ADJ','SHK_D4L_S_ADJ','SHK_RS_ADJ'};%SHK_D4L_CPI_NOSUBY
+ListShocksEP = {'SHK_D4S4L_GDP_ADJ','SHK_D4L_S_ADJ','SHK_RS_ADJ','SHK_L_GDP_GAP'};%SHK_D4L_CPI_NOSUBY
 % Variables (cambian de acuerdo a lo que se "ancle")
-ListVarEP    = {'D4S4L_GDP_ADJ','D4L_S_ADJ','RS_ADJ'};%SHK_D4L_CPI_NOSUBY
+ListVarEP    = {'D4S4L_GDP_ADJ','D4L_S_ADJ','RS_ADJ','L_GDP_GAP'};%SHK_D4L_CPI_NOSUBY
 
 %% Creación del Plan de Simulación
 % Plan de simulación para escenario Libre (Base)
