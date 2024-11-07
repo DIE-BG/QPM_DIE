@@ -55,7 +55,8 @@ full_data_add = params.Esc_add{2};
 params.LegendsNames = {MODEL.leg_act, MODEL.leg_ant};
 
 %% Variables en frecuencia trimestral
-names = dbnames(MODEL.PreProc.quarterly);
+% names = dbnames(MODEL.PreProc.quarterly)-'GDP_BAR';
+names = dbnames(MODEL.PreProc.quarterly)-{'GDP_BAR','L_GDP_BAR'};
 
 for rng = params.StartDate
     for i = 1:length(names)
