@@ -7,7 +7,7 @@ movil de 8 trimestres contra el QPM original
 setparam;
 
 % Modelo
-M = model('QPM_original.model', 'assign', s);
+M = model('QPM_MA.model', 'assign', s);
 M = sstate(M,'growth=',true,'MaxFunEvals',1000,'display=','off');
 M = solve(M,'error=',true);
     
@@ -47,8 +47,8 @@ MODEL = PostProcessing(MODEL,...
     'Esc',{'v7', MODEL.Esc.v7.pred});
 
 %% Cambio de etiqueta para el modelo con media movil
-leg_act = 'Octubre 2024 rem_gdp_bar MA'; 
-MODEL.Esc.v7.name = 'Octubre 2024 QPM original';
+leg_act = 'Noviembre 2024 QPM original'; 
+MODEL.Esc.v7.name = 'Nomviembre 2024 rem_gdp_bar MA';
 
 %% Graficas del escenario combinado
 col = [0 0 0];
