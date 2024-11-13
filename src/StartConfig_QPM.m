@@ -6,13 +6,13 @@ MODEL.param_file_name = fullfile('src', 'setparam.m');
 
 MODEL.CORR_VER = 'v0';
 
-MODEL.CORR_DATE     = '2024-10';
-MODEL.CORR_DATE_ANT = '2024-10';
+MODEL.CORR_DATE     = '2024-11';
+MODEL.CORR_DATE_ANT = '2024-11';
 
 % Fechas de fin de historia
 MODEL.DATES.hist_end_ant = qq(2024, 3);
 MODEL.DATES.hist_end = qq(2024, 3); 
-MODEL.DATES.hist_end_mm = mm(2024, 09);
+MODEL.DATES.hist_end_mm = mm(2024, 10);
 
 % Nombres de meses para corrimientos automáticos
 datestrfn = @(d) datestr(datetime(d, 'InputFormat', 'yyyy-MM'), 'mmmm yyyy', 'local'); 
@@ -39,7 +39,7 @@ MODEL.DATES.pred_start = MODEL.DATES.hist_end + 1;
 MODEL.DATES.pred_end = MODEL.DATES.hist_end + 30;
 
 % Rango de tablas para gráficos de simulación
-tab_range = [MODEL.DATES.hist_end, MODEL.DATES.pred_start:MODEL.DATES.pred_start+5, qq(2025,4)];
+tab_range = [MODEL.DATES.hist_end, MODEL.DATES.pred_start:MODEL.DATES.pred_start+5, qq(2026,4)];
 
 % Rango de tablas para gráficos de Pre - procesamiento
 % Trimestral
