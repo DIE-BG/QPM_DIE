@@ -53,18 +53,6 @@ for i = 1:length(ss_rem_gdp)
 
 end
                     
-for i = 1:length(ss_rem_gdp)
-    
-    fieldName = sprintf('rem_%d', i);
-    plot(qq(2024,1):qq(2032,1),...
-        MODEL.Esc_rem.(fieldName).F_pred.L_GDP_GAP);
-    
-    hold on
-    
-    zeroline();
-
-end
-
 %% Selección del modelo
 % Se seleccionó un estado estacionario de 19% debido a que cierra la brecha
 % antes de 5 años despúes de los pronósticos y con valores razonables.
