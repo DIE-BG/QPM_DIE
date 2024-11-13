@@ -52,17 +52,6 @@ for i = 1:length(rho_rem_gdp)
 
 end
 
-for i = 1:length(rho_rem_gdp)
-    
-    fieldName = sprintf('rem_rho_%d', i);
-    plot(qq(2024,1):qq(2032,1),...
-        MODEL.Esc_rem_rho.(fieldName).F_pred.L_GDP_GAP);
-    
-    hold on
-    
-    zeroline();
-    
-end
 
 %% Selección del modelo
 % Se seleccionó un valor de rho_rem_gdp de 0.73 dentro del proceso AR de
