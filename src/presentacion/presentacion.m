@@ -32,7 +32,7 @@ for i = 1:length(name)
    end
 end
 
-for i = 1:length(folder_name)
+for i = 7%1:length(folder_name)
         %% Inicializacion de presentacion
         isOpen  = exportToPPTX();
         if ~isempty(isOpen)

@@ -31,7 +31,6 @@ reconstruir el nivel original y luego procesar.
 
 - DIE
 - Marzo 2024
-- MJGM/JGOR
 %}
 p = inputParser;
     addParameter(p, 'list', {});

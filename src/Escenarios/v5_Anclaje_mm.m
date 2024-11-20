@@ -21,7 +21,7 @@ MODEL.Esc.v5.dbi = dboverlay(MODEL.F,shocks);
 
 % Anclaje de último valor observado mensual
 % Inflación subyacente PCE de EEUU
-MODEL.Esc.v5.dbi.D4L_CPI_RW(MODEL.DATES.E5_dates) = MODEL.PreProc.monthly.CPI_RW.log.diff(-12).data(end)*100;
+% MODEL.Esc.v5.dbi.D4L_CPI_RW(MODEL.DATES.E5_dates) = MODEL.PreProc.monthly.CPI_RW.log.diff(-12).data(end)*100;
 %IPEI 
 MODEL.Esc.v5.dbi.D4L_IPEI(MODEL.DATES.E5_dates) = MODEL.PreProc.monthly.IPEI.log.diff(-12).data(end)*100;
 % Tasa de Fondos Federales
@@ -38,17 +38,20 @@ MODEL.Esc.v5.dbi.D4L_MB(MODEL.DATES.E5_dates) = MODEL.PreProc.monthly.MB.log.dif
 MODEL.Esc.v5.dbi.RS(MODEL.DATES.E5_dates) = MODEL.PreProc.monthly.RS(end);
 
 %% Creación de plan de simulación
-% Variables
+% Variables con PCE
 vars = {'D4L_CPI_RW', 'D4L_IPEI', 'RS_RW','D4L_CPI_NOSUBY','D4L_CPIXFE','D4L_S','D4L_MB','RS'};
-% choques
+% Variables sin PCE
+vars_2 = {'D4L_IPEI', 'RS_RW','D4L_CPI_NOSUBY','D4L_CPIXFE','D4L_S','D4L_MB','RS'};
+% choques con PCE
 s_vars = {'SHK_DLA_CPI_RW', 'SHK_D4L_IPEI', 'SHK_RS_RW','SHK_D4L_CPI_NOSUBY','SHK_DLA_CPIXFE','SHK_L_S','SHK_D4L_MB','SHK_RS'};
-
+% choques sin PCE
+s_vars_2 = { 'SHK_D4L_IPEI', 'SHK_RS_RW','SHK_D4L_CPI_NOSUBY','SHK_DLA_CPIXFE','SHK_L_S','SHK_D4L_MB','SHK_RS'};
 % Plan de simulación
 MODEL.Esc.v5.planSim = plan(MODEL.MF, MODEL.DATES.pred_start:MODEL.DATES.pred_end);
 % Variable a endogenizar (shock propio?? No necesariamente)
-MODEL.Esc.v5.planSim = endogenize(MODEL.Esc.v5.planSim, s_vars, MODEL.DATES.E5_dates); 
+MODEL.Esc.v5.planSim = endogenize(MODEL.Esc.v5.planSim, s_vars_2, MODEL.DATES.E5_dates); %modificar dependiendo si se agrega PCE o no
 % Variable a exogenizar (Anclaje)
-MODEL.Esc.v5.planSim = exogenize(MODEL.Esc.v5.planSim, vars, MODEL.DATES.E5_dates);
+MODEL.Esc.v5.planSim = exogenize(MODEL.Esc.v5.planSim, vars_2, MODEL.DATES.E5_dates); %modificar dependiendo si se agrega PCE o no
 
 %% Simulación.
 MODEL.Esc.v5.pred = simulate(MODEL.MF,...

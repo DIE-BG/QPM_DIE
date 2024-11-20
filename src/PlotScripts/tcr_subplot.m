@@ -20,7 +20,7 @@ function tcr_subplot(MODEL, varargin)
 
 p = inputParser;
 addParameter(p, 'StartDate', {MODEL.DATES.hist_start, MODEL.DATES.hist_end - 20});
-addParameter(p, 'EndDatePlot', {MODEL.DATES.pred_end});
+addParameter(p, 'EndDatePlot', {MODEL.DATES.pred_end}); % -## para cambiar el rango final de la gráfica de los componentes
 addParameter(p, 'SavePath', {});
 addParameter(p, 'Esc_add', {}); % libre v0, alterno v1, contrafactual v2
 addParameter(p, 'tab_range', {});

@@ -11,7 +11,7 @@ PATH.temp = genpath('temp');
 
 structfun(@addpath, PATH)
 
-% return
+return
 %% Carga de configuraciones generales del corrimiento base (v0)
 tic
 StartConfig_QPM;
@@ -45,7 +45,7 @@ MODEL.F_pred = simulate(MODEL.MF,... Modelo Filtrado
 PostProcess;
 
 %% Gráficas
-MAKE_GRAPHS = true;
+MAKE_GRAPHS = false;
 
 if MAKE_GRAPHS
     % Pre-processing
@@ -166,7 +166,7 @@ databank.toCSV(MODEL.F_pred, fullfile('data', 'fulldata', MODEL.CORR_DATE, 'full
 
 % return; %Correr hasta esta linea la primera vez para Generar los anclajes necesarios para el Escneario IPEI del SVAR
 %% Escenarios alternos
-MAKE_ALT_SCENARIOS = false;
+MAKE_ALT_SCENARIOS = true;
 graph_esc = true;
 
 if MAKE_ALT_SCENARIOS == true
@@ -174,7 +174,9 @@ if MAKE_ALT_SCENARIOS == true
     v2_CP1;
     v3_Comb;
     v4_Istar;
-    v5_Anclaje_mm;
+    v5_Anclaje_mm; %Apagar PCE en los meses que el dato historico mensual corresponda al fin de trimestre por el distinto rezado que tiene
+    v6_brecha_damp;
+    v7_inf_subyacente;
 end
 
 
@@ -189,3 +191,5 @@ save(fullfile('data','fulldata',MODEL.CORR_DATE, sprintf("MODEL-%s-QPM.mat", MOD
 disp('Almacenamiento estructura MODEL: ok');
 disp('---- FIN ----');
 toc
+%% Mesualización de Pronósticos de Inflación Subyacente e Inflación Total.
+mesualizacion_QPM;
