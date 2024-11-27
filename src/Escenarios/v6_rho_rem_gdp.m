@@ -1,12 +1,11 @@
 %{
-Creación de escenarios modificando el estados estacionario de las remesas
-de 15 a 19 en pasos de 0.10 para encontrar una brecha que cierre después de
-dos años pero no mayor a 5
+Creación del Escenario en el que se modifica el valor del coeficiente
+autorregresivo asociado a las remesas como porcentaje del PIB.
 %}
 
 % parámetros del QPM
 setparam;
-s.ss_REM_GDP = 18.8;
+s.rho_REM_GDP = 0.90;
 
 % Modelo
 M = model('QPM_original.model', 'assign', s);
@@ -50,7 +49,7 @@ MODEL = PostProcessing(MODEL,...
 
 %% Cambio de etiqueta para el modelo con media movil
 leg_act = 'Octubre 2024 rem_gdp_bar MA'; 
-MODEL.Esc.v6.name = 'Octubre 2024 combinado rem_gdp';
+MODEL.Esc.v6.name = 'Octubre 2024 rho_rem_gdp';
 
 %% Graficas
 graph_esc = true;
