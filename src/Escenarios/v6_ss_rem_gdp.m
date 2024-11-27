@@ -4,73 +4,38 @@ de 15 a 19 en pasos de 0.10 para encontrar una brecha que cierre después de
 dos años pero no mayor a 5
 %}
 
-%% Lista de estados estacionarios a evaluar
-ss_rem_gdp = [17:0.1:19];
-
-%% Generación de modelos a utilizar
 % parámetros del QPM
 setparam;
-
-% Carga del modelo
-for i = 1:length(ss_rem_gdp)
-    
-    ss = s;
-    ss.ss_REM_GDP = ss_rem_gdp(i);
-    M = model(MODEL.mod_file_name, 'assign', ss);
-    M = sstate(M,'growth=',true,'MaxFunEvals',1000,'display=','off');
-    M = solve(M,'error=',true);
-    
-    fieldName = sprintf('rem_%d', i);
-    model_name = sprintf('rem_%d', i);
-    
-    MODEL.Esc_rem.(fieldName).MODEL = M;
-    MODEL.Esc_rem.(fieldName).name = model_name;
-    
-end
-
-%Filtro de kalman para cada modelo
-
-for i = 1:length(ss_rem_gdp)
-    
-    fieldName = sprintf('rem_%d', i);
-    [MODEL.Esc_rem.(fieldName).MF, MODEL.Esc_rem.(fieldName).F] = filter(MODEL.Esc_rem.(fieldName).MODEL, MODEL.PreProc.obs,... 
-                                MODEL.DATES.hist_start:MODEL.DATES.hist_end, ... 
-                                'meanOnly=',true);
-end
-
-% Pronosticos para cada modelo
-
-fcstrng = MODEL.DATES.pred_start:MODEL.DATES.pred_end;
-
-for i = 1:length(ss_rem_gdp)
-    
-    fieldName = sprintf('rem_%d', i);
-    MODEL.Esc_rem.(fieldName).F_pred = simulate(MODEL.Esc_rem.(fieldName).MF,... Modelo Filtrado
-                            MODEL.Esc_rem.(fieldName).F,...Base de datos inicial filtrada
-                            fcstrng,... Rango de Simulación
-                            'anticipate', false,...
-                            'DbOverlay=', true);
-
-end
-                    
-%% Selección del modelo
-% Se seleccionó un estado estacionario de 19% debido a que cierra la brecha
-% antes de 5 años despúes de los pronósticos y con valores razonables.
+s.ss_REM_GDP = 18.8;
 
 % Modelo
-MODEL.Esc.v6.MODEL = MODEL.Esc_rem.rem_19.MODEL;
-MODEL.Esc.v6.MF = MODEL.Esc_rem.rem_19.MF;
-MODEL.Esc.v6.F = MODEL.Esc_rem.rem_19.F;
-MODEL.Esc.v6.pred = MODEL.Esc_rem.rem_19.F_pred;
+M = model('QPM_original.model', 'assign', s);
+M = sstate(M,'growth=',true,'MaxFunEvals',1000,'display=','off');
+M = solve(M,'error=',true);
+    
+MODEL.Esc.v6.MODEL = M;
 
-% Descomposición de shocks
+% Filtro de kalman
+[MODEL.Esc.v6.MF, MODEL.Esc.v6.F] = filter(MODEL.Esc.v6.MODEL, MODEL.PreProc.obs,... 
+                                MODEL.DATES.hist_start:MODEL.DATES.hist_end, ... 
+                                'meanOnly=',true);
+                            
+% Pronosticos
+fcstrng = MODEL.DATES.pred_start:MODEL.DATES.pred_end;
+MODEL.Esc.v6.pred = simulate(MODEL.Esc.v6.MF,... Modelo Filtrado
+                        MODEL.Esc.v6.F,...Base de datos inicial filtrada
+                        fcstrng,... Rango de Simulación
+                        'anticipate', false,...
+                        'DbOverlay=', true);
+
+% Descopmposición de shocks
 MODEL.Esc.v6.shd = simulate(MODEL.Esc.v6.MF,...
                   MODEL.Esc.v6.pred,...
                   MODEL.DATES.hist_start:MODEL.DATES.pred_end,...
                   'anticipate',false,...
-                  'contributions',true);
-
-% Post-Procesamiento de variables seleccionadas.
+                  'contributions',true);                    
+                    
+%% Post-Procesamiento de variables seleccionadas.
 % Desestacionalizar y obtener brechas y tendencias de estas variables
 pp_list = {'L_MB', 'L_VEL', 'L_CPI_RW', 'L_IPEI_Q','L_Z', 'L_GDP', 'L_GDP_RW'};
 % Recuperar niveles de estas variables
@@ -82,6 +47,10 @@ MODEL = PostProcessing(MODEL,...
     'list',pp_list,...
     'list_niv', list_nivel,...
     'Esc',{'v6', MODEL.Esc.v6.pred});
+
+%% Cambio de etiqueta para el modelo con media movil
+leg_act = 'Octubre 2024 rem_gdp_bar MA'; 
+MODEL.Esc.v6.name = 'Octubre 2024 combinado rem_gdp';
 
 %% Graficas
 graph_esc = true;
