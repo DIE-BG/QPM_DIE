@@ -1,11 +1,11 @@
 %{
-Escenario en el que se modifica el estado estacionario de las remesas como
-porcentaje del GDP.
+Creación del Escenario en el que se modifica el valor del coeficiente
+autorregresivo asociado a las remesas como porcentaje del PIB.
 %}
 
 % parámetros del QPM
 setparam;
-s.ss_REM_GDP = 18.8;
+s.rho_REM_GDP = 0.90;
 
 % Modelo
 M = model('QPM.model', 'assign', s);
@@ -49,7 +49,7 @@ MODEL = PostProcessing(MODEL,...
 
 %% Cambio de etiqueta para el modelo con media movil
 leg_act = 'Octubre 2024'; 
-MODEL.Esc.v6.name = 'Octubre 2024 ss_rem_gdp';
+MODEL.Esc.v6.name = 'Octubre 2024 rho_rem_gdp';
 
 %% Graficas
 graph_esc = true;
