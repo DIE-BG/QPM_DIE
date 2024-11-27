@@ -1,21 +1,24 @@
 %% Modelo y setparam
 MODEL.mod_file_name = 'QPM.model';
-MODEL.param_file_name = 'setparam.m';
+MODEL.param_file_name = fullfile('src', 'setparam.m');
 
 %% Configuración del corrimiento
 
 MODEL.CORR_VER = 'v0';
 
-MODEL.CORR_DATE = '2024-06';
-MODEL.CORR_DATE_ANT = '2024-05';
-
-MODEL.leg_act = 'Junio 2024';  
-MODEL.leg_ant = 'Mayo 2024'; 
+MODEL.CORR_DATE     = '2024-08';
+MODEL.CORR_DATE_ANT = '2024-06';
 
 % Fechas de fin de historia
 MODEL.DATES.hist_end_ant = qq(2024, 1);
-MODEL.DATES.hist_end = qq(2024, 1);%qq(2023,4);%
-MODEL.DATES.hist_end_mm = mm(2024, 04);
+MODEL.DATES.hist_end = qq(2024, 2); 
+MODEL.DATES.hist_end_mm = mm(2024, 07);
+
+% Nombres de meses para corrimientos automáticos
+datestrfn = @(d) datestr(datetime(d, 'InputFormat', 'yyyy-MM'), 'mmmm yyyy', 'local'); 
+MODEL.leg_act = datestrfn(MODEL.CORR_DATE);  
+MODEL.leg_ant = datestrfn(MODEL.CORR_DATE_ANT); 
+
 
 %% Otros elementos y fechas
 MODEL.data_file_name = fullfile( ...
@@ -50,21 +53,32 @@ tab_range_mm = MODEL.DATES.hist_end_mm-8:MODEL.DATES.hist_end_mm;
 MODEL.esc_names = {'Escenario Libre',...v0
                    'Escenario IPEI',...v1
                    'Escenario Tasa Líder',...v2
-                   'Escenario Combinado'};%,...v3
+                   'Escenario Combinado',...v3
+                   'Escenario Tasa Externa',...v4
+                   'Escenario Anclajes Corto Plazo'};%,...v5
+
+MODEL.Esc.v1.name = MODEL.esc_names{2};
+MODEL.Esc.v2.name = MODEL.esc_names{3};
+MODEL.Esc.v3.name = MODEL.esc_names{4};
+MODEL.Esc.v4.name = MODEL.esc_names{5};
+MODEL.Esc.v5.name = MODEL.esc_names{6};
+               
 % Colores para escenarios ALTERNOS
 MODEL.esc_col = {[0.4660 0.6740 0.1880],...   v1
-                 [0.8500 0.3250 0.0980],...    %v2           
-                 [0.4940 0.1840 0.5560]}; %v3
+                 [0.8500 0.3250 0.0980],...    %v2
+                 [0.4940 0.1840 0.5560],...    %v3
+                 [0.9800 0.0001 0.9500],...    %v4
+                 [0.251 0.1843 0.01569]};      %v5
                       
 %% Carga de info mes previo
-MODEL_ANT = load(fullfile('data','fulldata',MODEL.CORR_DATE_ANT,sprintf('MODEL-%s.mat',MODEL.CORR_DATE_ANT)));
+MODEL_ANT = load(sprintf('MODEL-%s-QPM.mat',MODEL.CORR_DATE_ANT));
 MODEL_ANT = MODEL_ANT.MODEL;
 
 
 %% Lista de variables para post-procesamiento
 % Logaritmos desestacionalizados, tendencias y brechas
-pp_list = {'L_MB', 'L_VEL', 'L_CPI_RW', 'L_CPI_RW_Q'};
-% Niveles desestacinoalizados y tendencias
+pp_list = {'L_MB', 'L_VEL', 'L_CPI_RW', 'L_IPEI_Q'};
+% Niveles desestacionalizados y tendencias
 list_nivel = {'L_S','L_MB'};
 
 % Variables y titulos para gráficas de reconstrucción de nivel
@@ -74,4 +88,8 @@ tit_lev ={{'Tipo de Cambio Nominal (GTQ/USD)'},...
         {'Base Monetaria (Millones de Quetzales)'}};
     
 % Lista de gráficas de brechas
-list_gaps = {'L_GDP_RW','L_Z', 'L_GDP','L_CPI_RW', 'L_MB', 'L_VEL', 'L_CPI_RW_Q'};
+list_gaps = {'L_GDP_RW','L_Z', 'L_GDP','L_CPI_RW', 'L_MB', 'L_VEL', 'L_IPEI_Q'};
+
+% Lista de gráficas para descomposición histórica de shocks
+sh_list = {'L_GDP_RW_GAP', 'DLA_CPI_RW', 'RS_RW', 'D4L_CPI_NOSUBY','L_GDP_GAP','DLA_CPIXFE', 'DLA_S', 'D4L_MB', 'RS',...
+            'D4L_CPI', 'L_Z_GAP', 'D4L_VEL', 'RR', 'D4L_S', 'RMC', 'MCI'};
