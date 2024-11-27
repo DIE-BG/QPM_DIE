@@ -28,16 +28,13 @@ Los ajustes pueden hacerse de dos formas:
 %}
 %% Base de datos inicial y trimestres de ajuste
 MODEL.Esc.v0.dbi = MODEL.F;
-MODEL.Esc.v0.dates = MODEL.DATES.pred_start:MODEL.DATES.pred_start+7;
-
-%% Brecha DAMP
-MODEL.Esc.v0.dbi.L_GDP_GAP(MODEL.Esc.v0.dates) = [-0.14, -0.07, 0.01, 0.09, 0.16, 0.20, 0.23, 0.22];
-
+MODEL.Esc.v0.dates = MODEL.DATES.pred_start:MODEL.DATES.pred_start+4;
+% MODEL.Esc.v0.dates = MODEL.DATES.pred_start;
 %% Tasa de interés líder (VARIABLE PARA RECOMENDACIÓN: i_EP)
 % Anclado Ajustes:
-MODEL.Esc.v0.dbi.RS_ADJ(MODEL.Esc.v0.dates) = [0, 0, 0, 0, 0, 0, 0, 0];
+% MODEL.Esc.v0.dbi.RS_ADJ(MODEL.Esc.v0.dates) = [0, 0, 0, 0, 0, 0, 0, 0];
 % Anclando valores para la recomendación
-% MODEL.Esc.v0.dbi.i_EP(MODEL.Esc.v0.dates) = [5.25, 5.5, 5.75, 6, 6, 6, 6, 6];
+MODEL.Esc.v0.dbi.RS_EP(MODEL.Esc.v0.dates) = [4.62, 4.31, 4.35, 4.40, 4.47];
 
 %% Inflación total interanual (VARIABLE FINAL PARA EP: D4L_CPI)
 % Anclando Ajustes
@@ -46,20 +43,20 @@ MODEL.Esc.v0.dbi.RS_ADJ(MODEL.Esc.v0.dates) = [0, 0, 0, 0, 0, 0, 0, 0];
 % MODEL.Esc.v0.dbi.D4L_CPI(MODEL.DATES.pred_start:MODEL.DATES.pred_start+7) = [0, 0, 0, 0, 0, 0, 0, 0];
 
 %% Tasa de variación del tipo de cambio nominal (VARIABLES FINALES: D4L_S_EP y L_S_EP)
-MODEL.Esc.v0.dbi.D4L_S_ADJ(MODEL.Esc.v0.dates) = [0, 0, 0, 0, 0, 0, 0, 0];
+% MODEL.Esc.v0.dbi.D4L_S_ADJ(MODEL.Esc.v0.dates) = [0, 0, 0, 0, 0, 0, 0, 0];
 % Anclando la variación cambiaria directamente
 % MODEL.Esc.v0.dbi.D4L_S_EP(MODEL.DATES.pred_start:MODEL.DATES.pred_start+7) = [0, 0, 0, 0, 0, 0, 0, 0];
 
 %% Tasa de variación de la suma móvil de 4 trimestres del PIB (VARIABLE FINAL: D4S4L_GDP_EP)
-MODEL.Esc.v0.dbi.D4S4L_GDP_ADJ(MODEL.Esc.v0.dates) = [0, 0, 0, 0, 0, 0, 0, 0];
+% MODEL.Esc.v0.dbi.D4S4L_GDP_ADJ(MODEL.Esc.v0.dates) = [0, 0, 0, 0, 0, 0, 0, 0];
 % Anclando valores para la tasa de variación directamente
 % MODEL.Esc.v0.dbi.D4S4L_GDP_EP(MODEL.Esc.v0.dates) = [0, 0, 0, 0, 0, 0, 0, 0];
 
 %% Listado de variables a usar en el Plan de Simulación
 % Shocks (No cambian)
-ListShocksEP = {'SHK_D4S4L_GDP_ADJ','SHK_D4L_S_ADJ','SHK_RS_ADJ','SHK_L_GDP_GAP'};%SHK_D4L_CPI_NOSUBY
+ListShocksEP = {'SHK_RS_ADJ'}; %{'SHK_D4S4L_GDP_ADJ','SHK_D4L_S_ADJ','SHK_RS_ADJ'};%SHK_D4L_CPI_NOSUBY
 % Variables (cambian de acuerdo a lo que se "ancle")
-ListVarEP    = {'D4S4L_GDP_ADJ','D4L_S_ADJ','RS_ADJ','L_GDP_GAP'};%SHK_D4L_CPI_NOSUBY
+ListVarEP    = {'RS_EP'}; %{'D4S4L_GDP_ADJ','D4L_S_ADJ','RS_ADJ'};%SHK_D4L_CPI_NOSUBY
 
 %% Creación del Plan de Simulación
 % Plan de simulación para escenario Libre (Base)
