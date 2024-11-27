@@ -5,6 +5,7 @@ autorregresivo asociado a las remesas como porcentaje del PIB.
 
 % parámetros del QPM
 setparam;
+s.ss_REM_GDP = 18.8;
 s.rho_REM_GDP = 0.90;
 
 % Modelo
@@ -49,7 +50,7 @@ MODEL = PostProcessing(MODEL,...
 
 %% Cambio de etiqueta para el modelo con media movil
 leg_act = 'Octubre 2024'; 
-MODEL.Esc.v6.name = 'Octubre 2024 rho_rem_gdp';
+MODEL.Esc.v6.name = 'Octubre 2024 combinado rem GDP';
 
 %% Graficas
 graph_esc = true;
