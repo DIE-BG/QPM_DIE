@@ -1,8 +1,7 @@
 %{
   Modelo QPM Versión 3 (DIE)
-    MJGM: 05/08/2024
+  
     Revisión con Juan Pablo Medina, asistencia CAPTAC-DR: 27/09/2024
-    EMLF: prueba anclar PIB DAMP (Brecha y PIB potencial) historia y pronósticos
 
     Incluye variables de ajuste para presentaciones EP
     Crecimiento Económico
@@ -39,7 +38,7 @@ m_L_GDP_BAR; %13
 !transition_variables
 % 64 Variables (?)
 % Growth
-'Producto Interno Bruto Real Guatemala (Logaritmo desestacionalizado)'                     L_GDP,       %1
+'Producto Interno Bruto Real Guatemala (Logaritmo sin desestacionalizar)'                     L_GDP,       %1
 'Tendencia del Producto Interno Bruto Real Guatemala (Logaritmo)'                          L_GDP_BAR, %2
 'Producto Interno Bruto Real Guatemala (Brecha)'                                           L_GDP_GAP, %3
 'Tasa de Variación Intertrimestral Anualizada del del PIB de Guatemala'                    DLA_GDP, %4
@@ -249,8 +248,8 @@ m_L_CPIXFE     = L_CPIXFE;
 m_REM_GDP      = REM_GDP;
 m_L_GDP_RW_GAP = L_GDP_RW_GAP;
 m_L_MB         = L_MB;
-m_L_IPEI       = L_IPEI;
-m_L_GDP_BAR    = L_GDP_BAR;  
+m_L_IPEI       = L_IPEI; 
+m_L_GDP_BAR    = L_GDP_BAR;
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%% Estructura Endógena del modelo %%%%%%%%%%%%%%%%%%%%%%%%% 
@@ -358,9 +357,8 @@ RR_RW_GAP = RR_RW - RR_RW_BAR; %22
 RR_BAR = rho_RR_BAR*RR_BAR{-1} + (1-rho_RR_BAR)*ss_RR_BAR + SHK_RR_BAR;
 RR_GAP = RR - RR_BAR; % 24
 
-%% 25 Crecimiento del pib potencial
+% 25 Crecimiento del pib potencial
 DLA_GDP_BAR = rho_DLA_GDP_BAR*DLA_GDP_BAR{-1} + (1-rho_DLA_GDP_BAR)*ss_DLA_GDP_BAR + SHK_DLA_GDP_BAR; 
-
 
 % 28 Shock Prima por riesgo pais
 SHKN_PREM     = rho_SHKN_PREM*SHKN_PREM{-1} + SHK_PREM;
