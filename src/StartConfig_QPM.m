@@ -6,13 +6,13 @@ MODEL.param_file_name = fullfile('src', 'setparam.m');
 
 MODEL.CORR_VER = 'v0';
 
-MODEL.CORR_DATE     = '2024-08';
+MODEL.CORR_DATE     = '2025-02';
 MODEL.CORR_DATE_ANT = '2024-06';
 
 % Fechas de fin de historia
-MODEL.DATES.hist_end_ant = qq(2024, 1);
-MODEL.DATES.hist_end = qq(2024, 2); 
-MODEL.DATES.hist_end_mm = mm(2024, 07);
+MODEL.DATES.hist_end_ant = qq(2025, 1);
+MODEL.DATES.hist_end = qq(2025, 1); 
+MODEL.DATES.hist_end_mm = mm(2025, 02);
 
 % Nombres de meses para corrimientos automáticos
 datestrfn = @(d) datestr(datetime(d, 'InputFormat', 'yyyy-MM'), 'mmmm yyyy', 'local'); 
@@ -69,11 +69,6 @@ MODEL.esc_col = {[0.4660 0.6740 0.1880],...   v1
                  [0.4940 0.1840 0.5560],...    %v3
                  [0.9800 0.0001 0.9500],...    %v4
                  [0.251 0.1843 0.01569]};      %v5
-                      
-%% Carga de info mes previo
-MODEL_ANT = load(sprintf('MODEL-%s-QPM.mat',MODEL.CORR_DATE_ANT));
-MODEL_ANT = MODEL_ANT.MODEL;
-
 
 %% Lista de variables para post-procesamiento
 % Logaritmos desestacionalizados, tendencias y brechas
