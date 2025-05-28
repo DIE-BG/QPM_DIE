@@ -47,8 +47,7 @@ params = p.Results;
         % suma movil
         temp_movsum = movsum(MODEL.F_pred.L_GDP_RW.Data, 4);
         temp_movsum = temp_movsum(3:end-1);
-        MODEL.F_pred.S4_GDP_RW = MODEL.F_pred.L_GDP_RW;
-        MODEL.F_pred.S4_GDP_RW.Data = temp_movsum;
+        MODEL.F_pred.S4_GDP_RW = tseries(MODEL.F_pred.L_GDP_RW.Range(4:end), temp_movsum);
 
         % Tasa de variación de la suma movil
         MODEL.F_pred.D4S4L_GDP_RW = MODEL.F_pred.S4_GDP_RW.diff(-4)/4; 
