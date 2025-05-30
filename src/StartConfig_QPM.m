@@ -6,13 +6,13 @@ MODEL.param_file_name = fullfile('src', 'setparam.m');
 
 MODEL.CORR_VER = 'v0';
 
-MODEL.CORR_DATE     = '2024-08';
-MODEL.CORR_DATE_ANT = '2024-06';
+MODEL.CORR_DATE     = '2025-05';
+MODEL.CORR_DATE_ANT = '2025-04';
 
 % Fechas de fin de historia
-MODEL.DATES.hist_end_ant = qq(2024, 1);
-MODEL.DATES.hist_end = qq(2024, 2); 
-MODEL.DATES.hist_end_mm = mm(2024, 07);
+MODEL.DATES.hist_end_ant = qq(2024, 4);
+MODEL.DATES.hist_end = qq(2025, 1); 
+MODEL.DATES.hist_end_mm = mm(2025, 04);
 
 % Nombres de meses para corrimientos automáticos
 datestrfn = @(d) datestr(datetime(d, 'InputFormat', 'yyyy-MM'), 'mmmm yyyy', 'local'); 
